@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc28647d48a9ff24f900aa1c94b01b9a, type: 3}
+  m_Name: Barrel
+  m_EditorClassIdentifier: 
+  partType: 10
+  partSlots:
+  - Name: Handguard
+    PartIDs: 
+    GunPart: {fileID: 0}
+    Required: 1
+  - Name: Front Sight
+    PartIDs: 05000000
+    GunPart: {fileID: 0}
+    Required: 1
+  partSize:
+    PartDirection: 3
+    Size: 2

@@ -1,0 +1,22 @@
+0,0,Headwear,Helmet,2,2
+1,1,BodyArmour,Body Armour,3,3
+2,2,LegArmour,Leg Armour,3,3
+3,3,GunPart,M4A1,3,2
+4,3,GunPart,AK47,3,2
+5,3,GunPart,Mosin,3,2
+6,3,GunPart,MP5,2,2
+7,3,GunPart,Shotgun,3,1
+8,3,GunPart,Shield,2,1
+9,3,GunPart,Quiver,2,1
+10,5,Earpiece,Hearing Protection,2,2
+11,6,FaceCover,Balaclava,1,1
+12,7,Eyewear,Sunglasses,2,1
+13,8,Backpack,Backpack,4,4
+14,9,Rig,Rig,3,3
+15,10,Pouch,Case,2,2
+16,11,Melee,Sword,1,3
+17,12,Consumable,Crackers,1,1
+18,13,Consumable,Water,1,1
+19,13,Material,Bronze Ingot,1,1
+20,13,Material,Iron Ingot,1,1
+21,13,Material,Steel Ingot,1,1
