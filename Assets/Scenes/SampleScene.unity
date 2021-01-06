@@ -184,7 +184,7 @@ Transform:
   m_Children:
   - {fileID: 675356395}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &11868906
 BoxCollider:
@@ -551,7 +551,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &103574320
 GameObject:
@@ -3526,7 +3526,7 @@ Transform:
   m_Children:
   - {fileID: 317295655}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &355743049
 BoxCollider:
@@ -5773,7 +5773,7 @@ Transform:
   m_Children:
   - {fileID: 931845573}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &765849361
 BoxCollider:
@@ -5973,7 +5973,7 @@ Transform:
   m_Children:
   - {fileID: 1844790423}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &792523462
 BoxCollider:
@@ -6374,7 +6374,7 @@ Transform:
   m_Children:
   - {fileID: 242823482}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &823198990
 BoxCollider:
@@ -6839,7 +6839,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &852589187
 MonoBehaviour:
@@ -6876,7 +6876,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 871870693}
-  - component: {fileID: 871870692}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -6884,18 +6883,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &871870692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871870691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb4b0247d54202845a927e125d7c4026, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &871870693
 Transform:
   m_ObjectHideFlags: 0
@@ -7456,7 +7443,6 @@ GameObject:
   - component: {fileID: 912405091}
   - component: {fileID: 912405090}
   - component: {fileID: 912405089}
-  - component: {fileID: 912405088}
   - component: {fileID: 912405092}
   m_Layer: 5
   m_Name: InvenPanel
@@ -7484,23 +7470,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &912405088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912405086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b389acfa85dc17c4581d4b27cb75a08f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HighlightedSlot: {fileID: 0}
-  DropParent: {fileID: 7451579203486594892}
-  dragParent: {fileID: 7451579202793066269}
-  InspectParent: {fileID: 181478861}
-  Canvas: {fileID: 7451579204165789686}
 --- !u!114 &912405089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7515,13 +7484,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotPrefab: {fileID: 6846952214606941858, guid: 78483810ed9a4ed4e8a3933067efe6b0,
     type: 3}
-  GridSize:
+  gridSize:
     x: 10
-    y: 68
-  InvenGridManager: {fileID: 912405088}
+    y: 64
   InventoryRect: {fileID: 912405087}
-  DropRect: {fileID: 7451579203486594892}
   Parent: {fileID: 7451579204237879845}
+  InventoryManager: {fileID: 1998423943}
 --- !u!114 &912405090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8593,7 +8561,7 @@ Transform:
   - {fileID: 210381204}
   - {fileID: 1295836858}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1198398646
 GameObject:
@@ -9238,7 +9206,7 @@ MonoBehaviour:
   characterController: {fileID: 1998423941}
   mouseSensitivity: 100
   AudioClip: {fileID: 8300000, guid: 7b532a4126f10af4b9bc752574fd8575, type: 3}
-  Inventory: {fileID: 1998423943}
+  Inventory: {fileID: 0}
   PickupableName: {fileID: 1602672967}
   PickupableAmount: {fileID: 1597335263}
   Gun: {fileID: 873895187}
@@ -9246,6 +9214,7 @@ MonoBehaviour:
     type: 3}
   PlayerMovement: {fileID: 1998423940}
   InventoryCanvas: {fileID: 7451579204165789686}
+  InventoryManager: {fileID: 1998423943}
 --- !u!4 &1328216345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5285447487394064654, guid: 79c3409b7fdeaa247a9689999dbe71b7,
@@ -10928,7 +10897,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1592421345
 MonoBehaviour:
@@ -11525,7 +11494,7 @@ Transform:
   m_Children:
   - {fileID: 1194665261}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1627158409
 BoxCollider:
@@ -12193,7 +12162,7 @@ RectTransform:
   - {fileID: 1602672966}
   - {fileID: 793185932}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12554,7 +12523,7 @@ Transform:
   m_Children:
   - {fileID: 1569575273}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1768016890
 BoxCollider:
@@ -13246,7 +13215,7 @@ Transform:
   - {fileID: 1392368249}
   - {fileID: 196942444}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897880450
 GameObject:
@@ -14092,9 +14061,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1998423939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db65bd68d2a1fe544bf61b9dd84a8fd9, type: 3}
+  m_Script: {fileID: 11500000, guid: b389acfa85dc17c4581d4b27cb75a08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropParent: {fileID: 7451579203486594892}
+  dragParent: {fileID: 7451579202793066269}
+  InspectParent: {fileID: 181478861}
+  Canvas: {fileID: 7451579204165789686}
 --- !u!114 &1998423944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14625,7 +14598,7 @@ Transform:
   m_Children:
   - {fileID: 419065465}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2117359206
 BoxCollider:
@@ -14830,7 +14803,7 @@ Transform:
   - {fileID: 7451579203447662545}
   - {fileID: 199588972}
   m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7451579202841685740
 GameObject:
@@ -15286,49 +15259,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -128, y: 139}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &7451579203439264344
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7451579203439264345}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7451579203812045927}
-  m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &7451579203439264345
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7451579203439264344}
-  m_Layer: 5
-  m_Name: Misc
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!114 &7451579203447662544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15421,13 +15358,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 7451579204703167587}
-  - {fileID: 7451579203439264344}
   - {fileID: 7451579202841685731}
   - {fileID: 7451579204165789685}
   - {fileID: 7451579204400824786}
   - {fileID: 7451579203362561303}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -15682,7 +15618,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15692,7 +15628,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15702,7 +15638,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15712,7 +15648,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15722,7 +15658,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15732,7 +15668,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15742,7 +15678,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15752,7 +15688,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15762,7 +15698,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15772,7 +15708,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15782,7 +15718,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15792,7 +15728,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15802,7 +15738,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15812,7 +15748,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15822,7 +15758,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   - itemClass:
       globalID: 0
@@ -15832,7 +15768,7 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      scriptableObject: {fileID: 0}
+      part: {fileID: 0}
     weight: 1
   LootParent: {fileID: 7451579204703167587}
   ObjectPoolScript: {fileID: 199588973}
@@ -15844,7 +15780,7 @@ MonoBehaviour:
       x: 2
       y: 2
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 1
     categoryName: 1
     typeName: Body Armour
@@ -15852,7 +15788,7 @@ MonoBehaviour:
       x: 3
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 2
     categoryName: 2
     typeName: Leg Armour
@@ -15860,7 +15796,7 @@ MonoBehaviour:
       x: 3
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 3
     categoryName: 3
     typeName: Barrel
@@ -15868,7 +15804,7 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 11400000, guid: 2ee348fd5dbe95742b71ecd5764c7566, type: 2}
+    part: {fileID: 11400000, guid: 2ee348fd5dbe95742b71ecd5764c7566, type: 2}
   - globalID: 4
     categoryName: 3
     typeName: Base
@@ -15876,7 +15812,7 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 11400000, guid: 81b89fa82224f7e4f91d6b1d300f70bb, type: 2}
+    part: {fileID: 11400000, guid: 81b89fa82224f7e4f91d6b1d300f70bb, type: 2}
   - globalID: 5
     categoryName: 3
     typeName: Front Sight
@@ -15884,7 +15820,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 11400000, guid: 20b041528718cc44781388d6d4364b8a, type: 2}
+    part: {fileID: 11400000, guid: 20b041528718cc44781388d6d4364b8a, type: 2}
   - globalID: 6
     categoryName: 3
     typeName: Handguard
@@ -15892,7 +15828,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 11400000, guid: fd0e02dc44f103241a533d39652bf6c2, type: 2}
+    part: {fileID: 11400000, guid: fd0e02dc44f103241a533d39652bf6c2, type: 2}
   - globalID: 7
     categoryName: 3
     typeName: Magazine
@@ -15900,15 +15836,15 @@ MonoBehaviour:
       x: 1
       y: 2
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 11400000, guid: eb16d787cb4c9b4488394c94a83c020e, type: 2}
+    part: {fileID: 11400000, guid: eb16d787cb4c9b4488394c94a83c020e, type: 2}
   - globalID: 8
     categoryName: 3
     typeName: Mount
     size:
       x: 2
-      y: 2
+      y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 11400000, guid: 905177e31f887aa44a664081e5d6c037, type: 2}
+    part: {fileID: 11400000, guid: 905177e31f887aa44a664081e5d6c037, type: 2}
   - globalID: 9
     categoryName: 3
     typeName: Pistol Grip
@@ -15916,7 +15852,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 11400000, guid: da28a1070ecfcfd4693175d7e12e78da, type: 2}
+    part: {fileID: 11400000, guid: da28a1070ecfcfd4693175d7e12e78da, type: 2}
   - globalID: 10
     categoryName: 3
     typeName: Stock
@@ -15924,7 +15860,7 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    scriptableObject: {fileID: 11400000, guid: 6b5e9c3d49bc6604293e49e2570f28b4, type: 2}
+    part: {fileID: 11400000, guid: 6b5e9c3d49bc6604293e49e2570f28b4, type: 2}
   - globalID: 11
     categoryName: 4
     typeName: Hearing Protection
@@ -15932,7 +15868,7 @@ MonoBehaviour:
       x: 2
       y: 2
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 12
     categoryName: 5
     typeName: Balaclava
@@ -15940,7 +15876,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 13
     categoryName: 6
     typeName: Sunglasses
@@ -15948,7 +15884,7 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 14
     categoryName: 7
     typeName: Backpack
@@ -15956,7 +15892,7 @@ MonoBehaviour:
       x: 3
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 15
     categoryName: 8
     typeName: Rig
@@ -15964,7 +15900,7 @@ MonoBehaviour:
       x: 3
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 16
     categoryName: 9
     typeName: Case
@@ -15972,7 +15908,7 @@ MonoBehaviour:
       x: 2
       y: 2
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 17
     categoryName: 10
     typeName: Sword
@@ -15980,7 +15916,7 @@ MonoBehaviour:
       x: 1
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 18
     categoryName: 11
     typeName: Crackers
@@ -15988,7 +15924,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 19
     categoryName: 11
     typeName: Water
@@ -15996,7 +15932,7 @@ MonoBehaviour:
       x: 1
       y: 2
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 20
     categoryName: 12
     typeName: Bronze Ingot
@@ -16004,7 +15940,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 21
     categoryName: 12
     typeName: Iron Ingot
@@ -16012,7 +15948,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   - globalID: 22
     categoryName: 12
     typeName: Steel Ingot
@@ -16020,7 +15956,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    scriptableObject: {fileID: 0}
+    part: {fileID: 0}
   LootTextPrefab: {fileID: 3558581089250535135, guid: 2c8271d16e7171a4690216391742f8de,
     type: 3}
 --- !u!224 &7451579203812045927
@@ -16032,14 +15968,14 @@ RectTransform:
   m_GameObject: {fileID: 7451579203812045921}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.68645835, y: 0.68645835, z: 0.68645835}
   m_Children: []
-  m_Father: {fileID: 7451579203439264344}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1024.9163, y: 576.343}
+  m_AnchoredPosition: {x: 1516.783, y: 774.88745}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7451579203857686884
@@ -16250,7 +16186,7 @@ RectTransform:
   - {fileID: 7451579203652594754}
   - {fileID: 1198398647}
   m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -16495,7 +16431,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

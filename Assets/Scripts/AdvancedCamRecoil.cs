@@ -25,6 +25,7 @@ public class AdvancedCamRecoil : MonoBehaviour
 
     [SerializeField] private PlayerMovement PlayerMovement;
     [SerializeField] private GameObject InventoryCanvas;
+    [SerializeField] private InventoryManager InventoryManager;
 
     private float spread = 20f;          //Adjust this for a bigger or smaller crosshair
     private float maxSpread = 60f;
@@ -45,7 +46,7 @@ public class AdvancedCamRecoil : MonoBehaviour
     void Awake()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //FixCursor.lockState = CursorLockMode.Locked;
         tex = new Texture2D(1, 1);
         SetColor(tex, crosshairColor); //Set color
         lineStyle = new GUIStyle();
@@ -97,12 +98,12 @@ public class AdvancedCamRecoil : MonoBehaviour
 
             if (Cursor.visible)
             {
-                Cursor.lockState = CursorLockMode.Confined;
+                //FixCursor.lockState = CursorLockMode.Confined;
                 PlayerMovement.enabled = false;
             }
             else
             {
-                Cursor.lockState = CursorLockMode.Locked;
+                //FixCursor.lockState = CursorLockMode.Locked;
                 PlayerMovement.enabled = true;
             }
         }
@@ -115,7 +116,7 @@ public class AdvancedCamRecoil : MonoBehaviour
 
                 newItem.SetItemObject(ItemDatabase.Instance.DBList(Loot.CurrentLoot.ItemID));
 
-                if (InvenGridManager.Instance.StoreLoot(newItem))
+                if (InventoryManager.StoreLoot(newItem))
                     Loot.Destroy();
             }
 

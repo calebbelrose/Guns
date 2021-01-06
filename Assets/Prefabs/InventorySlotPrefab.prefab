@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 6815325547938574594}
   - component: {fileID: 114453922500673028}
   m_Layer: 5
-  m_Name: SlotPrefab
+  m_Name: InventorySlotPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -452,15 +452,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6350dc80d887424b9556dd88d185d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPos:
-    x: 0
-    y: 0
-  storedItemObject: {fileID: 0}
-  storedItemSize:
-    x: 0
-    y: 0
-  storedItemStartPos:
-    x: 0
-    y: 0
-  InvenGridManager: {fileID: 0}
-  isOccupied: 0
+  Image: {fileID: 6815325547938574594}

@@ -17,23 +17,23 @@ public class SlotSectorScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         SectorScript = this;
-        InvenGridManager.HighlightedSlot = ParentSlotScript;
+        InventoryManager.HighlightedSlot = ParentSlotScript;
 
         if (ItemScript.selectedItem != null)
-            InvenGridManager.RefreshColor(true);
-        else if (ParentSlotScript.storedItemObject != null)
-            InvenGridManager.ColorChangeLoop(Color.white, ParentSlotScript.storedItemSize, ParentSlotScript.storedItemStartPos);
+            InventoryManager.RefreshColor(true);
+        else if (ParentSlotScript.ItemObject != null)
+            InventoryManager.ColorChangeLoop(ParentSlotScript.SlotGrid, Color.white, ParentSlotScript.ItemSize, ParentSlotScript.ItemStartPos);
     }
 
     //Reset overlay and slot colour
     public void OnPointerExit(PointerEventData eventData)
     {
-        SectorScript = null;
-        InvenGridManager.Instance.HighlightedSlot = null;
-
         if (ItemScript.selectedItem != null)
-            InvenGridManager.Instance.RefreshColor(false);
-        else if (ParentSlotScript.storedItemObject != null)
-            InvenGridManager.Instance.ColorChangeLoop(Color.white, ParentSlotScript.storedItemSize, ParentSlotScript.storedItemStartPos);
+            InventoryManager.RefreshColor(false);
+        else if (ParentSlotScript.ItemObject != null)
+            InventoryManager.ColorChangeLoop(ParentSlotScript.SlotGrid, Color.white, ParentSlotScript.ItemSize, ParentSlotScript.ItemStartPos);
+
+        SectorScript = null;
+        InventoryManager.HighlightedSlot = null;
     }
 }

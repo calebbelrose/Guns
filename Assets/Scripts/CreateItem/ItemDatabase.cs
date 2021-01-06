@@ -29,7 +29,7 @@ public class ItemDatabase : MonoBehaviour
             Destroy(this.gameObject);
 
         Instance = this;
-        DontDestroyOnLoad(transform.parent.parent.gameObject);
+        DontDestroyOnLoad(gameObject);
         RareLootDrops = RareLootDrops.OrderBy(x => x.Weight).ToList();
 
         foreach (string line in lines)

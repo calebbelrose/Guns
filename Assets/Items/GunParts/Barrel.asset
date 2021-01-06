@@ -9,18 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc28647d48a9ff24f900aa1c94b01b9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 89157d019d734c34196b75a8b4442b8d, type: 3}
   m_Name: Barrel
   m_EditorClassIdentifier: 
+  PartSlot: {fileID: 0}
+  SizeModifiers: []
   partType: 10
   partSlots:
-  - Name: Handguard
-    PartIDs: 
-    GunPart: {fileID: 0}
-    Required: 1
-  - Name: Front Sight
+  - Item: {fileID: 0}
+    ParentPart: {fileID: 11400000}
+    Name: Front Sight
     PartIDs: 05000000
-    GunPart: {fileID: 0}
+    Required: 0
+  - Item: {fileID: 0}
+    ParentPart: {fileID: 11400000}
+    Name: Handguard
+    PartIDs: 06000000
     Required: 1
   partSize:
     PartDirection: 3

@@ -7,6 +7,7 @@ public class ItemScript : MonoBehaviour
     public ItemClass item { get; private set; }
     public CanvasGroup CanvasGroup{ get { return canvasGroup; } }
     public RectTransform Rect { get { return rect; } }
+    public IntVector2 Size { get { return size; } }
 
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image Image;
@@ -15,6 +16,7 @@ public class ItemScript : MonoBehaviour
     [SerializeField] private GameObject InspectPrefab;
 
     private int quantity;
+    private IntVector2 size;
     private GameObject InspectWindow = null;
 
     public static ItemScript selectedItem;
@@ -26,9 +28,10 @@ public class ItemScript : MonoBehaviour
     //Sets up the object
     public void SetItemObject(ItemClass passedItem)
     {
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, passedItem.Size.x * InvenGridScript.SlotSize);
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, passedItem.Size.y * InvenGridScript.SlotSize);
         item = passedItem;
+        size = item.Size;
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Size.x * SlotGrid.SlotSize);
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Size.y * SlotGrid.SlotSize);
         Image.sprite = passedItem.Icon;
     }
 
@@ -50,7 +53,7 @@ public class ItemScript : MonoBehaviour
         if (InspectWindow == null)
         {
             InspectWindow = Instantiate(InspectPrefab, parent);
-            InspectWindow.GetComponent<Inspect>().Setup(item);
+            InspectWindow.GetComponent<Inspect>().Setup(this);
         }
         else
             InspectWindow.transform.localPosition = Vector3.zero;
@@ -60,9 +63,9 @@ public class ItemScript : MonoBehaviour
     public static void SetSelectedItem(ItemScript obj)
     {
         selectedItem = obj;
-        selectedItemSize = obj.item.Size;
+        selectedItemSize = obj.Size;
         isDragging = true;
-        obj.transform.SetParent(InvenGridManager.Instance.DragParent);
+        obj.transform.SetParent(InventoryManager.DragParent);
         obj.rect.localScale = Vector3.one;
         selectedItem.CanvasGroup.alpha = 0.5f;
         selectedItem.Rect.pivot = DragPivot;
@@ -83,5 +86,21 @@ public class ItemScript : MonoBehaviour
         selectedItem = null;
         selectedItemSize = IntVector2.Zero;
         isDragging = false;
+    }
+
+    public void UpdateSize()
+    {
+        //Up Right Down Left
+        int[] totalModifier = { 0, 0, 0, 0 };
+
+        foreach (PartSize modifier in item.Part.SizeModifiers)
+        {
+            int index = (int)modifier.PartDirection;
+
+            if (modifier.Size > totalModifier[index])
+                totalModifier[index] = modifier.Size;
+        }
+
+        size = item.Size + new IntVector2(totalModifier[1] + totalModifier[3], totalModifier[0] + totalModifier[2]);
     }
 }

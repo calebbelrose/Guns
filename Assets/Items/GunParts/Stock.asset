@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc28647d48a9ff24f900aa1c94b01b9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 89157d019d734c34196b75a8b4442b8d, type: 3}
   m_Name: Stock
   m_EditorClassIdentifier: 
+  PartSlot: {fileID: 0}
+  SizeModifiers: []
   partType: 4
   partSlots: []
   partSize:
-    PartDirection: 1
-    Size: 1
+    PartDirection: 0
+    Size: 0
