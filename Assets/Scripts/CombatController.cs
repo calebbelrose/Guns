@@ -44,14 +44,14 @@ public class CombatController : MonoBehaviour
     //Equips item
     public void Equip(ItemScript itemScript)
     {
-        EquipSlot equipSlot = EquipSlots.Find(x => x.CategoryName == itemScript.item.CategoryName);
+        EquipSlot equipSlot = EquipSlots.Find(x => x.CategoryName == itemScript.Item.CategoryName);
         EquipInSlot(itemScript, equipSlot);
     }
 
     //Equips item in slot
     public void EquipInSlot(ItemScript itemScript, EquipSlot equipSlot)
     {
-        if (itemScript.item.CategoryName == equipSlot.CategoryName)
+        if (itemScript.Item.CategoryName == equipSlot.CategoryName)
         {
             itemScript.transform.SetParent(equipSlot.transform);
             itemScript.transform.localPosition = Vector3.zero;
@@ -78,7 +78,7 @@ public class CombatController : MonoBehaviour
     }
 
     //Takes damage
-    public virtual void TakeDamage(float amount, CombatController attacker)
+    public virtual void TakeDamage(float amount, float multiplier, CombatController attacker)
     {
         if (amount > 0)
         {

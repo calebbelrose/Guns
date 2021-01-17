@@ -4,10 +4,12 @@ using UnityEngine.UI;
 
 public class Inspect : MonoBehaviour {
 
+    public GameObject PartSlotPrefab { get { return partSlotPrefab; } }
+
     [SerializeField] private Text nameText;
     [SerializeField] private Image Icon;
     [SerializeField] private RectTransform IconRect, SlotRect;
-    [SerializeField] private GameObject PartSlotPrefab;
+    [SerializeField] private GameObject partSlotPrefab;
     [SerializeField] private ContentSizeFitter ContentSizeFitter;
 
     //Updates overlay information
@@ -15,12 +17,11 @@ public class Inspect : MonoBehaviour {
     {
         int totalSize = itemScript.Size.x * itemScript.Size.y;
 
-        CreateSlots(itemScript.item.Part);
-        nameText.text = itemScript.item.TypeName;
+        CreateSlots(itemScript);
+        nameText.text = itemScript.Item.TypeName;
         Icon.color = new Color32(255, 255, 255, 255);
-        Icon.sprite = itemScript.item.Icon;
-        IconRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, itemScript.Size.x * SlotGrid.SlotSize);
-        IconRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, itemScript.Size.y * SlotGrid.SlotSize);
+        Icon.sprite = itemScript.Item.Icon;
+        IconRect.sizeDelta = new Vector2(itemScript.Size.x * DisplaySlots.SlotSize, itemScript.Size.y * DisplaySlots.SlotSize);
     }
 
     public void Refresh()
@@ -29,8 +30,10 @@ public class Inspect : MonoBehaviour {
         ContentSizeFitter.enabled = true;
     }
 
-    private void CreateSlots(Part part)
+    private void CreateSlots(ItemScript itemScript)
     {
+        Part part = itemScript.Item.Part;
+
         if (part != null)
         {
             for (int i = 0; i < part.PartSlotCount(); i++)
@@ -38,10 +41,14 @@ public class Inspect : MonoBehaviour {
                 PartSlot partSlot = Instantiate(PartSlotPrefab, SlotRect).GetComponent<PartSlot>();
 
                 partSlot.SlotInfo = part.PartSlots(i);
+                partSlot.SlotInfo.ParentItem = itemScript;
                 partSlot.Inspect = this;
 
                 if (part.PartSlots(i).Item != null)
-                    CreateSlots(part.PartSlots(i).Item.item.Part);
+                {
+                    partSlot.FillSlot(part.PartSlots(i).Item);
+                    CreateSlots(part.PartSlots(i).Item);
+                }
             }
         }
     }

@@ -7,8 +7,8 @@ using UnityEngine;
 [Serializable]
 public class LootDrop
 {
-    [SerializeField] public ItemClass ItemClass { get { return itemClass; } }
-    [SerializeField] public int Weight { get { return weight; } }
+    public ItemClass ItemClass { get { return itemClass; } }
+    public int Weight { get { return weight; } }
 
     [SerializeField] private ItemClass itemClass;
     [SerializeField] private int weight;

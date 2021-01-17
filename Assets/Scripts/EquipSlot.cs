@@ -23,7 +23,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (ItemScript.selectedItem != null)
         {
-            if (ItemScript.selectedItem.item.CategoryName == CategoryName)
+            if (ItemScript.selectedItem.Item.CategoryName == CategoryName)
                 Image.color = Color.green;
             else
                 Image.color = Color.red;

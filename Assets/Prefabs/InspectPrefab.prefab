@@ -393,7 +393,7 @@ MonoBehaviour:
   Icon: {fileID: 2214206328722770835}
   IconRect: {fileID: 2214206328722770834}
   SlotRect: {fileID: 2214206328363585479}
-  PartSlotPrefab: {fileID: 6846952214606941858, guid: 53cd5754e90c4a2439fa04729e23bac0,
+  partSlotPrefab: {fileID: 6846952214606941858, guid: 53cd5754e90c4a2439fa04729e23bac0,
     type: 3}
   ContentSizeFitter: {fileID: 2214206329956448964}
 --- !u!114 &525492327693912074

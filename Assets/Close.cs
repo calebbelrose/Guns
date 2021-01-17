@@ -9,6 +9,6 @@ public class Close : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Destroy(InspectObject);
+        InspectObject.SetActive(false);
     }
 }

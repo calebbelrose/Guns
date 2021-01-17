@@ -10,7 +10,8 @@ public class AIMovement : MonoBehaviour
     public Vector3 recoilrotation = new Vector3(2f, 2f, 2f), recoilrotationaiming = new Vector3(0.5f, 0.5f, 1.5f), targetGunLocation;
     public Transform Body;
     public Inventory Inventory;
-    public LayerMask LayerMask;
+    public LayerMask EnemyMask;
+    public LayerMask ItemMask;
     public List<Vector3> targets = new List<Vector3>();
     public List<float> directions;
 
@@ -18,28 +19,75 @@ public class AIMovement : MonoBehaviour
     private Vector2 totalRotation = Vector2.zero;
     private float xRotation = 0f;
     private int consecutiveShots = 0, currentTarget = 0;
-    private Transform nearestEnemy = null;
+    private Transform nearestTarget = null;
+    [SerializeField] private CombatController CombatController;
+    [SerializeField] private Collider CurrentAI;
 
     void Update()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 100f, LayerMask);
+        Collider[] enemyColliders = Physics.OverlapSphere(transform.position, 100f, EnemyMask);
         float minimumDistance = float.MaxValue;
-        Vector2 newRotation = Vector2.zero, removedRotation;
+        Vector2 newRotation = Vector2.zero;
         RaycastHit hit;
 
-        foreach (Collider collider in hitColliders)
+        foreach (Collider collider in enemyColliders)
         {
-            float distance = Vector3.Distance(Body.position, collider.transform.position);
-
-            if (distance < minimumDistance && Vector3.Dot(Vector3.Normalize(collider.transform.position - transform.position), transform.forward) > 0.707)
+            if (collider != CurrentAI)
             {
-                minimumDistance = distance;
-                nearestEnemy = collider.transform;
+                float distance = Vector3.Distance(Body.position, collider.transform.position);
+
+                if (distance < minimumDistance && Vector3.Dot(Vector3.Normalize(collider.transform.position - transform.position), transform.forward) > 0.707)
+                {
+                    minimumDistance = distance;
+                    nearestTarget = collider.transform;
+                }
             }
         }
 
-        if (nearestEnemy != null)
-            Body.Rotate((Quaternion.LookRotation(new Vector3(nearestEnemy.position.x - transform.position.x, 0.0f, nearestEnemy.position.z - transform.position.z)).eulerAngles - Body.eulerAngles).normalized);
+        if (nearestTarget == null)
+        {
+            Collider[] itemColliders = Physics.OverlapSphere(transform.position, 100f, ItemMask);
+
+            foreach (Collider collider in itemColliders)
+            {
+                float distance = Vector3.Distance(Body.position, collider.transform.position);
+
+                if (distance < minimumDistance && Vector3.Dot(Vector3.Normalize(collider.transform.position - transform.position), transform.forward) > 0.707)
+                {
+                    minimumDistance = distance;
+                    nearestTarget = collider.transform;
+                }
+            }
+        }
+
+        if (nearestTarget != null)
+        {
+            //Vector3 targetRotation = (Quaternion.LookRotation(nearestTarget.position - transform.position).eulerAngles - transform.eulerAngles).normalized;
+
+            //Vector3 targetRotation = nearestTarget.position - transform.position;
+            Vector3 rotation = Quaternion.LookRotation(nearestTarget.position - transform.position).eulerAngles - transform.eulerAngles;
+
+            //Body.Rotate(new Vector3(0.0f, targetRotation.y, 0.0f));
+            //transform.Rotate(new Vector3(targetRotation.x, 0.0f, 0.0f));
+
+            if (rotation.x > 90.0f)
+                rotation.x -= 360.0f;
+            else if (rotation.x < -90.0f)
+                rotation.x += 360.0f;
+
+            if (rotation.y > 180.0f)
+                rotation.y -= 360.0f;
+            else if (rotation.y < -180.0f)
+                rotation.y += 360.0f;
+
+            if (rotation.magnitude > 1.0f)
+                rotation = rotation.normalized;
+
+            Body.Rotate(0.0f, rotation.y, 0.0f);
+            transform.Rotate(rotation.x, 0.0f, 0.0f);
+            //transform.Rotate((Quaternion.LookRotation(new Vector3(0.0f, targetRotation.y, 0.0f)).eulerAngles - transform.eulerAngles).normalized);
+            //transform.Rotate(new Vector3(Vector3.Angle((nearestTarget.position - transform.position).normalized, transform.forward), 0.0f, 0.0f));
+        }
         else
         {
             float minDirection = Mathf.Repeat(Mathf.Round(Body.rotation.y - 22.5f), 360.0f), maxDirection = Mathf.Repeat(Mathf.Round(Body.rotation.y + 22.5f), 360.0f);
@@ -73,7 +121,7 @@ public class AIMovement : MonoBehaviour
 
         //spread = Mathf.Clamp(spread, minSpread, maxSpread);
 
-        if (minimumDistance >= 20f)
+        /*if (minimumDistance >= 20f)
         {
             aiming = true;
             targetGunLocation = Gun.aimingLocation;
@@ -84,31 +132,25 @@ public class AIMovement : MonoBehaviour
             targetGunLocation = Gun.idleLocation;
         }
 
-        Gun.transform.localPosition = Vector3.Lerp(Gun.transform.localPosition, targetGunLocation, Time.deltaTime * Gun.Maneuverability);
+        Gun.transform.localPosition = Vector3.Lerp(Gun.transform.localPosition, targetGunLocation, Time.deltaTime * Gun.Maneuverability);*/
 
-        /**/
-
-        if (Physics.Raycast(new Ray(transform.position, transform.forward), out hit, 100f))
+        if (Physics.Raycast(new Ray(transform.position, transform.forward), out hit, 10.0f))
         {
             //if (hit.collider.transform.CompareTag("Character"))
                 //newRotation = Fire(nearestEnemy.position);
 
-            if (hit.distance <= 10f && hit.collider.transform.CompareTag("Pickupable"))
+            if (hit.collider.gameObject.layer == 11)
             {
-                Pickup pickup = hit.collider.GetComponent<Pickup>();
-                pickup.Pickupable.AddToInventory(Inventory, hit.collider.gameObject, pickup.Amount);
+                ItemScript newItem = ItemDatabase.Instance.ItemEquipPool.GetItemScript();
+
+                newItem.SetItemObject(ItemDatabase.Instance.DBList(hit.collider.GetComponent<Loot>().ItemID));
+
+                if (Inventory.StoreLoot(newItem))
+                    Loot.Destroy();
+                else
+                    Destroy(newItem.gameObject);
             }
         }
-
-        totalRotation += newRotation;
-        removedRotation = new Vector2(Mathf.Lerp(0, totalRotation.x, Time.deltaTime), Mathf.Lerp(0, totalRotation.y, Time.deltaTime));
-        totalRotation -= removedRotation;
-        //float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime + newRotation.x - removedRotation.x;
-        //float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime + newRotation.y - removedRotation.y;
-        //xRotation = Mathf.Clamp(xRotation - mouseY, -90f, 90f);
-
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        //Body.Rotate(Vector3.up * mouseX);
     }
 
     Vector2 Fire(Vector3 target)
@@ -117,11 +159,12 @@ public class AIMovement : MonoBehaviour
 
         if (canShoot)
         {
-            GameObject bullet = Instantiate(BulletPrefab, Gun.BulletSpawn.position, Gun.transform.rotation);
+            Bullet bullet = Instantiate(BulletPrefab, Gun.BulletSpawn.position, Gun.transform.rotation).GetComponent<Bullet>();
 
             Gun.AudioSource.PlayOneShot(AudioClip);
             consecutiveShots++;
-            bullet.GetComponent<Rigidbody>().velocity = (target - Gun.BulletSpawn.transform.position).normalized * 100;
+            bullet.rb.velocity = (target - Gun.BulletSpawn.transform.position).normalized * 100;
+            bullet.Shooter = CombatController;
             //Destroy(bullet, 2f);
             canShoot = false;
             StartCoroutine(ShootDelay());

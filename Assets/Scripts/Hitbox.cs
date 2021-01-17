@@ -1,17 +1,16 @@
-﻿
-
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    public Health Health;
+    public CombatController CombatController;
     public float multiplier = 1f;
 
-    public void TakeDamage(float damage)
+    [SerializeField] private int index;
+
+    public void TakeDamage(float damage, CombatController attacker)
     {
-        Health.TakeDamage(damage * multiplier);
+        CombatController.TakeDamage(damage, multiplier, attacker);
     }
 }

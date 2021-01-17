@@ -17,7 +17,6 @@ public class AdvancedCamRecoil : MonoBehaviour
     public CharacterController characterController;
     public float mouseSensitivity = 100f;
     public AudioClip AudioClip;
-    public Inventory Inventory;
     public Text PickupableName;
     public Text PickupableAmount;
     public Gun Gun;
@@ -25,7 +24,8 @@ public class AdvancedCamRecoil : MonoBehaviour
 
     [SerializeField] private PlayerMovement PlayerMovement;
     [SerializeField] private GameObject InventoryCanvas;
-    [SerializeField] private InventoryManager InventoryManager;
+    [SerializeField] private Inventory Inventory;
+    [SerializeField] private CombatController CombatController;
 
     private float spread = 20f;          //Adjust this for a bigger or smaller crosshair
     private float maxSpread = 60f;
@@ -65,14 +65,17 @@ public class AdvancedCamRecoil : MonoBehaviour
             Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             RaycastHit hit;
             Vector3 targetPoint;
+            Bullet bullet;
 
             if (Physics.Raycast(ray, out hit))
                 targetPoint = hit.point;
             else
                 targetPoint = ray.GetPoint(1000); // You may need to change this value according to your needs
                                                   // Create the bullet and give it a velocity according to the target point computed before
-            GameObject bullet = Instantiate(BulletPrefab, Gun.BulletSpawn.position, Gun.transform.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = (targetPoint - Gun.BulletSpawn.transform.position).normalized * 500;
+
+            bullet = Instantiate(BulletPrefab, Gun.BulletSpawn.position, Gun.transform.rotation).GetComponent<Bullet>();
+            bullet.Shooter = CombatController;
+            bullet.rb.velocity = (targetPoint - Gun.BulletSpawn.transform.position).normalized * 500;
             //Destroy(bullet, 2f);
             canShoot = false;
 
@@ -89,8 +92,6 @@ public class AdvancedCamRecoil : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit hit;
-
         if (Input.GetButtonDown("Inventory"))
         {
             InventoryCanvas.SetActive(!InventoryCanvas.activeSelf);
@@ -116,8 +117,10 @@ public class AdvancedCamRecoil : MonoBehaviour
 
                 newItem.SetItemObject(ItemDatabase.Instance.DBList(Loot.CurrentLoot.ItemID));
 
-                if (InventoryManager.StoreLoot(newItem))
+                if (Inventory.StoreLoot(newItem))
                     Loot.Destroy();
+                else
+                    Destroy(newItem.gameObject);
             }
 
             if (Input.GetButtonDown("Reload"))
@@ -168,17 +171,6 @@ public class AdvancedCamRecoil : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
                 PlayerBody.Rotate(Vector3.up * mouseX);
             }
-
-            if (Physics.Raycast(new Ray(transform.position, transform.forward), out hit, 100f) && hit.collider.transform.CompareTag("Pickupable"))
-            {
-                Pickup pickup = hit.collider.GetComponent<Pickup>();
-
-                PickupableName.text = pickup.Pickupable.GetName();
-                PickupableAmount.text = pickup.Amount.ToString();
-
-                if (Input.GetButton("Interact"))
-                    pickup.Pickupable.AddToInventory(Inventory, hit.collider.gameObject, pickup.Amount);
-            }
         }
     }
 
@@ -188,10 +180,12 @@ public class AdvancedCamRecoil : MonoBehaviour
 
         if (!aiming)
         {
-            GUI.Box(new Rect(centerPoint.x - width / 2, centerPoint.y - (height + spread), width, height), "", lineStyle);
-            GUI.Box(new Rect(centerPoint.x - width / 2, centerPoint.y + spread, width, height), "", lineStyle);
-            GUI.Box(new Rect(centerPoint.x + spread, (centerPoint.y - width / 2), height, width), "", lineStyle);
-            GUI.Box(new Rect(centerPoint.x - (height + spread), (centerPoint.y - width / 2), height, width), "", lineStyle);
+            float x = centerPoint.x - width / 2, y = centerPoint.y - width / 2;
+
+            GUI.Box(new Rect(x, centerPoint.y - (height + spread), width, height), "", lineStyle);
+            GUI.Box(new Rect(x, centerPoint.y + spread, width, height), "", lineStyle);
+            GUI.Box(new Rect(centerPoint.x + spread, y, height, width), "", lineStyle);
+            GUI.Box(new Rect(centerPoint.x - (height + spread), y, height, width), "", lineStyle);
         }
     }
 

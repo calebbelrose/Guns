@@ -4,19 +4,20 @@ using UnityEngine.UI;
 
 public class ItemScript : MonoBehaviour
 {
-    public ItemClass item { get; private set; }
+    public ItemClass Item { get; private set; }
     public CanvasGroup CanvasGroup{ get { return canvasGroup; } }
     public RectTransform Rect { get { return rect; } }
-    public IntVector2 Size { get { return size; } }
+    public IntVector2 Size { get { if (Item.Part != null) return Item.Size + Item.Part.SizeModifier; else return Item.Size; } }
+    public SlotScript Slot;
+    public Image Image { get { return image; } }
 
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private Image Image;
+    [SerializeField] private Image image;
     [SerializeField] private RectTransform rect;
     [SerializeField] private Text text;
     [SerializeField] private GameObject InspectPrefab;
 
     private int quantity;
-    private IntVector2 size;
     private GameObject InspectWindow = null;
 
     public static ItemScript selectedItem;
@@ -28,11 +29,9 @@ public class ItemScript : MonoBehaviour
     //Sets up the object
     public void SetItemObject(ItemClass passedItem)
     {
-        item = passedItem;
-        size = item.Size;
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Size.x * SlotGrid.SlotSize);
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Size.y * SlotGrid.SlotSize);
-        Image.sprite = passedItem.Icon;
+        Item = passedItem;
+        rect.sizeDelta = new Vector2(Size.x * DisplaySlots.SlotSize, Size.y * DisplaySlots.SlotSize);
+        image.sprite = passedItem.Icon;
     }
 
     public void SetQuantity(int _quantity)
@@ -56,7 +55,10 @@ public class ItemScript : MonoBehaviour
             InspectWindow.GetComponent<Inspect>().Setup(this);
         }
         else
+        {
+            InspectWindow.SetActive(true);
             InspectWindow.transform.localPosition = Vector3.zero;
+        }
     }
 
     //Sets picked up item
@@ -86,21 +88,5 @@ public class ItemScript : MonoBehaviour
         selectedItem = null;
         selectedItemSize = IntVector2.Zero;
         isDragging = false;
-    }
-
-    public void UpdateSize()
-    {
-        //Up Right Down Left
-        int[] totalModifier = { 0, 0, 0, 0 };
-
-        foreach (PartSize modifier in item.Part.SizeModifiers)
-        {
-            int index = (int)modifier.PartDirection;
-
-            if (modifier.Size > totalModifier[index])
-                totalModifier[index] = modifier.Size;
-        }
-
-        size = item.Size + new IntVector2(totalModifier[1] + totalModifier[3], totalModifier[0] + totalModifier[2]);
     }
 }

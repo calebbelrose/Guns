@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public Round Round;
     public LayerMask LayerMask;
     public GameObject testObject;
+    public CombatController Shooter;
 
     private Vector3 oldPreviousPosition;
     private Vector3 newPreviousPosition;
@@ -52,7 +53,7 @@ public class Bullet : MonoBehaviour
             RaycastHit otherHit;
 
             Physics.Linecast(oldPreviousPosition, position, out otherHit, LayerMask);
-            hitbox.TakeDamage(rb.velocity.magnitude);
+            hitbox.TakeDamage(rb.velocity.magnitude, Shooter);
             rb.velocity *= 0.9f;
             previousHitbox = hitbox;
         }

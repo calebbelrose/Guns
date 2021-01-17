@@ -2,27 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/GunPart")]
-public class Part : ScriptableObject
+[System.Serializable]
+public class Part
 {
     public PartSlot PartSlot;
     public PartType PartType { get { return partType; } }
-    public List<PartSize> SizeModifiers = new List<PartSize>();
+    public Modifiers[] SizeModifiers = new Modifiers[4];
+    public IntVector2 SizeModifier { get { return new IntVector2(SizeModifiers[1].HighestModifier + SizeModifiers[3].HighestModifier, SizeModifiers[0].HighestModifier + SizeModifiers[2].HighestModifier); } }
+    public IntVector2 Size; // index, modifier
 
     [SerializeField] private PartType partType;
     [SerializeField] private List<SlotInfo> partSlots;
-    [SerializeField] private PartSize partSize;
 
     public SlotInfo PartSlots(int index)
     {
         return partSlots[index];
-    }
-    
-    public void AddModifier(PartSize modifier)
-    {
-        SizeModifiers.Add(modifier);
-
-        PartSlot.SlotInfo.Item.UpdateSize();   
     }
 
     public int PartSlotCount()
