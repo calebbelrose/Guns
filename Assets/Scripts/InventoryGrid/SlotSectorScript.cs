@@ -17,23 +17,23 @@ public class SlotSectorScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         SectorScript = this;
-        ParentSlotScript.SlotGrid.Inventory.HighlightedSlot = ParentSlotScript;
+        ParentSlotScript.InventorySlotInfo.SlotGrid.Inventory.HighlightedSlot = ParentSlotScript;
 
         if (ItemScript.selectedItem != null)
-            ParentSlotScript.SlotGrid.Inventory.RefreshColor(true);
-        else if (ParentSlotScript.ItemScript != null)
-            Inventory.ColorChangeLoop(ParentSlotScript.SlotGrid, Color.white, ParentSlotScript.ItemScript.Size, ParentSlotScript.ItemStartPos);
+            ParentSlotScript.InventorySlotInfo.SlotGrid.Inventory.RefreshColor(true);
+        else if (ParentSlotScript.InventorySlotInfo.ItemScript != null)
+            Inventory.ColorChangeLoop(ParentSlotScript.InventorySlotInfo.SlotGrid, Color.white, ParentSlotScript.InventorySlotInfo.ItemScript.Size, ParentSlotScript.InventorySlotInfo.ItemStartPos);
     }
 
     //Reset overlay and slot colour
     public void OnPointerExit(PointerEventData eventData)
     {
         if (ItemScript.selectedItem != null)
-            ParentSlotScript.SlotGrid.Inventory.RefreshColor(false);
-        else if (ParentSlotScript.ItemScript != null)
-            Inventory.ColorChangeLoop(ParentSlotScript.SlotGrid, Color.white, ParentSlotScript.ItemScript.Size, ParentSlotScript.ItemStartPos);
+            ParentSlotScript.InventorySlotInfo.SlotGrid.Inventory.RefreshColor(false);
+        else if (ParentSlotScript.InventorySlotInfo.ItemScript != null)
+            Inventory.ColorChangeLoop(ParentSlotScript.InventorySlotInfo.SlotGrid, Color.white, ParentSlotScript.InventorySlotInfo.ItemScript.Size, ParentSlotScript.InventorySlotInfo.ItemStartPos);
 
         SectorScript = null;
-        ParentSlotScript.SlotGrid.Inventory.HighlightedSlot = null;
+        ParentSlotScript.InventorySlotInfo.SlotGrid.Inventory.HighlightedSlot = null;
     }
 }

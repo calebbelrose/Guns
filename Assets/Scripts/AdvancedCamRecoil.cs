@@ -26,6 +26,8 @@ public class AdvancedCamRecoil : MonoBehaviour
     [SerializeField] private GameObject InventoryCanvas;
     [SerializeField] private Inventory Inventory;
     [SerializeField] private CombatController CombatController;
+    [SerializeField] DisplayInventory PlayerDisplay;
+    [SerializeField] DisplayInventory LootDisplay;
 
     private float spread = 20f;          //Adjust this for a bigger or smaller crosshair
     private float maxSpread = 60f;
@@ -108,6 +110,9 @@ public class AdvancedCamRecoil : MonoBehaviour
                 PlayerMovement.enabled = true;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+            Debug.Log(Inventory.slotGridList[1].List[0].SlotInfo[0, 0].SlotScript.transform.position + " " + Inventory.slotGridList[1].List[0].SlotInfo[0, 0].ItemScript.transform.position);
 
         if (PlayerMovement.enabled)
         {

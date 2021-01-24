@@ -12,9 +12,9 @@ public class Part
     public IntVector2 Size; // index, modifier
 
     [SerializeField] private PartType partType;
-    [SerializeField] private List<SlotInfo> partSlots;
+    [SerializeField] private List<PartSlotInfo> partSlots;
 
-    public SlotInfo PartSlots(int index)
+    public PartSlotInfo PartSlots(int index)
     {
         return partSlots[index];
     }

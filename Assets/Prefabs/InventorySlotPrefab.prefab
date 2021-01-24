@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quadNum: 2
-  ParentSlotScript: {fileID: 0}
+  ParentSlotScript: {fileID: 215182278875020143}
 --- !u!1 &1581703450439536
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quadNum: 3
-  ParentSlotScript: {fileID: 0}
+  ParentSlotScript: {fileID: 215182278875020143}
 --- !u!1 &1671416959900612
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quadNum: 1
-  ParentSlotScript: {fileID: 0}
+  ParentSlotScript: {fileID: 215182278875020143}
 --- !u!1 &1690844012314360
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quadNum: 4
-  ParentSlotScript: {fileID: 0}
+  ParentSlotScript: {fileID: 215182278875020143}
 --- !u!1 &6846952214606941858
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 6637227381236394852}
   - component: {fileID: 6634984526223806386}
   - component: {fileID: 6815325547938574594}
+  - component: {fileID: 215182278875020143}
   m_Layer: 5
   m_Name: InventorySlotPrefab
   m_TagString: Untagged
@@ -439,3 +440,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &215182278875020143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846952214606941858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6350dc80d887424b9556dd88d185d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 6815325547938574594}
+  rect: {fileID: 6637227381236394852}

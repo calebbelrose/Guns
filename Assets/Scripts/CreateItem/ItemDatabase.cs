@@ -54,10 +54,15 @@ public class ItemDatabase : MonoBehaviour
     {
         return Instantiate(LootTextPrefab, LootParent);
     }
-    
+
     public ItemClass DBList(int index)
     {
         return dbList[index];
+    }
+
+    public int DBCount()
+    {
+        return dbList.Count;
     }
 
     //Returns the specified object
@@ -66,24 +71,24 @@ public class ItemDatabase : MonoBehaviour
         ObjectPoolScript.ReturnObject(toReturn);
     }
 
-        /*public void SpawnLoot(Vector3 position, int itemID, int amount)
-        {
-            int weightSum = 0;
-            int index = 0;
-            int roll;
-            ItemClass newItem;
-            GameObject newLoot;
+    /*public void SpawnLoot(Vector3 position, int itemID, int amount)
+    {
+        int weightSum = 0;
+        int index = 0;
+        int roll;
+        ItemClass newItem;
+        GameObject newLoot;
 
-            foreach (LootDrop drop in RareLootDrops)
-                weightSum += drop.Weight;
-            roll = UnityEngine.Random.Range(0, weightSum);
+        foreach (LootDrop drop in RareLootDrops)
+            weightSum += drop.Weight;
+        roll = UnityEngine.Random.Range(0, weightSum);
 
-            while (index < RareLootDrops.Count && roll <= RareLootDrops[index].Weight)
-                roll -= RareLootDrops[index].Weight;
+        while (index < RareLootDrops.Count && roll <= RareLootDrops[index].Weight)
+            roll -= RareLootDrops[index].Weight;
 
-            newItem = new ItemClass(itemID, );
-            newLoot = Instantiate(Resources.Load("Loot/" + newItem.TypeName) as GameObject);
-            newLoot.GetComponent<Loot>().item = newItem;
-            newLoot.transform.position = position;
-        }*/
-    }
+        newItem = new ItemClass(itemID, );
+        newLoot = Instantiate(Resources.Load("Loot/" + newItem.TypeName) as GameObject);
+        newLoot.GetComponent<Loot>().item = newItem;
+        newLoot.transform.position = position;
+    }*/
+}

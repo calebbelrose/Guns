@@ -17,7 +17,6 @@ public class AIMovement : MonoBehaviour
 
     private bool canShoot = true, aiming;
     private Vector2 totalRotation = Vector2.zero;
-    private float xRotation = 0f;
     private int consecutiveShots = 0, currentTarget = 0;
     private Transform nearestTarget = null;
     [SerializeField] private CombatController CombatController;

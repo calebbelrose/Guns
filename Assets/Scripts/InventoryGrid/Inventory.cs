@@ -11,45 +11,52 @@ public class Inventory : MonoBehaviour
     public bool IsOverEdge { get; private set; } = false;
     public int CheckState { get; private set; }
 
-    [SerializeField] private List<SlotGrid> slotGrids = new List<SlotGrid>();
+    public SlotGridList[] slotGridList = new SlotGridList[4];
+    [SerializeField] private int pockets;
 
     private List<OtherItem> otherItems = new List<OtherItem>();
+
+    private void Start()
+    {
+        for (int i = 0; i < pockets; i++)
+            slotGridList[1].List.Add(new SlotGrid(1, 1, this));
+    }
 
     //Returns true if the loot was stored otherwise returns false
     public bool StoreLoot(ItemScript itemScript)
     {
-        foreach (SlotGrid slotGrid in slotGrids)
+        foreach (SlotGridList slotGridArray in slotGridList)
         {
-            //Loops over all of the slots to find a space big enough for the item
-            for (int x = 0; x < slotGrid.Slots.GetLength(0) - itemScript.Size.x; x++)
+            foreach (SlotGrid slotGrid in slotGridArray.List)
             {
-                for (int y = 0; y < slotGrid.Slots.GetLength(1) - itemScript.Size.y; y++)
+                //Loops over all of the slots to find a space big enough for the item
+                for (int x = 0; x <= slotGrid.SlotInfo.GetLength(0) - itemScript.Size.x; x++)
                 {
-                    int i = 0;
-                    bool stillEmpty = true;
-
-                    while (i < itemScript.Size.x && stillEmpty)
+                    for (int y = 0; y <= slotGrid.SlotInfo.GetLength(1) - itemScript.Size.y; y++)
                     {
-                        for (int j = 0; j < itemScript.Size.y; j++)
+                        int i = 0;
+                        bool stillEmpty = true;
+
+                        while (i < itemScript.Size.x && stillEmpty)
                         {
-                            if (slotGrid.Slots[x + i, y + j].IsOccupied)
+                            for (int j = 0; j < itemScript.Size.y; j++)
                             {
-                                stillEmpty = false;
-                                break;
+                                if (slotGrid.SlotInfo[x + i, y + j].ItemScript != null)
+                                {
+                                    stillEmpty = false;
+                                    break;
+                                }
                             }
+
+                            i++;
                         }
 
-                        i++;
-                    }
-
-                    // Stores the item if there's a space big enough
-                    if (stillEmpty)
-                    {
-                        totalOffset = slotGrid.Slots[x, y].GridPos;
-                        StoreItem(slotGrid, itemScript);
-                        itemScript.Rect.localScale = Vector3.one;
-                        ColorChangeLoop(slotGrid, Color.white, itemScript.Size, totalOffset);
-                        return true;
+                        // Stores the item if there's a space big enough
+                        if (stillEmpty)
+                        {
+                            StoreItem(slotGrid, itemScript);
+                            return true;
+                        }
                     }
                 }
             }
@@ -63,22 +70,14 @@ public class Inventory : MonoBehaviour
     {
         IntVector2 itemSize = itemScript.Size;
 
-        itemScript.Slot = slotGrid.Slots[totalOffset.x, totalOffset.y];
-
         for (int y = 0; y < itemSize.y; y++)
         {
             for (int x = 0; x < itemSize.x; x++)
-            {
-                SlotScript slotScript = slotGrid.Slots[totalOffset.x + x, totalOffset.y + y];
-
-                slotScript.ChangeItem(itemScript, totalOffset, true);
-                slotScript.Image.color = Color.white;
-            }
+                slotGrid.SlotInfo[totalOffset.x + x, totalOffset.y + y].ChangeItem(itemScript, totalOffset);
         }
 
         itemScript.transform.SetParent(InventoryManager.DropParent);
         itemScript.Rect.pivot = new Vector2(0.0f, 1.0f);
-        itemScript.transform.position = slotGrid.Slots[totalOffset.x, totalOffset.y].transform.position;
         itemScript.CanvasGroup.alpha = 1f;
     }
 
@@ -93,11 +92,11 @@ public class Inventory : MonoBehaviour
             {
                 for (int x = 0; x < itemSize.x; x++)
                 {
-                    SlotScript instanceScript = slotGrid.Slots[checkStartPos.x + x, checkStartPos.y + y];
+                    SlotScript instanceScript = slotGrid.SlotInfo[checkStartPos.x + x, checkStartPos.y + y].SlotScript;
 
-                    if (instanceScript.IsOccupied)
+                    if (instanceScript.InventorySlotInfo.ItemScript != null)
                     {
-                        OtherItem otherItem = new OtherItem(instanceScript.ItemScript, instanceScript.ItemStartPos);
+                        OtherItem otherItem = new OtherItem(instanceScript.InventorySlotInfo.ItemScript, instanceScript.InventorySlotInfo.ItemStartPos);
 
                         if (!otherItems.Contains(otherItem))
                             otherItems.Add(otherItem);
@@ -115,25 +114,25 @@ public class Inventory : MonoBehaviour
         if (enter)
         {
             CheckArea(ItemScript.selectedItemSize, HighlightedSlot);
-            CheckState = SlotCheck(HighlightedSlot.SlotGrid, CheckSize);
+            CheckState = SlotCheck(HighlightedSlot.InventorySlotInfo.SlotGrid, CheckSize);
 
             switch (CheckState)
             {
-                case 0: ColorChangeLoop(HighlightedSlot.SlotGrid, Color.green, CheckSize, checkStartPos); break;
+                case 0: ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.green, CheckSize, checkStartPos); break;
                 case 1:
-                    ColorChangeLoop(HighlightedSlot.SlotGrid, Color.white, otherItems[0].Item.Size, otherItems[0].StartPosition);
-                    ColorChangeLoop(HighlightedSlot.SlotGrid, Color.green, CheckSize, checkStartPos);
+                    ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, otherItems[0].Item.Size, otherItems[0].StartPosition);
+                    ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.green, CheckSize, checkStartPos);
                     break;
-                default: ColorChangeLoop(HighlightedSlot.SlotGrid, Color.red, CheckSize, checkStartPos); break;
+                default: ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.red, CheckSize, checkStartPos); break;
             }
         }
         else
         {
             IsOverEdge = false;
-            ColorChangeLoop2(HighlightedSlot.SlotGrid, CheckSize, checkStartPos);
+            ColorChangeLoop2(HighlightedSlot.InventorySlotInfo.SlotGrid, CheckSize, checkStartPos);
 
             foreach (OtherItem otherItem in otherItems)
-                ColorChangeLoop(HighlightedSlot.SlotGrid, Color.white, otherItem.Item.Size, otherItem.StartPosition);
+                ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, otherItem.Item.Size, otherItem.StartPosition);
         }
     }
 
@@ -142,15 +141,15 @@ public class Inventory : MonoBehaviour
     {
         IntVector2 overCheck;
 
-        totalOffset = slotScript.GridPos - Offset(itemSize);
+        totalOffset = slotScript.InventorySlotInfo.GridPos - Offset(itemSize);
         checkStartPos = totalOffset;
         CheckSize = itemSize;
         overCheck = totalOffset + itemSize;
         IsOverEdge = false;
 
-        if (overCheck.x > slotScript.SlotGrid.GridSize.x)
+        if (overCheck.x > slotScript.InventorySlotInfo.SlotGrid.GridSize.x)
         {
-            CheckSize.x = slotScript.SlotGrid.GridSize.x - totalOffset.x;
+            CheckSize.x = slotScript.InventorySlotInfo.SlotGrid.GridSize.x - totalOffset.x;
             IsOverEdge = true;
         }
         if (totalOffset.x < 0)
@@ -159,9 +158,9 @@ public class Inventory : MonoBehaviour
             checkStartPos.x = 0;
             IsOverEdge = true;
         }
-        if (overCheck.y > slotScript.SlotGrid.GridSize.y)
+        if (overCheck.y > slotScript.InventorySlotInfo.SlotGrid.GridSize.y)
         {
-            CheckSize.y = slotScript.SlotGrid.GridSize.y - totalOffset.y;
+            CheckSize.y = slotScript.InventorySlotInfo.SlotGrid.GridSize.y - totalOffset.y;
             IsOverEdge = true;
         }
         if (totalOffset.y < 0)
@@ -178,7 +177,7 @@ public class Inventory : MonoBehaviour
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
-                slotGrid.Slots[startPos.x + x, startPos.y + y].Image.color = color;
+                slotGrid.SlotInfo[startPos.x + x, startPos.y + y].SlotScript.Image.color = color;
         }
     }
 
@@ -188,21 +187,21 @@ public class Inventory : MonoBehaviour
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
-                slotGrid.Slots[startPos.x + x, startPos.y + y].Image.color = Color.white;
+                slotGrid.SlotInfo[startPos.x + x, startPos.y + y].SlotScript.Image.color = Color.white;
         }
     }
 
     //Gets item in slot
-    public ItemScript GetItem(SlotScript slotScript)
+    public ItemScript GetItem(InventorySlotInfo slotInfo)
     {
-        ItemScript retItem = slotScript.ItemScript;
-        IntVector2 tempItemPos = slotScript.ItemStartPos;
+        ItemScript retItem = slotInfo.ItemScript;
+        IntVector2 tempItemPos = slotInfo.ItemStartPos;
         IntVector2 itemSizeL = retItem.Size;
 
         for (int y = 0; y < itemSizeL.y; y++)
         {
             for (int x = 0; x < itemSizeL.x; x++)
-                slotScript.SlotGrid.Slots[tempItemPos.x + x, tempItemPos.y + y].ChangeItem(null, IntVector2.Zero, false);
+                slotInfo.SlotGrid.SlotInfo[tempItemPos.x + x, tempItemPos.y + y].ChangeItem(null, IntVector2.Zero);
         }
         retItem.Rect.pivot = new Vector2(0.5f, 0.5f);
         retItem.CanvasGroup.alpha = 0.5f;

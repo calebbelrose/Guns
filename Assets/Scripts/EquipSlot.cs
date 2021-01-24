@@ -7,14 +7,11 @@ using UnityEngine.EventSystems;
 public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public bool Empty = true;
-    public ItemScript Item;
+    public EquipSlotInfo EquipSlotInfo;
 
     public Image Image { get { return image; } }
     public GameObject EquipObject { get {return equipObject; } }
 
-    public CategoryName CategoryName { get { return categoryName; } }
-
-    [SerializeField] private CategoryName categoryName;
     [SerializeField] private Image image;
     [SerializeField] private GameObject equipObject;
     [SerializeField] private CombatController CombatController;
@@ -23,7 +20,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (ItemScript.selectedItem != null)
         {
-            if (ItemScript.selectedItem.Item.CategoryName == CategoryName)
+            if (ItemScript.selectedItem.Item.CategoryName == EquipSlotInfo.CategoryName)
                 Image.color = Color.green;
             else
                 Image.color = Color.red;
@@ -35,7 +32,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (!Empty)
             CombatController.Unequip(this);
         else if (eventData.button == PointerEventData.InputButton.Left && ItemScript.selectedItem != null)
-            CombatController.EquipInSlot(ItemScript.selectedItem, this);
+            CombatController.EquipInSlot(ItemScript.selectedItem, EquipSlotInfo);
     }
 
     public void OnPointerExit(PointerEventData eventData)

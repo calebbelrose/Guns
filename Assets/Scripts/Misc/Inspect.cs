@@ -21,7 +21,7 @@ public class Inspect : MonoBehaviour {
         nameText.text = itemScript.Item.TypeName;
         Icon.color = new Color32(255, 255, 255, 255);
         Icon.sprite = itemScript.Item.Icon;
-        IconRect.sizeDelta = new Vector2(itemScript.Size.x * DisplaySlots.SlotSize, itemScript.Size.y * DisplaySlots.SlotSize);
+        IconRect.sizeDelta = new Vector2(itemScript.Size.x * SlotGrid.SlotSize, itemScript.Size.y * SlotGrid.SlotSize);
     }
 
     public void Refresh()
@@ -44,10 +44,10 @@ public class Inspect : MonoBehaviour {
                 partSlot.SlotInfo.ParentItem = itemScript;
                 partSlot.Inspect = this;
 
-                if (part.PartSlots(i).Item != null)
+                if (part.PartSlots(i).ItemScript != null)
                 {
-                    partSlot.FillSlot(part.PartSlots(i).Item);
-                    CreateSlots(part.PartSlots(i).Item);
+                    partSlot.FillSlot(part.PartSlots(i).ItemScript);
+                    CreateSlots(part.PartSlots(i).ItemScript);
                 }
             }
         }

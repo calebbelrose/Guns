@@ -30,7 +30,7 @@ public class ItemScript : MonoBehaviour
     public void SetItemObject(ItemClass passedItem)
     {
         Item = passedItem;
-        rect.sizeDelta = new Vector2(Size.x * DisplaySlots.SlotSize, Size.y * DisplaySlots.SlotSize);
+        rect.sizeDelta = new Vector2(Size.x * SlotGrid.SlotSize, Size.y * SlotGrid.SlotSize);
         image.sprite = passedItem.Icon;
     }
 
