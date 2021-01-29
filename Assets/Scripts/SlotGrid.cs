@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlotGrid
 {
@@ -45,11 +46,19 @@ public class SlotGrid
 
                 if (slotScript.InventorySlotInfo.ItemScript != null)
                 {
-                    slotScript.InventorySlotInfo.ItemScript.transform.SetParent(slotScript.transform);
-                    slotScript.InventorySlotInfo.ItemScript.Rect.localScale = Vector3.one;
-                    slotScript.InventorySlotInfo.ItemScript.Slot = slotScript.InventorySlotInfo.SlotScript;
-                    slotScript.InventorySlotInfo.ItemScript.Rect.position = slotScript.InventorySlotInfo.SlotScript.Rect.position;
-                    Inventory.ColorChangeLoop(slotScript.InventorySlotInfo.SlotGrid, Color.white, slotScript.InventorySlotInfo.ItemScript.Size, slotScript.InventorySlotInfo.GridPos);
+                    //LayoutRebuilder.ForceRebuildLayoutImmediate(parent.GetComponent<RectTransform>());
+                    if (slotScript.InventorySlotInfo.ItemStartPos == slotScript.InventorySlotInfo.GridPos)
+                    {
+                        slotScript.InventorySlotInfo.ItemScript.Slot = slotScript;
+                        slotScript.InventorySlotInfo.ItemScript.transform.SetParent(InventoryManager.DropParent);
+                        slotScript.InventorySlotInfo.ItemScript.Rect.localScale = Vector3.one;
+                        slotScript.InventorySlotInfo.ItemScript.Image.color = Color.red;
+                        slotScript.InventorySlotInfo.ItemScript.transform.position = slotScript.transform.position;
+                        slotScript.InventorySlotInfo.ItemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * slotScript.InventorySlotInfo.ItemScript.Size.x, SlotGrid.SlotSize * slotScript.InventorySlotInfo.ItemScript.Size.y); ;
+                        Debug.Log(slotScript.InventorySlotInfo.ItemScript.Rect.sizeDelta);
+                    }
+
+                    slotScript.InventorySlotInfo.SlotScript.Image.color = Color.white;
                 }
             }
         }

@@ -33,12 +33,15 @@ public class InventoryManager : MonoBehaviour
 
         DragParent = dragParent;
         DropParent = dropParent;
+
     }
 
     private void Update()
     {
         if (Inventory.HighlightedSlot != null)
         {
+            Inventory inventory = Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid.Inventory;
+
             if (Input.GetMouseButtonUp(0))
             {
                 //If alt is held down equip item
@@ -47,7 +50,7 @@ public class InventoryManager : MonoBehaviour
                     //Uses item in slot
                     if (Inventory.HighlightedSlot.InventorySlotInfo.ItemScript != null)
                     {
-                        ItemScript itemScript = Inventory.GetItem(Inventory.HighlightedSlot.InventorySlotInfo);
+                        ItemScript itemScript = inventory.GetItem(Inventory.HighlightedSlot.InventorySlotInfo);
 
                         for (int y = 0; y < Inventory.HighlightedSlot.InventorySlotInfo.ItemScript.Size.y; y++)
                         {
@@ -59,19 +62,20 @@ public class InventoryManager : MonoBehaviour
                 //If an item is picked up
                 else if (ItemScript.selectedItem != null)
                 {
-                    if (!Inventory.IsOverEdge)
+                    if (!inventory.IsOverEdge)
                     {
-                        switch (Inventory.CheckState)
+                        switch (inventory.CheckState)
                         {
                             case 0: //Store on empty slots
-                                Inventory.StoreItem(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, ItemScript.selectedItem);
-                                Inventory.ColorChangeLoop(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, ItemScript.selectedItemSize, Inventory.totalOffset);
+                                inventory.StoreItem(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, ItemScript.selectedItem);
+                                inventory.PlaceItem(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[Inventory.HighlightedSlot.InventorySlotInfo.ItemStartPos.x, Inventory.HighlightedSlot.InventorySlotInfo.ItemStartPos.y], ItemScript.selectedItem);
+                                Inventory.ColorChangeLoop(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, ItemScript.selectedItemSize, inventory.totalOffset);
                                 ItemScript.ResetSelectedItem();
                                 break;
                             case 1: //Swap items
                                 ItemScript.SwapSelectedItem(SwapItem(ItemScript.selectedItem));
-                                Inventory.ColorChangeLoop(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, Inventory.OtherItems(0).Item.Size, Inventory.OtherItems(0).StartPosition); //*1
-                                Inventory.RefreshColor(true);
+                                Inventory.ColorChangeLoop(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, inventory.OtherItems(0).Item.Size, inventory.OtherItems(0).StartPosition); //*1
+                                inventory.RefreshColor(true);
                                 break;
                         }
                     }
@@ -82,8 +86,8 @@ public class InventoryManager : MonoBehaviour
                     if (Inventory.HighlightedSlot.InventorySlotInfo.ItemScript != null)
                     {
                         Inventory.ColorChangeLoop(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, Inventory.HighlightedSlot.InventorySlotInfo.ItemScript.Size, Inventory.HighlightedSlot.InventorySlotInfo.ItemStartPos);
-                        ItemScript.SetSelectedItem(Inventory.GetItem(Inventory.HighlightedSlot.InventorySlotInfo));
-                        Inventory.RefreshColor(true);
+                        ItemScript.SetSelectedItem(inventory.GetItem(Inventory.HighlightedSlot.InventorySlotInfo));
+                        inventory.RefreshColor(true);
                     }
                 }
             }

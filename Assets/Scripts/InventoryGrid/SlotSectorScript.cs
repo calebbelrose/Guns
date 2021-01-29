@@ -17,7 +17,7 @@ public class SlotSectorScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         SectorScript = this;
-        ParentSlotScript.InventorySlotInfo.SlotGrid.Inventory.HighlightedSlot = ParentSlotScript;
+        Inventory.HighlightedSlot = ParentSlotScript;
 
         if (ItemScript.selectedItem != null)
             ParentSlotScript.InventorySlotInfo.SlotGrid.Inventory.RefreshColor(true);
@@ -34,6 +34,6 @@ public class SlotSectorScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
             Inventory.ColorChangeLoop(ParentSlotScript.InventorySlotInfo.SlotGrid, Color.white, ParentSlotScript.InventorySlotInfo.ItemScript.Size, ParentSlotScript.InventorySlotInfo.ItemStartPos);
 
         SectorScript = null;
-        ParentSlotScript.InventorySlotInfo.SlotGrid.Inventory.HighlightedSlot = null;
+        Inventory.HighlightedSlot = null;
     }
 }

@@ -10,4 +10,5 @@ public class PartSlotInfo
     public string Name;
     public List<int> PartIDs;
     public bool Required;
+    public SlotScript Slot;
 }

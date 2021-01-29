@@ -15,6 +15,7 @@ public class ItemDatabase : MonoBehaviour
     [SerializeField] private ObjectPoolScript ObjectPoolScript;
     [SerializeField] private List<ItemClass> dbList = new List<ItemClass>();
     [SerializeField] private GameObject LootTextPrefab;
+    [SerializeField] private GameObject LootBoxPrefab;
 
     private int totalLootDropWeights = 0;
 
@@ -50,7 +51,7 @@ public class ItemDatabase : MonoBehaviour
     }
 
     //Creates the specified loot with the set parent
-    public GameObject CreateLoot()
+    public GameObject CreateLootText()
     {
         return Instantiate(LootTextPrefab, LootParent);
     }

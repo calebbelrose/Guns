@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public IntVector2 totalOffset, checkStartPos;
-    public SlotScript HighlightedSlot;
+    public IntVector2 totalOffset;
     public IntVector2 CheckSize;
-
+    public IntVector2 CheckStartPos;
     public bool IsOverEdge { get; private set; } = false;
     public int CheckState { get; private set; }
-
     public SlotGridList[] slotGridList = new SlotGridList[4];
-    [SerializeField] private int pockets;
 
+    [SerializeField] private int pockets = 4;
+
+    private IntVector2 checkStartPos;
     private List<OtherItem> otherItems = new List<OtherItem>();
+
+    public static SlotScript HighlightedSlot;
 
     private void Start()
     {
@@ -23,7 +25,7 @@ public class Inventory : MonoBehaviour
     }
 
     //Returns true if the loot was stored otherwise returns false
-    public bool StoreLoot(ItemScript itemScript)
+    public InventorySlotInfo StoreLoot(ItemScript itemScript)
     {
         foreach (SlotGridList slotGridArray in slotGridList)
         {
@@ -55,14 +57,14 @@ public class Inventory : MonoBehaviour
                         if (stillEmpty)
                         {
                             StoreItem(slotGrid, itemScript);
-                            return true;
+                            return slotGrid.SlotInfo[x, y];
                         }
                     }
                 }
             }
         }
 
-        return false;
+        return null;
     }
 
     //Stores item in slot
@@ -79,6 +81,13 @@ public class Inventory : MonoBehaviour
         itemScript.transform.SetParent(InventoryManager.DropParent);
         itemScript.Rect.pivot = new Vector2(0.0f, 1.0f);
         itemScript.CanvasGroup.alpha = 1f;
+    }
+
+    public void PlaceItem(InventorySlotInfo slotInfo, ItemScript itemScript)
+    {
+        itemScript.Rect.localScale = Vector3.one;
+        ColorChangeLoop(slotInfo.SlotGrid, Color.white, itemScript.Size, slotInfo.GridPos);
+        slotInfo.ItemScript.Rect.position = slotInfo.SlotScript.Rect.position;
     }
 
     //Checks how many items the picked up item overlaps with
@@ -203,6 +212,7 @@ public class Inventory : MonoBehaviour
             for (int x = 0; x < itemSizeL.x; x++)
                 slotInfo.SlotGrid.SlotInfo[tempItemPos.x + x, tempItemPos.y + y].ChangeItem(null, IntVector2.Zero);
         }
+
         retItem.Rect.pivot = new Vector2(0.5f, 0.5f);
         retItem.CanvasGroup.alpha = 0.5f;
         retItem.transform.position = Input.mousePosition;

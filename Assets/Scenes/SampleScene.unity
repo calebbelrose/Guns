@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 11868902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 9
@@ -3478,7 +3478,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 355743045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 6
@@ -4867,7 +4867,7 @@ MonoBehaviour:
     categoryName: 0
   image: {fileID: 577987053}
   equipObject: {fileID: 577987050}
-  CombatController: {fileID: 0}
+  CombatController: {fileID: 1998423945}
 --- !u!114 &577987053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5070,7 +5070,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5418,7 +5418,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 765849357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 8
@@ -5666,9 +5666,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &787664133
 MonoBehaviour:
@@ -5783,7 +5783,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 792523458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 7
@@ -6186,7 +6186,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 823198986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 3
@@ -6533,7 +6533,7 @@ MonoBehaviour:
     categoryName: 0
   image: {fileID: 841547851}
   equipObject: {fileID: 841547848}
-  CombatController: {fileID: 0}
+  CombatController: {fileID: 1998423945}
 --- !u!114 &841547851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7473,8 +7473,6 @@ GameObject:
   - component: {fileID: 912405091}
   - component: {fileID: 912405090}
   - component: {fileID: 912405092}
-  - component: {fileID: 912405089}
-  - component: {fileID: 912405088}
   m_Layer: 5
   m_Name: InvenPanel
   m_TagString: InvenPanel
@@ -7501,48 +7499,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &912405088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912405086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec759a9ed053e754a94dc9e72639c6a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GridSize:
-    x: 10
-    y: 10
-  Inventory: {fileID: 912405089}
-  SlotPrefab: {fileID: 6846952214606941858, guid: 78483810ed9a4ed4e8a3933067efe6b0,
-    type: 3}
---- !u!114 &912405089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912405086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0fa7ea4eedf4a04285d287044fc2de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalOffset:
-    x: 0
-    y: 0
-  checkStartPos:
-    x: 0
-    y: 0
-  HighlightedSlot: {fileID: 0}
-  CheckSize:
-    x: 0
-    y: 0
-  slotGridList: []
-  pockets: 0
 --- !u!114 &912405090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8642,11 +8598,10 @@ MonoBehaviour:
   totalOffset:
     x: 0
     y: 0
-  checkStartPos:
+  CheckSize:
     x: 0
     y: 0
-  HighlightedSlot: {fileID: 0}
-  CheckSize:
+  CheckStartPos:
     x: 0
     y: 0
   slotGridList: []
@@ -8680,7 +8635,6 @@ GameObject:
   - component: {fileID: 1198398650}
   - component: {fileID: 1198398649}
   - component: {fileID: 1198398648}
-  - component: {fileID: 1198398651}
   m_Layer: 5
   m_Name: LootInventory
   m_TagString: Untagged
@@ -8777,39 +8731,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198398646}
   m_CullTransparentMesh: 0
---- !u!114 &1198398651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198398646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4daf3526a26d8094ea040a7a5f7163e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EquipSlots:
-  - {fileID: 42484705}
-  - {fileID: 1917641816}
-  - {fileID: 193710592}
-  - {fileID: 1772325024}
-  - {fileID: 215948665}
-  - {fileID: 801145419}
-  - {fileID: 50635999}
-  - {fileID: 1943416787}
-  - {fileID: 1665063675}
-  - {fileID: 1880622118}
-  - {fileID: 1382794482}
-  - {fileID: 166824976}
-  - {fileID: 1040510410}
-  SlotPrefab: {fileID: 6846952214606941858, guid: 78483810ed9a4ed4e8a3933067efe6b0,
-    type: 3}
-  Parents:
-  - {fileID: 593064009}
-  - {fileID: 2011747665}
-  - {fileID: 1388747329}
-  - {fileID: 417577386}
 --- !u!1 &1217742954
 GameObject:
   m_ObjectHideFlags: 0
@@ -9517,10 +9438,19 @@ MonoBehaviour:
     type: 3}
   PlayerMovement: {fileID: 1998423940}
   InventoryCanvas: {fileID: 7451579204165789686}
+  LootInventory: {fileID: 1198398646}
+  LootBoxInventory: {fileID: 1765107021}
+  LootBoxRect: {fileID: 912405087}
   Inventory: {fileID: 1998423944}
+  playerMovement: {fileID: 0}
+  inventoryCanvas: {fileID: 0}
+  lootInventory: {fileID: 0}
+  lootBoxInventory: {fileID: 0}
+  SlotPrefab: {fileID: 6846952214606941858, guid: 78483810ed9a4ed4e8a3933067efe6b0,
+    type: 3}
+  lootBoxRect: {fileID: 0}
+  inventory: {fileID: 0}
   CombatController: {fileID: 1998423945}
-  PlayerDisplay: {fileID: 0}
-  LootDisplay: {fileID: 1198398651}
 --- !u!4 &1328216345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5285447487394064654, guid: 79c3409b7fdeaa247a9689999dbe71b7,
@@ -10800,6 +10730,112 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1529880972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1529880977}
+  - component: {fileID: 1529880976}
+  - component: {fileID: 1529880975}
+  - component: {fileID: 1529880974}
+  - component: {fileID: 1529880973}
+  m_Layer: 11
+  m_Name: Box
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1529880973
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529880972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1529880974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529880972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0fa7ea4eedf4a04285d287044fc2de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalOffset:
+    x: 0
+    y: 0
+  CheckSize:
+    x: 0
+    y: 0
+  CheckStartPos:
+    x: 0
+    y: 0
+  slotGridList: []
+  pockets: 0
+--- !u!114 &1529880975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529880972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61220a4c3641ab4a90aa6ef83cf4614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  inventory: {fileID: 1529880974}
+  GridSize:
+    x: 10
+    y: 10
+  SlotPrefab: {fileID: 6846952214606941858, guid: 78483810ed9a4ed4e8a3933067efe6b0,
+    type: 3}
+--- !u!54 &1529880976
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529880972}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
+--- !u!4 &1529880977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529880972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.12, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1707852427}
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532604728 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 79c3409b7fdeaa247a9689999dbe71b7,
@@ -11172,7 +11208,7 @@ MonoBehaviour:
     categoryName: 0
   image: {fileID: 1590271628}
   equipObject: {fileID: 1590271625}
-  CombatController: {fileID: 0}
+  CombatController: {fileID: 1998423945}
 --- !u!114 &1590271628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11730,7 +11766,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1627158405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 10
@@ -12475,6 +12511,87 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1707852426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1707852427}
+  - component: {fileID: 1707852429}
+  - component: {fileID: 1707852428}
+  m_Layer: 11
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1707852427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707852426}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1529880977}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1707852428
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707852426}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1707852429
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707852426}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1736301865
 GameObject:
   m_ObjectHideFlags: 0
@@ -12700,12 +12817,12 @@ GameObject:
   - component: {fileID: 1765107024}
   - component: {fileID: 1765107023}
   m_Layer: 5
-  m_Name: Inventory
+  m_Name: LootBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1765107022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12823,7 +12940,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1768016886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 5
@@ -14183,11 +14300,10 @@ MonoBehaviour:
   totalOffset:
     x: 0
     y: 0
-  checkStartPos:
+  CheckSize:
     x: 0
     y: 0
-  HighlightedSlot: {fileID: 0}
-  CheckSize:
+  CheckStartPos:
     x: 0
     y: 0
   slotGridList: []
@@ -14641,7 +14757,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2117359202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 4
@@ -16194,11 +16310,13 @@ MonoBehaviour:
         Name: Front Sight
         PartIDs: 05000000
         Required: 0
+        Slot: {fileID: 0}
       - ItemScript: {fileID: 0}
         ParentItem: {fileID: 0}
         Name: Handguard
         PartIDs: 06000000
         Required: 1
+        Slot: {fileID: 0}
   - globalID: 4
     categoryName: 3
     typeName: Base
@@ -16227,26 +16345,31 @@ MonoBehaviour:
         Name: Barrel
         PartIDs: 03000000
         Required: 1
+        Slot: {fileID: 0}
       - ItemScript: {fileID: 0}
         ParentItem: {fileID: 0}
         Name: Magazine
         PartIDs: 07000000
         Required: 0
+        Slot: {fileID: 0}
       - ItemScript: {fileID: 0}
         ParentItem: {fileID: 0}
         Name: Mount
         PartIDs: 08000000
         Required: 0
+        Slot: {fileID: 0}
       - ItemScript: {fileID: 0}
         ParentItem: {fileID: 0}
         Name: Pistol Grip
         PartIDs: 09000000
         Required: 1
+        Slot: {fileID: 0}
       - ItemScript: {fileID: 0}
         ParentItem: {fileID: 0}
         Name: Stock
         PartIDs: 0a000000
         Required: 1
+        Slot: {fileID: 0}
   - globalID: 5
     categoryName: 3
     typeName: Front Sight
@@ -16661,8 +16784,32 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
+  - globalID: 22
+    categoryName: 12
+    typeName: Steel Ingot
+    size:
+      x: 1
+      y: 1
+    icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
+    part:
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      Size:
+        x: 0
+        y: 0
+      partType: 0
+      partSlots: []
   LootTextPrefab: {fileID: 3558581089250535135, guid: 2c8271d16e7171a4690216391742f8de,
     type: 3}
+  LootBoxPrefab: {fileID: 0}
 --- !u!224 &7451579203812045927
 RectTransform:
   m_ObjectHideFlags: 0

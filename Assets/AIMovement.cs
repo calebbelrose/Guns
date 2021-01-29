@@ -142,10 +142,10 @@ public class AIMovement : MonoBehaviour
             {
                 ItemScript newItem = ItemDatabase.Instance.ItemEquipPool.GetItemScript();
 
-                newItem.SetItemObject(ItemDatabase.Instance.DBList(hit.collider.GetComponent<Loot>().ItemID));
+                newItem.SetItemObject(ItemDatabase.Instance.DBList(hit.collider.GetComponent<GroundLoot>().ItemID));
 
-                if (Inventory.StoreLoot(newItem))
-                    Loot.Destroy();
+                if (Inventory.StoreLoot(newItem) != null)
+                    GroundLoot.Destroy();
                 else
                     Destroy(newItem.gameObject);
             }

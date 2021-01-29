@@ -22,12 +22,21 @@ public class AdvancedCamRecoil : MonoBehaviour
     public Gun Gun;
     public GameObject MagazinePrefab;
 
-    [SerializeField] private PlayerMovement PlayerMovement;
-    [SerializeField] private GameObject InventoryCanvas;
-    [SerializeField] private Inventory Inventory;
+    public PlayerMovement PlayerMovement;
+    public GameObject InventoryCanvas;
+    public GameObject LootInventory;
+    public GameObject LootBoxInventory;
+    public RectTransform LootBoxRect;
+    public Inventory Inventory;
+
+    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private GameObject inventoryCanvas;
+    [SerializeField] private GameObject lootInventory;
+    [SerializeField] private GameObject lootBoxInventory;
+    [SerializeField] private GameObject SlotPrefab;
+    [SerializeField] private RectTransform lootBoxRect;
+    [SerializeField] private Inventory inventory;
     [SerializeField] private CombatController CombatController;
-    [SerializeField] DisplayInventory PlayerDisplay;
-    [SerializeField] DisplayInventory LootDisplay;
 
     private float spread = 20f;          //Adjust this for a bigger or smaller crosshair
     private float maxSpread = 60f;
@@ -62,8 +71,6 @@ public class AdvancedCamRecoil : MonoBehaviour
 
         if (canShoot && Gun.UseAmmo())
         {
-            Gun.AudioSource.PlayOneShot(AudioClip);
-            consecutiveShots++;
             Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             RaycastHit hit;
             Vector3 targetPoint;
@@ -75,6 +82,8 @@ public class AdvancedCamRecoil : MonoBehaviour
                 targetPoint = ray.GetPoint(1000); // You may need to change this value according to your needs
                                                   // Create the bullet and give it a velocity according to the target point computed before
 
+            Gun.AudioSource.PlayOneShot(AudioClip);
+            consecutiveShots++;
             bullet = Instantiate(BulletPrefab, Gun.BulletSpawn.position, Gun.transform.rotation).GetComponent<Bullet>();
             bullet.Shooter = CombatController;
             bullet.rb.velocity = (targetPoint - Gun.BulletSpawn.transform.position).normalized * 500;
@@ -107,6 +116,8 @@ public class AdvancedCamRecoil : MonoBehaviour
             else
             {
                 //FixCursor.lockState = CursorLockMode.Locked;
+                LootBoxInventory.SetActive(false);
+                LootInventory.SetActive(false);
                 PlayerMovement.enabled = true;
             }
         }
@@ -116,16 +127,10 @@ public class AdvancedCamRecoil : MonoBehaviour
 
         if (PlayerMovement.enabled)
         {
-            if (Input.GetButtonDown("Interact") && Loot.CurrentLoot != null)
+            if (Input.GetButtonDown("Interact"))
             {
-                ItemScript newItem = ItemDatabase.Instance.ItemEquipPool.GetItemScript();
-
-                newItem.SetItemObject(ItemDatabase.Instance.DBList(Loot.CurrentLoot.ItemID));
-
-                if (Inventory.StoreLoot(newItem))
-                    Loot.Destroy();
-                else
-                    Destroy(newItem.gameObject);
+                if (Loot.CurrentLoot != null)
+                    Loot.CurrentLoot.Action(this);
             }
 
             if (Input.GetButtonDown("Reload"))
