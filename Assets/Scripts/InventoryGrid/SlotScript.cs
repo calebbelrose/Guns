@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SlotScript : MonoBehaviour
 {
     public InventorySlotInfo InventorySlotInfo;
+    public ItemScript ItemScript;
     public RectTransform Rect { get { return rect; } }
     public Image Image { get { return image; } }
 

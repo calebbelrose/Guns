@@ -13,15 +13,15 @@ public class Inspect : MonoBehaviour {
     [SerializeField] private ContentSizeFitter ContentSizeFitter;
 
     //Updates overlay information
-    public void Setup(ItemScript itemScript)
+    public void Setup(ItemClass item)
     {
-        int totalSize = itemScript.Size.x * itemScript.Size.y;
+        int totalSize = item.Size.x * item.Size.y;
 
-        CreateSlots(itemScript);
-        nameText.text = itemScript.Item.TypeName;
+        CreateSlots(item);
+        nameText.text = item.TypeName;
         Icon.color = new Color32(255, 255, 255, 255);
-        Icon.sprite = itemScript.Item.Icon;
-        IconRect.sizeDelta = new Vector2(itemScript.Size.x * SlotGrid.SlotSize, itemScript.Size.y * SlotGrid.SlotSize);
+        Icon.sprite = item.Icon;
+        IconRect.sizeDelta = new Vector2(item.Size.x * SlotGrid.SlotSize, item.Size.y * SlotGrid.SlotSize);
     }
 
     public void Refresh()
@@ -30,9 +30,9 @@ public class Inspect : MonoBehaviour {
         ContentSizeFitter.enabled = true;
     }
 
-    private void CreateSlots(ItemScript itemScript)
+    private void CreateSlots(ItemClass item)
     {
-        Part part = itemScript.Item.Part;
+        Part part = item.Part;
 
         if (part != null)
         {
@@ -41,13 +41,13 @@ public class Inspect : MonoBehaviour {
                 PartSlot partSlot = Instantiate(PartSlotPrefab, SlotRect).GetComponent<PartSlot>();
 
                 partSlot.SlotInfo = part.PartSlots(i);
-                partSlot.SlotInfo.ParentItem = itemScript;
+                partSlot.SlotInfo.ParentItem = item;
                 partSlot.Inspect = this;
 
-                if (part.PartSlots(i).ItemScript != null)
+                if (part.PartSlots(i).Item != null)
                 {
-                    partSlot.FillSlot(part.PartSlots(i).ItemScript);
-                    CreateSlots(part.PartSlots(i).ItemScript);
+                    partSlot.FillSlot(part.PartSlots(i).Item);
+                    CreateSlots(part.PartSlots(i).Item);
                 }
             }
         }

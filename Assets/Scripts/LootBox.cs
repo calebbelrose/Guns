@@ -15,18 +15,20 @@ public class LootBox : Loot
     //Sets up loot
     void Start()
     {
-        Inventory.slotGridList[0].List.Add(new SlotGrid(GridSize.x, GridSize.y, Inventory));
+        Inventory.SlotGridList[0].List.Add(new SlotGrid(GridSize.x, GridSize.y, Inventory));
 
         for (int i = 0; i < Random.Range(1, 5); i++)
         {
-            ItemScript newItem = ItemDatabase.Instance.ItemEquipPool.GetItemScript();
+            ItemClass newItem = ItemDatabase.Instance.DBList(1/*Random.Range(0, ItemDatabase.Instance.DBCount())*/);
             InventorySlotInfo slotInfo;
 
-            newItem.SetItemObject(ItemDatabase.Instance.DBList(1/*Random.Range(0, ItemDatabase.Instance.DBCount())*/));
             slotInfo = Inventory.StoreLoot(newItem);
 
-            if (slotInfo == null)
-                Destroy(newItem.gameObject);
+            if (slotInfo != null)
+            {
+                ItemScript itemScript = GameObject.Instantiate(ItemDatabase.Instance.ItemPrefab).GetComponent<ItemScript>();
+                itemScript.SetItemObject(newItem);
+            }
         }
 
         LootTextObject = ItemDatabase.Instance.CreateLootText();
@@ -43,6 +45,6 @@ public class LootBox : Loot
         playerCam.LootBoxInventory.SetActive(true);
         Cursor.visible = playerCam.InventoryCanvas.activeSelf;
         playerCam.PlayerMovement.enabled = false;
-        Inventory.slotGridList[0].List[0].Display(SlotPrefab, playerCam.LootBoxRect);
+        Inventory.SlotGridList[0].List[0].Display(SlotPrefab, playerCam.LootBoxRect);
     }
 }

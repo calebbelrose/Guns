@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     public IntVector2 CheckStartPos;
     public bool IsOverEdge { get; private set; } = false;
     public int CheckState { get; private set; }
-    public SlotGridList[] slotGridList = new SlotGridList[4];
+    public SlotGridList[] SlotGridList = new SlotGridList[4];
 
     [SerializeField] private int pockets = 4;
 
@@ -21,29 +21,29 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         for (int i = 0; i < pockets; i++)
-            slotGridList[1].List.Add(new SlotGrid(1, 1, this));
+            SlotGridList[1].List.Add(new SlotGrid(1, 1, this));
     }
 
     //Returns true if the loot was stored otherwise returns false
-    public InventorySlotInfo StoreLoot(ItemScript itemScript)
+    public InventorySlotInfo StoreLoot(ItemClass item)
     {
-        foreach (SlotGridList slotGridArray in slotGridList)
+        foreach (SlotGridList slotGridArray in SlotGridList)
         {
             foreach (SlotGrid slotGrid in slotGridArray.List)
             {
                 //Loops over all of the slots to find a space big enough for the item
-                for (int x = 0; x <= slotGrid.SlotInfo.GetLength(0) - itemScript.Size.x; x++)
+                for (int x = 0; x <= slotGrid.SlotInfo.GetLength(0) - item.Size.x; x++)
                 {
-                    for (int y = 0; y <= slotGrid.SlotInfo.GetLength(1) - itemScript.Size.y; y++)
+                    for (int y = 0; y <= slotGrid.SlotInfo.GetLength(1) - item.Size.y; y++)
                     {
                         int i = 0;
                         bool stillEmpty = true;
 
-                        while (i < itemScript.Size.x && stillEmpty)
+                        while (i < item.Size.x && stillEmpty)
                         {
-                            for (int j = 0; j < itemScript.Size.y; j++)
+                            for (int j = 0; j < item.Size.y; j++)
                             {
-                                if (slotGrid.SlotInfo[x + i, y + j].ItemScript != null)
+                                if (slotGrid.SlotInfo[x + i, y + j].Item != null)
                                 {
                                     stillEmpty = false;
                                     break;
@@ -56,7 +56,7 @@ public class Inventory : MonoBehaviour
                         // Stores the item if there's a space big enough
                         if (stillEmpty)
                         {
-                            StoreItem(slotGrid, itemScript);
+                            StoreItem(slotGrid, item);
                             return slotGrid.SlotInfo[x, y];
                         }
                     }
@@ -68,26 +68,30 @@ public class Inventory : MonoBehaviour
     }
 
     //Stores item in slot
-    public void StoreItem(SlotGrid slotGrid, ItemScript itemScript)
+    public void StoreItem(SlotGrid slotGrid, ItemClass item)
     {
-        IntVector2 itemSize = itemScript.Size;
+        IntVector2 itemSize = item.Size;
 
         for (int y = 0; y < itemSize.y; y++)
         {
             for (int x = 0; x < itemSize.x; x++)
-                slotGrid.SlotInfo[totalOffset.x + x, totalOffset.y + y].ChangeItem(itemScript, totalOffset);
+                slotGrid.SlotInfo[totalOffset.x + x, totalOffset.y + y].ChangeItem(item, totalOffset);
         }
-
-        itemScript.transform.SetParent(InventoryManager.DropParent);
-        itemScript.Rect.pivot = new Vector2(0.0f, 1.0f);
-        itemScript.CanvasGroup.alpha = 1f;
     }
 
     public void PlaceItem(InventorySlotInfo slotInfo, ItemScript itemScript)
     {
-        itemScript.Rect.localScale = Vector3.one;
-        ColorChangeLoop(slotInfo.SlotGrid, Color.white, itemScript.Size, slotInfo.GridPos);
-        slotInfo.ItemScript.Rect.position = slotInfo.SlotScript.Rect.position;
+        ColorChangeLoop(slotInfo.SlotGrid, Color.white, itemScript.Item.Size, slotInfo.GridPos);
+        itemScript.Rect.position = slotInfo.SlotScript.Rect.position;
+        slotInfo.SlotScript.ItemScript = itemScript;
+        
+        for(int x = 0; x < slotInfo.Item.Size.x; x++)
+        {
+            for (int y = 0; y < slotInfo.Item.Size.y; y++)
+                slotInfo.SlotGrid.SlotInfo[slotInfo.GridPos.x + x, slotInfo.GridPos.y + y].SlotScript.ItemScript = itemScript;
+        }    
+
+        slotInfo.SlotScript.ItemScript.Item.Slot = slotInfo.SlotScript;
     }
 
     //Checks how many items the picked up item overlaps with
@@ -103,9 +107,9 @@ public class Inventory : MonoBehaviour
                 {
                     SlotScript instanceScript = slotGrid.SlotInfo[checkStartPos.x + x, checkStartPos.y + y].SlotScript;
 
-                    if (instanceScript.InventorySlotInfo.ItemScript != null)
+                    if (instanceScript.InventorySlotInfo.Item != null)
                     {
-                        OtherItem otherItem = new OtherItem(instanceScript.InventorySlotInfo.ItemScript, instanceScript.InventorySlotInfo.ItemStartPos);
+                        OtherItem otherItem = new OtherItem(instanceScript.InventorySlotInfo.Item, instanceScript.InventorySlotInfo.ItemStartPos);
 
                         if (!otherItems.Contains(otherItem))
                             otherItems.Add(otherItem);
@@ -203,14 +207,20 @@ public class Inventory : MonoBehaviour
     //Gets item in slot
     public ItemScript GetItem(InventorySlotInfo slotInfo)
     {
-        ItemScript retItem = slotInfo.ItemScript;
+        Debug.Log(slotInfo);
+        Debug.Log(slotInfo.SlotScript);
+        Debug.Log(slotInfo.SlotScript.ItemScript);
+        ItemScript retItem = slotInfo.SlotScript.ItemScript;
         IntVector2 tempItemPos = slotInfo.ItemStartPos;
-        IntVector2 itemSizeL = retItem.Size;
+        IntVector2 itemSizeL = retItem.Item.Size;
 
         for (int y = 0; y < itemSizeL.y; y++)
         {
             for (int x = 0; x < itemSizeL.x; x++)
+            {
                 slotInfo.SlotGrid.SlotInfo[tempItemPos.x + x, tempItemPos.y + y].ChangeItem(null, IntVector2.Zero);
+                slotInfo.SlotGrid.SlotInfo[tempItemPos.x + x, tempItemPos.y + y].SlotScript.ItemScript = null;
+            }
         }
 
         retItem.Rect.pivot = new Vector2(0.5f, 0.5f);

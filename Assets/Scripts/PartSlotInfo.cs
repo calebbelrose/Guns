@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class PartSlotInfo
 {
-    public ItemScript ItemScript;
-    public ItemScript ParentItem;
+    public ItemClass Item;
+    public ItemClass ParentItem;
     public string Name;
     public List<int> PartIDs;
     public bool Required;

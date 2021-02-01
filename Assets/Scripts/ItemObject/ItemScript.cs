@@ -7,8 +7,6 @@ public class ItemScript : MonoBehaviour
     public ItemClass Item { get; private set; }
     public CanvasGroup CanvasGroup{ get { return canvasGroup; } }
     public RectTransform Rect { get { return rect; } }
-    public IntVector2 Size { get { if (Item.Part != null) return Item.Size + Item.Part.SizeModifier; else return Item.Size; } }
-    public SlotScript Slot;
     public Image Image { get { return image; } }
 
     [SerializeField] private CanvasGroup canvasGroup;
@@ -30,7 +28,7 @@ public class ItemScript : MonoBehaviour
     public void SetItemObject(ItemClass passedItem)
     {
         Item = passedItem;
-        rect.sizeDelta = new Vector2(Size.x * SlotGrid.SlotSize, Size.y * SlotGrid.SlotSize);
+        rect.sizeDelta = new Vector2(Item.Size.x * SlotGrid.SlotSize, Item.Size.y * SlotGrid.SlotSize);
         image.sprite = passedItem.Icon;
     }
 
@@ -52,7 +50,7 @@ public class ItemScript : MonoBehaviour
         if (InspectWindow == null)
         {
             InspectWindow = Instantiate(InspectPrefab, parent);
-            InspectWindow.GetComponent<Inspect>().Setup(this);
+            InspectWindow.GetComponent<Inspect>().Setup(Item);
         }
         else
         {
@@ -65,7 +63,7 @@ public class ItemScript : MonoBehaviour
     public static void SetSelectedItem(ItemScript obj)
     {
         selectedItem = obj;
-        selectedItemSize = obj.Size;
+        selectedItemSize = obj.Item.Size;
         isDragging = true;
         obj.transform.SetParent(InventoryManager.DragParent);
         obj.rect.localScale = Vector3.one;

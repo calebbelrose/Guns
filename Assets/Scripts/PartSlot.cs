@@ -25,60 +25,60 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
         {
             if (Empty && SlotInfo.PartIDs.Contains(ItemScript.selectedItem.Item.GlobalID))
             {
-                ItemScript itemScript = SlotInfo.ParentItem;
+                ItemClass item = SlotInfo.Item;
                 int[] tempModifiers = new int[4];
                 bool fits = true;
-                int maxX = SlotInfo.ParentItem.Slot.InventorySlotInfo.GridPos.x + SlotInfo.ParentItem.Item.Size.x, maxY = SlotInfo.ParentItem.Slot.InventorySlotInfo.GridPos.y + SlotInfo.ParentItem.Item.Size.y;
+                int maxX = SlotInfo.ParentItem.Slot.InventorySlotInfo.GridPos.x + SlotInfo.ParentItem.BaseSize.x, maxY = SlotInfo.ParentItem.Slot.InventorySlotInfo.GridPos.y + SlotInfo.ParentItem.BaseSize.y;
 
-                while (itemScript.Item.Part.PartSlot != null)
-                    itemScript = itemScript.Item.Part.PartSlot.SlotInfo.ParentItem;
+                while (item.Part.PartSlot != null)
+                    item = item.Part.PartSlot.SlotInfo.ParentItem;
 
                 for (int i = 0; i < tempModifiers.Length; i++)
                 {
-                    if (itemScript.Item.Part.SizeModifiers[i].HighestModifier < ItemScript.selectedItem.Item.Part.SizeModifiers[i].HighestModifier)
+                    if (item.Part.SizeModifiers[i].HighestModifier < ItemScript.selectedItem.Item.Part.SizeModifiers[i].HighestModifier)
                         tempModifiers[i] = ItemScript.selectedItem.Item.Part.SizeModifiers[i].HighestModifier;
                     else
-                        tempModifiers[i] = itemScript.Item.Part.SizeModifiers[i].HighestModifier;
+                        tempModifiers[i] = item.Part.SizeModifiers[i].HighestModifier;
                 }
 
                 if (tempModifiers[ItemScript.selectedItem.Item.Part.Size.x] < ItemScript.selectedItem.Item.Part.Size.y)
                     tempModifiers[ItemScript.selectedItem.Item.Part.Size.x] = ItemScript.selectedItem.Item.Part.Size.y;
 
-                if (CheckArea(new IntVector2(itemScript.Item.Size.x + tempModifiers[1] + tempModifiers[3], itemScript.Item.Size.y + tempModifiers[0] + tempModifiers[2]), SlotInfo.ParentItem.Slot))
+                if (CheckArea(new IntVector2(item.BaseSize.x + tempModifiers[1] + tempModifiers[3], item.BaseSize.y + tempModifiers[0] + tempModifiers[2]), SlotInfo.ParentItem.Slot))
                 {
                     fits = false;
                 }
                 else
                 {
-                    for (int x = itemScript.Slot.InventorySlotInfo.GridPos.x; x < maxX; x++)
+                    for (int x = item.Slot.InventorySlotInfo.GridPos.x; x < maxX; x++)
                     {
                         for (int y = maxY; y < maxY + tempModifiers[0] + tempModifiers[2]; y++)
                         {
-                            if (itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ItemScript != null && itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ItemScript != itemScript)
+                            if (item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].Item != null && item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].Item != item)
                             {
                                 fits = false;
-                                itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.red;
+                                item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.red;
                             }
                             else
-                                itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.green;
+                                item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.green;
 
-                            changedImages.Add(itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image);
+                            changedImages.Add(item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image);
                         }
                     }
 
                     for (int x = maxX; x < maxX + tempModifiers[1] + tempModifiers[3]; x++)
                     {
-                        for (int y = itemScript.Slot.InventorySlotInfo.GridPos.y; y < maxY + tempModifiers[0] + tempModifiers[2]; y++)
+                        for (int y = item.Slot.InventorySlotInfo.GridPos.y; y < maxY + tempModifiers[0] + tempModifiers[2]; y++)
                         {
-                            if (itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ItemScript != null)
+                            if (item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].Item != null)
                             {
                                 fits = false;
-                                itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.red;
+                                item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.red;
                             }
                             else
-                                itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.green;
+                                item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.green;
 
-                            changedImages.Add(itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image);
+                            changedImages.Add(item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image);
                         }
                     }
                 }
@@ -111,45 +111,47 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
             {
                 if (ItemScript.selectedItem != null && SlotInfo.PartIDs.Contains(ItemScript.selectedItem.Item.GlobalID))
                 {
-                    FillSlot(ItemScript.selectedItem);
-                    CreateSlots(ItemScript.selectedItem);
+                    FillSlot(ItemScript.selectedItem.Item);
+                    CreateSlots(ItemScript.selectedItem.Item);
                     ItemScript.ResetSelectedItem();
                 }
             }
             else
             {
-                ItemScript itemScript = SlotInfo.ItemScript;
+                ItemClass item = SlotInfo.Item;
 
-                while (itemScript.Item.Part.PartSlot != null)
+                while (item.Part.PartSlot != null)
                 {
                     int[] changedModifiers = new int[4];
                     int modifier;
 
-                    itemScript = itemScript.Item.Part.PartSlot.SlotInfo.ParentItem;
+                    item = item.Part.PartSlot.SlotInfo.ParentItem;
 
                     for (int i = 0; i < 4; i++)
-                        changedModifiers[i] = SlotInfo.ItemScript.Item.Part.SizeModifiers[i].RemoveFromPart(itemScript.Item.Part, i);
+                        changedModifiers[i] = SlotInfo.Item.Part.SizeModifiers[i].RemoveFromPart(item.Part, i);
 
-                    modifier = itemScript.Item.Part.SizeModifiers[SlotInfo.ItemScript.Item.Part.Size.x].Remove(SlotInfo.ItemScript.Item.Part.Size.y);
+                    modifier = item.Part.SizeModifiers[SlotInfo.Item.Part.Size.x].Remove(SlotInfo.Item.Part.Size.y);
 
-                    if (changedModifiers[SlotInfo.ItemScript.Item.Part.Size.x] < modifier)
-                        changedModifiers[SlotInfo.ItemScript.Item.Part.Size.x] = modifier;
+                    if (changedModifiers[SlotInfo.Item.Part.Size.x] < modifier)
+                        changedModifiers[SlotInfo.Item.Part.Size.x] = modifier;
 
-                    for (int x = itemScript.Slot.InventorySlotInfo.GridPos.x; x < itemScript.Size.x; x++)
+                    for (int x = item.Slot.InventorySlotInfo.GridPos.x; x < item.Size.x; x++)
                     {
-                        for (int y = itemScript.Size.y; y < itemScript.Size.y + changedModifiers[0] + changedModifiers[2]; y++)
+                        for (int y = item.Size.y; y < item.Size.y + changedModifiers[0] + changedModifiers[2]; y++)
                         {
-                            itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.white;
-                            itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ChangeItem(null, IntVector2.Zero);
+                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.white;
+                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ChangeItem(null, IntVector2.Zero);
+                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.ItemScript = null;
                         }
                     }
 
-                    for (int x = itemScript.Size.x; x < itemScript.Size.x + changedModifiers[1] + changedModifiers[3]; x++)
+                    for (int x = item.Size.x; x < item.Size.x + changedModifiers[1] + changedModifiers[3]; x++)
                     {
-                        for (int y = itemScript.Slot.InventorySlotInfo.GridPos.y; y < itemScript.Size.y + changedModifiers[0] + changedModifiers[2]; y++)
+                        for (int y = item.Slot.InventorySlotInfo.GridPos.y; y < item.Size.y + changedModifiers[0] + changedModifiers[2]; y++)
                         {
-                            itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.white;
-                            itemScript.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ChangeItem(null, IntVector2.Zero);
+                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.white;
+                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ChangeItem(null, IntVector2.Zero);
+                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.ItemScript = null;
                         }
                     }
                 }
@@ -157,82 +159,82 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
                 foreach (GameObject gameObject in CreatedSlots)
                     Destroy(gameObject);
 
-                SlotInfo.ItemScript.Item.Part.PartSlot = null;
+                SlotInfo.Item.Part.PartSlot = null;
                 IconImage.sprite = null;
                 IconImage.enabled = false;
-                SlotInfo.ItemScript.Image.enabled = true;
-                ItemScript.SetSelectedItem(SlotInfo.ItemScript);
+                SlotInfo.Slot.ItemScript.Image.enabled = true;
+                ItemScript.SetSelectedItem(SlotInfo.Slot.ItemScript);
                 Image.color = Color.white;
                 Empty = true;
-                itemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * itemScript.Size.x, SlotGrid.SlotSize * itemScript.Size.y);
+                item.Slot.ItemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * item.Size.x, SlotGrid.SlotSize * item.Size.y);
             }
         }
     }
 
-    public void FillSlot(ItemScript itemScript)
+    public void FillSlot(ItemClass item)
     {
-        if (ItemScript.selectedItem.Size.x > ItemScript.selectedItem.Size.y)
-            IconRect.sizeDelta = new Vector2(SlotGrid.SlotSize, ItemScript.selectedItem.Size.y * SlotGrid.SlotSize / ItemScript.selectedItem.Size.x);
+        if (ItemScript.selectedItem.Item.Size.x > ItemScript.selectedItem.Item.Size.y)
+            IconRect.sizeDelta = new Vector2(SlotGrid.SlotSize, ItemScript.selectedItem.Item.Size.y * SlotGrid.SlotSize / ItemScript.selectedItem.Item.Size.x);
         else
-            IconRect.sizeDelta = new Vector2( ItemScript.selectedItem.Size.x * SlotGrid.SlotSize / ItemScript.selectedItem.Size.y, SlotGrid.SlotSize);
+            IconRect.sizeDelta = new Vector2( ItemScript.selectedItem.Item.Size.x * SlotGrid.SlotSize / ItemScript.selectedItem.Item.Size.y, SlotGrid.SlotSize);
 
-        itemScript.Item.Part.PartSlot = this;
-        SlotInfo.ItemScript = ItemScript.selectedItem;
+        item.Part.PartSlot = this;
+        SlotInfo.Item = ItemScript.selectedItem.Item;
         Inspect.Refresh();
         Empty = false;
-        SlotInfo.ItemScript.transform.SetParent(InventoryManager.DropParent);
+        ItemScript.selectedItem.transform.SetParent(InventoryManager.DropParent);
         IconImage.enabled = true;
         IconImage.sprite = ItemScript.selectedItem.Image.sprite;
         ItemScript.selectedItem.Image.enabled = false;
         Image.color = Color.white;
 
-        while (itemScript.Item.Part.PartSlot != null)
+        while (item.Part.PartSlot != null)
         {
-            itemScript = itemScript.Item.Part.PartSlot.SlotInfo.ParentItem;
+            item = item.Part.PartSlot.SlotInfo.ParentItem;
 
             for (int i = 0; i < 4; i++)
-                ItemScript.selectedItem.Item.Part.SizeModifiers[i].AddToPart(itemScript.Item.Part, i);
+                ItemScript.selectedItem.Item.Part.SizeModifiers[i].AddToPart(item.Part, i);
 
-            itemScript.Item.Part.SizeModifiers[ItemScript.selectedItem.Item.Part.Size.x].Add(ItemScript.selectedItem.Item.Part.Size.y);
+            item.Part.SizeModifiers[ItemScript.selectedItem.Item.Part.Size.x].Add(ItemScript.selectedItem.Item.Part.Size.y);
         }
 
-        itemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * itemScript.Size.x, SlotGrid.SlotSize * itemScript.Size.y);
+        item.Slot.ItemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * item.Size.x, SlotGrid.SlotSize * item.Size.y);
     }
 
-    private void CreateSlots(ItemScript itemScript)
+    private void CreateSlots(ItemClass item)
     {
-        if (itemScript != null && itemScript.Item.Part != null)
+        if (item != null && item.Part != null)
         {
             int siblingIndex;
 
-            if (itemScript.Item.Part.PartSlot == null)
+            if (item.Part.PartSlot == null)
                 siblingIndex = 0;
             else
-                siblingIndex = itemScript.transform.parent.GetSiblingIndex();
+                siblingIndex = item.Slot.ItemScript.transform.parent.GetSiblingIndex();
 
-            for (int i = 0; i < itemScript.Item.Part.PartSlotCount(); i++)
+            for (int i = 0; i < item.Part.PartSlotCount(); i++)
             {
                 PartSlot newPart = Instantiate(Inspect.PartSlotPrefab, transform.parent).GetComponent<PartSlot>();
 
                 CreatedSlots.Add(newPart.gameObject);
                 newPart.Inspect = Inspect;
-                newPart.SlotInfo = itemScript.Item.Part.PartSlots(i);
-                newPart.SlotInfo.ParentItem = itemScript;
+                newPart.SlotInfo = item.Part.PartSlots(i);
+                newPart.SlotInfo.ParentItem = item;
                 newPart.transform.SetSiblingIndex(siblingIndex + i);
 
-                if (newPart.SlotInfo.ItemScript != null)
+                if (newPart.SlotInfo.Item != null)
                 {
-                    Debug.Log(newPart.SlotInfo.ItemScript.Image.sprite);
+                    Debug.Log(newPart.SlotInfo.Slot.ItemScript.Image.sprite);
                     newPart.IconImage.enabled = true;
-                    newPart.IconImage.sprite = newPart.SlotInfo.ItemScript.Image.sprite;
+                    newPart.IconImage.sprite = newPart.SlotInfo.Slot.ItemScript.Image.sprite;
 
-                    if (newPart.SlotInfo.ItemScript.Size.x > newPart.SlotInfo.ItemScript.Size.y)
-                        newPart.IconRect.sizeDelta = new Vector2(SlotGrid.SlotSize, newPart.SlotInfo.ItemScript.Size.y * SlotGrid.SlotSize / newPart.SlotInfo.ItemScript.Size.x);
+                    if (newPart.SlotInfo.Item.Size.x > newPart.SlotInfo.Item.Size.y)
+                        newPart.IconRect.sizeDelta = new Vector2(SlotGrid.SlotSize, newPart.SlotInfo.Item.Size.y * SlotGrid.SlotSize / newPart.SlotInfo.Item.Size.x);
                     else
-                        newPart.IconRect.sizeDelta = new Vector2(newPart.SlotInfo.ItemScript.Size.x * SlotGrid.SlotSize / newPart.SlotInfo.ItemScript.Size.y, SlotGrid.SlotSize);
+                        newPart.IconRect.sizeDelta = new Vector2(newPart.SlotInfo.Item.Size.x * SlotGrid.SlotSize / newPart.SlotInfo.Item.Size.y, SlotGrid.SlotSize);
                 }
 
-                CreateSlots(newPart.SlotInfo.ItemScript);
+                CreateSlots(newPart.SlotInfo.Item);
             }
         }
     }

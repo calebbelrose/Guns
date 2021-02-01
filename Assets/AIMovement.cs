@@ -140,14 +140,10 @@ public class AIMovement : MonoBehaviour
 
             if (hit.collider.gameObject.layer == 11)
             {
-                ItemScript newItem = ItemDatabase.Instance.ItemEquipPool.GetItemScript();
-
-                newItem.SetItemObject(ItemDatabase.Instance.DBList(hit.collider.GetComponent<GroundLoot>().ItemID));
+                ItemClass newItem = ItemDatabase.Instance.DBList(hit.collider.GetComponent<GroundLoot>().ItemID);
 
                 if (Inventory.StoreLoot(newItem) != null)
                     GroundLoot.Destroy();
-                else
-                    Destroy(newItem.gameObject);
             }
         }
     }

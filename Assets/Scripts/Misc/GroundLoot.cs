@@ -19,11 +19,11 @@ public class GroundLoot : Loot
 
     public override void Action(AdvancedCamRecoil playerCam)
     {
-        ItemScript newItem = ItemDatabase.Instance.ItemEquipPool.GetItemScript();
+        ItemScript newItem = GameObject.Instantiate(ItemDatabase.Instance.ItemPrefab).GetComponent<ItemScript>();
         InventorySlotInfo slotInfo;
 
         newItem.SetItemObject(ItemDatabase.Instance.DBList(itemID));
-        slotInfo = playerCam.Inventory.StoreLoot(newItem);
+        slotInfo = playerCam.Inventory.StoreLoot(newItem.Item);
 
         if (slotInfo != null)
         {

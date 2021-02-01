@@ -7,15 +7,14 @@ using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour
 {
-    public ObjectPoolScript ItemEquipPool { get { return itemEquipPool; } }
+    public GameObject ItemPrefab { get { return itemPrefab; } }
 
-    [SerializeField] private ObjectPoolScript itemEquipPool;
     [SerializeField] private List<LootDrop> RareLootDrops = new List<LootDrop>();
     [SerializeField] private Transform LootParent;
-    [SerializeField] private ObjectPoolScript ObjectPoolScript;
     [SerializeField] private List<ItemClass> dbList = new List<ItemClass>();
     [SerializeField] private GameObject LootTextPrefab;
     [SerializeField] private GameObject LootBoxPrefab;
+    [SerializeField] private GameObject itemPrefab; 
 
     private int totalLootDropWeights = 0;
 
@@ -64,12 +63,6 @@ public class ItemDatabase : MonoBehaviour
     public int DBCount()
     {
         return dbList.Count;
-    }
-
-    //Returns the specified object
-    public void ReturnObject(GameObject toReturn)
-    {
-        ObjectPoolScript.ReturnObject(toReturn);
     }
 
     /*public void SpawnLoot(Vector3 position, int itemID, int amount)

@@ -2110,50 +2110,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196942443}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &199588971
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 199588972}
-  - component: {fileID: 199588973}
-  m_Layer: 0
-  m_Name: ItemButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &199588972
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199588971}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7451579202841685731}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &199588973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199588971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc2c5376a1f94745bd5c1527fb33733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Prefab: {fileID: 1596034453966994, guid: a51e6d858b5c1d94bbae5f0fcde1398e, type: 3}
 --- !u!1001 &206512142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8604,7 +8560,7 @@ MonoBehaviour:
   CheckStartPos:
     x: 0
     y: 0
-  slotGridList: []
+  SlotGridList: []
   pockets: 0
 --- !u!4 &1197788357
 Transform:
@@ -10784,7 +10740,7 @@ MonoBehaviour:
   CheckStartPos:
     x: 0
     y: 0
-  slotGridList: []
+  SlotGridList: []
   pockets: 0
 --- !u!114 &1529880975
 MonoBehaviour:
@@ -14306,7 +14262,7 @@ MonoBehaviour:
   CheckStartPos:
     x: 0
     y: 0
-  slotGridList: []
+  SlotGridList: []
   pockets: 4
 --- !u!114 &1998423945
 MonoBehaviour:
@@ -14981,38 +14937,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7451579202841685731
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7451579202841685740}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7451579203447662545}
-  - {fileID: 199588972}
-  m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7451579202841685740
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7451579202841685731}
-  m_Layer: 0
-  m_Name: ObjectPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!224 &7451579202867852900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15457,57 +15381,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -128, y: 139}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7451579203447662544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7451579203447662546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc2c5376a1f94745bd5c1527fb33733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Prefab: {fileID: 1411545239711252, guid: 0772be54e504ff744a9310f3ce10d0c0, type: 3}
---- !u!4 &7451579203447662545
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7451579203447662546}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7451579202841685731}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7451579203447662546
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7451579203447662545}
-  - component: {fileID: 7451579203447662544}
-  m_Layer: 0
-  m_Name: ItemEquip
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!114 &7451579203452230692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15556,7 +15436,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 7451579204703167587}
-  - {fileID: 7451579202841685731}
   - {fileID: 7451579204165789685}
   - {fileID: 7451579204400824786}
   - {fileID: 7451579203362561303}
@@ -15808,9 +15687,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3378a5d59d0cdc449bff8921600181ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemEquipPool: {fileID: 7451579203447662544}
   RareLootDrops:
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15836,6 +15715,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15861,6 +15741,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15886,6 +15767,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15911,6 +15793,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15936,6 +15819,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15961,6 +15845,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15986,6 +15871,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16011,6 +15897,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16036,6 +15923,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16061,6 +15949,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16086,6 +15975,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16111,6 +16001,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16136,6 +16027,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16161,6 +16053,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16186,6 +16079,7 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   - itemClass:
+      Slot: {fileID: 0}
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16211,9 +16105,9 @@ MonoBehaviour:
         partSlots: []
     weight: 1
   LootParent: {fileID: 7451579204703167587}
-  ObjectPoolScript: {fileID: 199588973}
   dbList:
-  - globalID: 0
+  - Slot: {fileID: 0}
+    globalID: 0
     categoryName: 0
     typeName: Helmet
     size:
@@ -16236,7 +16130,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 1
+  - Slot: {fileID: 0}
+    globalID: 1
     categoryName: 1
     typeName: Body Armour
     size:
@@ -16259,7 +16154,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 2
+  - Slot: {fileID: 0}
+    globalID: 2
     categoryName: 2
     typeName: Leg Armour
     size:
@@ -16282,7 +16178,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 3
+  - Slot: {fileID: 0}
+    globalID: 3
     categoryName: 3
     typeName: Barrel
     size:
@@ -16305,19 +16202,116 @@ MonoBehaviour:
         y: 2
       partType: 10
       partSlots:
-      - ItemScript: {fileID: 0}
-        ParentItem: {fileID: 0}
+      - Item:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
+        ParentItem:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
         Name: Front Sight
         PartIDs: 05000000
         Required: 0
         Slot: {fileID: 0}
-      - ItemScript: {fileID: 0}
-        ParentItem: {fileID: 0}
+      - Item:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
+        ParentItem:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
         Name: Handguard
         PartIDs: 06000000
         Required: 1
         Slot: {fileID: 0}
-  - globalID: 4
+  - Slot: {fileID: 0}
+    globalID: 4
     categoryName: 3
     typeName: Base
     size:
@@ -16340,37 +16334,278 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots:
-      - ItemScript: {fileID: 0}
-        ParentItem: {fileID: 0}
+      - Item:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
+        ParentItem:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
         Name: Barrel
         PartIDs: 03000000
         Required: 1
         Slot: {fileID: 0}
-      - ItemScript: {fileID: 0}
-        ParentItem: {fileID: 0}
+      - Item:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
+        ParentItem:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
         Name: Magazine
         PartIDs: 07000000
         Required: 0
         Slot: {fileID: 0}
-      - ItemScript: {fileID: 0}
-        ParentItem: {fileID: 0}
+      - Item:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
+        ParentItem:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
         Name: Mount
         PartIDs: 08000000
         Required: 0
         Slot: {fileID: 0}
-      - ItemScript: {fileID: 0}
-        ParentItem: {fileID: 0}
+      - Item:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
+        ParentItem:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
         Name: Pistol Grip
         PartIDs: 09000000
         Required: 1
         Slot: {fileID: 0}
-      - ItemScript: {fileID: 0}
-        ParentItem: {fileID: 0}
+      - Item:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
+        ParentItem:
+          Slot: {fileID: 0}
+          globalID: 0
+          categoryName: 0
+          typeName: 
+          size:
+            x: 0
+            y: 0
+          icon: {fileID: 0}
+          part:
+            PartSlot: {fileID: 0}
+            SizeModifiers:
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            - highestModifier: 0
+              list: 
+            Size:
+              x: 0
+              y: 0
+            partType: 0
+            partSlots: []
         Name: Stock
         PartIDs: 0a000000
         Required: 1
         Slot: {fileID: 0}
-  - globalID: 5
+  - Slot: {fileID: 0}
+    globalID: 5
     categoryName: 3
     typeName: Front Sight
     size:
@@ -16393,7 +16628,8 @@ MonoBehaviour:
         y: 0
       partType: 6
       partSlots: []
-  - globalID: 6
+  - Slot: {fileID: 0}
+    globalID: 6
     categoryName: 3
     typeName: Handguard
     size:
@@ -16416,7 +16652,8 @@ MonoBehaviour:
         y: 0
       partType: 7
       partSlots: []
-  - globalID: 7
+  - Slot: {fileID: 0}
+    globalID: 7
     categoryName: 3
     typeName: Magazine
     size:
@@ -16439,7 +16676,8 @@ MonoBehaviour:
         y: 1
       partType: 2
       partSlots: []
-  - globalID: 8
+  - Slot: {fileID: 0}
+    globalID: 8
     categoryName: 3
     typeName: Mount
     size:
@@ -16462,7 +16700,8 @@ MonoBehaviour:
         y: 0
       partType: 8
       partSlots: []
-  - globalID: 9
+  - Slot: {fileID: 0}
+    globalID: 9
     categoryName: 3
     typeName: Pistol Grip
     size:
@@ -16485,7 +16724,8 @@ MonoBehaviour:
         y: 1
       partType: 3
       partSlots: []
-  - globalID: 10
+  - Slot: {fileID: 0}
+    globalID: 10
     categoryName: 3
     typeName: Stock
     size:
@@ -16508,7 +16748,8 @@ MonoBehaviour:
         y: 1
       partType: 4
       partSlots: []
-  - globalID: 11
+  - Slot: {fileID: 0}
+    globalID: 11
     categoryName: 4
     typeName: Hearing Protection
     size:
@@ -16531,7 +16772,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 12
+  - Slot: {fileID: 0}
+    globalID: 12
     categoryName: 5
     typeName: Balaclava
     size:
@@ -16554,7 +16796,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 13
+  - Slot: {fileID: 0}
+    globalID: 13
     categoryName: 6
     typeName: Sunglasses
     size:
@@ -16577,7 +16820,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 14
+  - Slot: {fileID: 0}
+    globalID: 14
     categoryName: 7
     typeName: Backpack
     size:
@@ -16600,7 +16844,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 15
+  - Slot: {fileID: 0}
+    globalID: 15
     categoryName: 8
     typeName: Rig
     size:
@@ -16623,7 +16868,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 16
+  - Slot: {fileID: 0}
+    globalID: 16
     categoryName: 9
     typeName: Case
     size:
@@ -16646,7 +16892,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 17
+  - Slot: {fileID: 0}
+    globalID: 17
     categoryName: 10
     typeName: Sword
     size:
@@ -16669,7 +16916,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 18
+  - Slot: {fileID: 0}
+    globalID: 18
     categoryName: 11
     typeName: Crackers
     size:
@@ -16692,7 +16940,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 19
+  - Slot: {fileID: 0}
+    globalID: 19
     categoryName: 11
     typeName: Water
     size:
@@ -16715,7 +16964,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 20
+  - Slot: {fileID: 0}
+    globalID: 20
     categoryName: 12
     typeName: Bronze Ingot
     size:
@@ -16738,7 +16988,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 21
+  - Slot: {fileID: 0}
+    globalID: 21
     categoryName: 12
     typeName: Iron Ingot
     size:
@@ -16761,7 +17012,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 22
+  - Slot: {fileID: 0}
+    globalID: 22
     categoryName: 12
     typeName: Steel Ingot
     size:
@@ -16784,7 +17036,8 @@ MonoBehaviour:
         y: 0
       partType: 0
       partSlots: []
-  - globalID: 22
+  - Slot: {fileID: 0}
+    globalID: 22
     categoryName: 12
     typeName: Steel Ingot
     size:
@@ -16810,6 +17063,7 @@ MonoBehaviour:
   LootTextPrefab: {fileID: 3558581089250535135, guid: 2c8271d16e7171a4690216391742f8de,
     type: 3}
   LootBoxPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1411545239711252, guid: 0772be54e504ff744a9310f3ce10d0c0, type: 3}
 --- !u!224 &7451579203812045927
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17041,7 +17295,7 @@ RectTransform:
   - {fileID: 1198398647}
   - {fileID: 7451579203486594892}
   m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17287,7 +17541,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7451579203452230745}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

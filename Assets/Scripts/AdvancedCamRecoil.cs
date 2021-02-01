@@ -123,7 +123,7 @@ public class AdvancedCamRecoil : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.K))
-            Debug.Log(Inventory.slotGridList[1].List[0].SlotInfo[0, 0].SlotScript.transform.position + " " + Inventory.slotGridList[1].List[0].SlotInfo[0, 0].ItemScript.transform.position);
+            Debug.Log(Inventory.SlotGridList[1].List[0].SlotInfo[0, 0].SlotScript.transform.position + " " + Inventory.SlotGridList[1].List[0].SlotInfo[0, 0].SlotScript.ItemScript.transform.position);
 
         if (PlayerMovement.enabled)
         {
