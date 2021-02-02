@@ -32,22 +32,20 @@ public class Inspect : MonoBehaviour {
 
     private void CreateSlots(ItemClass item)
     {
-        Part part = item.Part;
-
-        if (part != null)
+        if (item != null)
         {
-            for (int i = 0; i < part.PartSlotCount(); i++)
+            for (int i = 0; i < item.PartSlotCount(); i++)
             {
                 PartSlot partSlot = Instantiate(PartSlotPrefab, SlotRect).GetComponent<PartSlot>();
 
-                partSlot.SlotInfo = part.PartSlots(i);
+                partSlot.SlotInfo = item.PartSlots(i);
                 partSlot.SlotInfo.ParentItem = item;
                 partSlot.Inspect = this;
 
-                if (part.PartSlots(i).Item != null)
+                if (item.PartSlots(i).Item != null)
                 {
-                    partSlot.FillSlot(part.PartSlots(i).Item);
-                    CreateSlots(part.PartSlots(i).Item);
+                    partSlot.FillSlot(item.PartSlots(i).Item);
+                    CreateSlots(item.PartSlots(i).Item);
                 }
             }
         }

@@ -30,19 +30,19 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
                 bool fits = true;
                 int maxX = SlotInfo.ParentItem.Slot.InventorySlotInfo.GridPos.x + SlotInfo.ParentItem.BaseSize.x, maxY = SlotInfo.ParentItem.Slot.InventorySlotInfo.GridPos.y + SlotInfo.ParentItem.BaseSize.y;
 
-                while (item.Part.PartSlot != null)
-                    item = item.Part.PartSlot.SlotInfo.ParentItem;
+                while (item.PartSlot != null)
+                    item = item.PartSlot.SlotInfo.ParentItem;
 
                 for (int i = 0; i < tempModifiers.Length; i++)
                 {
-                    if (item.Part.SizeModifiers[i].HighestModifier < ItemScript.selectedItem.Item.Part.SizeModifiers[i].HighestModifier)
-                        tempModifiers[i] = ItemScript.selectedItem.Item.Part.SizeModifiers[i].HighestModifier;
+                    if (item.SizeModifiers[i].HighestModifier < ItemScript.selectedItem.Item.SizeModifiers[i].HighestModifier)
+                        tempModifiers[i] = ItemScript.selectedItem.Item.SizeModifiers[i].HighestModifier;
                     else
-                        tempModifiers[i] = item.Part.SizeModifiers[i].HighestModifier;
+                        tempModifiers[i] = item.SizeModifiers[i].HighestModifier;
                 }
 
-                if (tempModifiers[ItemScript.selectedItem.Item.Part.Size.x] < ItemScript.selectedItem.Item.Part.Size.y)
-                    tempModifiers[ItemScript.selectedItem.Item.Part.Size.x] = ItemScript.selectedItem.Item.Part.Size.y;
+                if (tempModifiers[ItemScript.selectedItem.Item.PartSize.x] < ItemScript.selectedItem.Item.PartSize.y)
+                    tempModifiers[ItemScript.selectedItem.Item.PartSize.x] = ItemScript.selectedItem.Item.PartSize.y;
 
                 if (CheckArea(new IntVector2(item.BaseSize.x + tempModifiers[1] + tempModifiers[3], item.BaseSize.y + tempModifiers[0] + tempModifiers[2]), SlotInfo.ParentItem.Slot))
                 {
@@ -120,20 +120,20 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
             {
                 ItemClass item = SlotInfo.Item;
 
-                while (item.Part.PartSlot != null)
+                while (item.PartSlot != null)
                 {
                     int[] changedModifiers = new int[4];
                     int modifier;
 
-                    item = item.Part.PartSlot.SlotInfo.ParentItem;
+                    item = item.PartSlot.SlotInfo.ParentItem;
 
                     for (int i = 0; i < 4; i++)
-                        changedModifiers[i] = SlotInfo.Item.Part.SizeModifiers[i].RemoveFromPart(item.Part, i);
+                        changedModifiers[i] = SlotInfo.Item.SizeModifiers[i].RemoveFromPart(item, i);
 
-                    modifier = item.Part.SizeModifiers[SlotInfo.Item.Part.Size.x].Remove(SlotInfo.Item.Part.Size.y);
+                    modifier = item.SizeModifiers[SlotInfo.Item.PartSize.x].Remove(SlotInfo.Item.PartSize.y);
 
-                    if (changedModifiers[SlotInfo.Item.Part.Size.x] < modifier)
-                        changedModifiers[SlotInfo.Item.Part.Size.x] = modifier;
+                    if (changedModifiers[SlotInfo.Item.PartSize.x] < modifier)
+                        changedModifiers[SlotInfo.Item.PartSize.x] = modifier;
 
                     for (int x = item.Slot.InventorySlotInfo.GridPos.x; x < item.Size.x; x++)
                     {
@@ -159,7 +159,7 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
                 foreach (GameObject gameObject in CreatedSlots)
                     Destroy(gameObject);
 
-                SlotInfo.Item.Part.PartSlot = null;
+                SlotInfo.Item.PartSlot = null;
                 IconImage.sprite = null;
                 IconImage.enabled = false;
                 SlotInfo.Slot.ItemScript.Image.enabled = true;
@@ -178,7 +178,7 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
         else
             IconRect.sizeDelta = new Vector2( ItemScript.selectedItem.Item.Size.x * SlotGrid.SlotSize / ItemScript.selectedItem.Item.Size.y, SlotGrid.SlotSize);
 
-        item.Part.PartSlot = this;
+        item.PartSlot = this;
         SlotInfo.Item = ItemScript.selectedItem.Item;
         Inspect.Refresh();
         Empty = false;
@@ -188,37 +188,37 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
         ItemScript.selectedItem.Image.enabled = false;
         Image.color = Color.white;
 
-        while (item.Part.PartSlot != null)
+        while (item.PartSlot != null)
         {
-            item = item.Part.PartSlot.SlotInfo.ParentItem;
+            item = item.PartSlot.SlotInfo.ParentItem;
 
             for (int i = 0; i < 4; i++)
-                ItemScript.selectedItem.Item.Part.SizeModifiers[i].AddToPart(item.Part, i);
+                ItemScript.selectedItem.Item.SizeModifiers[i].AddToPart(item, i);
 
-            item.Part.SizeModifiers[ItemScript.selectedItem.Item.Part.Size.x].Add(ItemScript.selectedItem.Item.Part.Size.y);
+            item.SizeModifiers[ItemScript.selectedItem.Item.PartSize.x].Add(ItemScript.selectedItem.Item.PartSize.y);
         }
 
-        item.Slot.ItemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * item.Size.x, SlotGrid.SlotSize * item.Size.y);
+        item.Slot.ItemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * item.PartSize.x, SlotGrid.SlotSize * item.PartSize.y);
     }
 
     private void CreateSlots(ItemClass item)
     {
-        if (item != null && item.Part != null)
+        if (item != null)
         {
             int siblingIndex;
 
-            if (item.Part.PartSlot == null)
+            if (item.PartSlot == null)
                 siblingIndex = 0;
             else
                 siblingIndex = item.Slot.ItemScript.transform.parent.GetSiblingIndex();
 
-            for (int i = 0; i < item.Part.PartSlotCount(); i++)
+            for (int i = 0; i < item.PartSlotCount(); i++)
             {
                 PartSlot newPart = Instantiate(Inspect.PartSlotPrefab, transform.parent).GetComponent<PartSlot>();
 
                 CreatedSlots.Add(newPart.gameObject);
                 newPart.Inspect = Inspect;
-                newPart.SlotInfo = item.Part.PartSlots(i);
+                newPart.SlotInfo = item.PartSlots(i);
                 newPart.SlotInfo.ParentItem = item;
                 newPart.transform.SetSiblingIndex(siblingIndex + i);
 

@@ -14,7 +14,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     [SerializeField] private Image image;
     [SerializeField] private GameObject equipObject;
-    [SerializeField] private CombatController CombatController;
+    [SerializeField] protected CombatController CombatController;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -27,7 +27,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public virtual void OnPointerClick(PointerEventData eventData)
     {
         if (!Empty)
             CombatController.Unequip(this);

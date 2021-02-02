@@ -38,19 +38,19 @@ public class Modifiers
         return oldModifier - highestModifier;
     }
 
-    public int RemoveFromPart(Part part, int index)
+    public int RemoveFromPart(ItemClass itemClass, int index)
     {
         int oldHighestModifier = highestModifier;
 
         foreach (int modifier in list)
-            part.SizeModifiers[index].Remove(modifier);
+            itemClass.SizeModifiers[index].Remove(modifier);
 
         return oldHighestModifier - highestModifier;
     }
 
-    public void AddToPart(Part part, int index)
+    public void AddToPart(ItemClass itemClass, int index)
     {
         foreach (int modifier in list)
-            part.SizeModifiers[index].Add(modifier);
+            itemClass.SizeModifiers[index].Add(modifier);
     }
 }

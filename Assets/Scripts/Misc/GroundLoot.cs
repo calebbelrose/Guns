@@ -21,16 +21,28 @@ public class GroundLoot : Loot
     {
         ItemScript newItem = GameObject.Instantiate(ItemDatabase.Instance.ItemPrefab).GetComponent<ItemScript>();
         InventorySlotInfo slotInfo;
+        EquipSlotInfo equipSlotInfo;
 
         newItem.SetItemObject(ItemDatabase.Instance.DBList(itemID));
-        slotInfo = playerCam.Inventory.StoreLoot(newItem.Item);
+        equipSlotInfo = playerCam.CombatController.FindSlot(newItem);
 
-        if (slotInfo != null)
+        if (equipSlotInfo.ItemScript == null)
         {
-            playerCam.Inventory.PlaceItem(slotInfo, newItem);
+            ItemScript.SetSelectedItem(newItem);
+            playerCam.CombatController.EquipInSlot(newItem, equipSlotInfo);
             GroundLoot.Destroy();
         }
         else
-            Destroy(newItem.gameObject);
+        {
+            slotInfo = playerCam.Inventory.StoreLoot(newItem.Item);
+
+            if (slotInfo != null)
+            {
+                playerCam.Inventory.PlaceItem(slotInfo, newItem);
+                GroundLoot.Destroy();
+            }
+            else
+                Destroy(newItem.gameObject);
+        }
     }
 }

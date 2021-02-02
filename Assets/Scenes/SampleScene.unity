@@ -4813,7 +4813,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 577987050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f077cefab11898343a84c41b2072c277, type: 3}
+  m_Script: {fileID: 11500000, guid: a9b1573eff021f7429f11b114760c2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Empty: 1
@@ -4824,6 +4824,8 @@ MonoBehaviour:
   image: {fileID: 577987053}
   equipObject: {fileID: 577987050}
   CombatController: {fileID: 1998423945}
+  Index: 2
+  Inventory: {fileID: 1998423944}
 --- !u!114 &577987053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6479,7 +6481,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 841547848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f077cefab11898343a84c41b2072c277, type: 3}
+  m_Script: {fileID: 11500000, guid: a9b1573eff021f7429f11b114760c2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Empty: 1
@@ -6490,6 +6492,8 @@ MonoBehaviour:
   image: {fileID: 841547851}
   equipObject: {fileID: 841547848}
   CombatController: {fileID: 1998423945}
+  Index: 0
+  Inventory: {fileID: 1998423944}
 --- !u!114 &841547851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8561,7 +8565,7 @@ MonoBehaviour:
     x: 0
     y: 0
   SlotGridList: []
-  pockets: 0
+  pockets: 4
 --- !u!4 &1197788357
 Transform:
   m_ObjectHideFlags: 0
@@ -9392,21 +9396,15 @@ MonoBehaviour:
   Gun: {fileID: 873895187}
   MagazinePrefab: {fileID: 4298624376778601126, guid: ad4f1d5554dab4b4b89aed465cc29dee,
     type: 3}
-  PlayerMovement: {fileID: 1998423940}
-  InventoryCanvas: {fileID: 7451579204165789686}
-  LootInventory: {fileID: 1198398646}
-  LootBoxInventory: {fileID: 1765107021}
-  LootBoxRect: {fileID: 912405087}
-  Inventory: {fileID: 1998423944}
-  playerMovement: {fileID: 0}
-  inventoryCanvas: {fileID: 0}
-  lootInventory: {fileID: 0}
-  lootBoxInventory: {fileID: 0}
+  playerMovement: {fileID: 1998423940}
+  inventoryCanvas: {fileID: 7451579204165789686}
+  lootInventory: {fileID: 1198398646}
+  lootBoxInventory: {fileID: 1765107021}
   SlotPrefab: {fileID: 6846952214606941858, guid: 78483810ed9a4ed4e8a3933067efe6b0,
     type: 3}
-  lootBoxRect: {fileID: 0}
-  inventory: {fileID: 0}
-  CombatController: {fileID: 1998423945}
+  lootBoxRect: {fileID: 912405087}
+  inventory: {fileID: 1998423944}
+  combatController: {fileID: 1998423945}
 --- !u!4 &1328216345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5285447487394064654, guid: 79c3409b7fdeaa247a9689999dbe71b7,
@@ -11154,7 +11152,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1590271625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f077cefab11898343a84c41b2072c277, type: 3}
+  m_Script: {fileID: 11500000, guid: a9b1573eff021f7429f11b114760c2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Empty: 1
@@ -11165,6 +11163,8 @@ MonoBehaviour:
   image: {fileID: 1590271628}
   equipObject: {fileID: 1590271625}
   CombatController: {fileID: 1998423945}
+  Index: 3
+  Inventory: {fileID: 1998423944}
 --- !u!114 &1590271628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13200,6 +13200,176 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c8271d16e7171a4690216391742f8de, type: 3}
+--- !u!1 &1806497057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1806497065}
+  - component: {fileID: 1806497064}
+  - component: {fileID: 1806497063}
+  - component: {fileID: 1806497062}
+  - component: {fileID: 1806497061}
+  - component: {fileID: 1806497060}
+  - component: {fileID: 1806497059}
+  - component: {fileID: 1806497058}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!54 &1806497058
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806497057}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1806497059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806497057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd4d5ce8ecc8b04ca8d367a4094436a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 15
+--- !u!114 &1806497060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806497057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61220a4c3641ab4a90aa6ef83cf4614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  inventory: {fileID: 1806497061}
+  GridSize:
+    x: 10
+    y: 10
+  SlotPrefab: {fileID: 6846952214606941858, guid: 78483810ed9a4ed4e8a3933067efe6b0,
+    type: 3}
+--- !u!114 &1806497061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806497057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0fa7ea4eedf4a04285d287044fc2de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalOffset:
+    x: 0
+    y: 0
+  CheckSize:
+    x: 0
+    y: 0
+  CheckStartPos:
+    x: 0
+    y: 0
+  SlotGridList: []
+  pockets: 0
+--- !u!135 &1806497062
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806497057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1806497063
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806497057}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1806497064
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806497057}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1806497065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806497057}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.86, y: 0.58, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1844790422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14278,43 +14448,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EquipSlotInfo:
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579202867852953}
     categoryName: 4
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579204430361778}
     categoryName: 0
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579204266602004}
     categoryName: 5
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579203857686936}
     categoryName: 6
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579204831322569}
     categoryName: 1
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579204502687303}
     categoryName: 3
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579204074180810}
     categoryName: 2
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579203236531409}
     categoryName: 10
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579203608445655}
     categoryName: 3
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 7451579203278574125}
     categoryName: 3
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 841547850}
     categoryName: 8
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 577987052}
     categoryName: 7
   - ItemScript: {fileID: 0}
-    EquipSlot: {fileID: 0}
+    EquipSlot: {fileID: 1590271627}
     categoryName: 9
   animator: {fileID: 0}
   Stats: []
@@ -15690,6 +15860,20 @@ MonoBehaviour:
   RareLootDrops:
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15697,25 +15881,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15723,25 +15906,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15749,25 +15931,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15775,25 +15956,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15801,25 +15981,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15827,25 +16006,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15853,25 +16031,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15879,25 +16056,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15905,25 +16081,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15931,25 +16106,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15957,25 +16131,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -15983,25 +16156,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16009,25 +16181,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16035,25 +16206,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16061,25 +16231,24 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   - itemClass:
       Slot: {fileID: 0}
+      PartSlot: {fileID: 0}
+      SizeModifiers:
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      - highestModifier: 0
+        list: 
+      PartSize:
+        x: 0
+        y: 0
+      partType: 0
       globalID: 0
       categoryName: 0
       typeName: 
@@ -16087,26 +16256,25 @@ MonoBehaviour:
         x: 0
         y: 0
       icon: {fileID: 0}
-      part:
-        PartSlot: {fileID: 0}
-        SizeModifiers:
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        - highestModifier: 0
-          list: 
-        Size:
-          x: 0
-          y: 0
-        partType: 0
-        partSlots: []
+      partSlots: []
     weight: 1
   LootParent: {fileID: 7451579204703167587}
   dbList:
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 0
     categoryName: 0
     typeName: Helmet
@@ -16114,23 +16282,22 @@ MonoBehaviour:
       x: 2
       y: 2
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 1
     categoryName: 1
     typeName: Body Armour
@@ -16138,23 +16305,22 @@ MonoBehaviour:
       x: 3
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 2
     categoryName: 2
     typeName: Leg Armour
@@ -16162,23 +16328,22 @@ MonoBehaviour:
       x: 3
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 3
     categoryName: 3
     typeName: Barrel
@@ -16186,131 +16351,22 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 3
-        y: 2
-      partType: 10
-      partSlots:
-      - Item:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        ParentItem:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        Name: Front Sight
-        PartIDs: 05000000
-        Required: 0
-        Slot: {fileID: 0}
-      - Item:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        ParentItem:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        Name: Handguard
-        PartIDs: 06000000
-        Required: 1
-        Slot: {fileID: 0}
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 4
     categoryName: 3
     typeName: Base
@@ -16318,293 +16374,22 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots:
-      - Item:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        ParentItem:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        Name: Barrel
-        PartIDs: 03000000
-        Required: 1
-        Slot: {fileID: 0}
-      - Item:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        ParentItem:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        Name: Magazine
-        PartIDs: 07000000
-        Required: 0
-        Slot: {fileID: 0}
-      - Item:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        ParentItem:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        Name: Mount
-        PartIDs: 08000000
-        Required: 0
-        Slot: {fileID: 0}
-      - Item:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        ParentItem:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        Name: Pistol Grip
-        PartIDs: 09000000
-        Required: 1
-        Slot: {fileID: 0}
-      - Item:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        ParentItem:
-          Slot: {fileID: 0}
-          globalID: 0
-          categoryName: 0
-          typeName: 
-          size:
-            x: 0
-            y: 0
-          icon: {fileID: 0}
-          part:
-            PartSlot: {fileID: 0}
-            SizeModifiers:
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            - highestModifier: 0
-              list: 
-            Size:
-              x: 0
-              y: 0
-            partType: 0
-            partSlots: []
-        Name: Stock
-        PartIDs: 0a000000
-        Required: 1
-        Slot: {fileID: 0}
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 5
     categoryName: 3
     typeName: Front Sight
@@ -16612,23 +16397,22 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 6
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 6
     categoryName: 3
     typeName: Handguard
@@ -16636,23 +16420,22 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 7
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 7
     categoryName: 3
     typeName: Magazine
@@ -16660,23 +16443,22 @@ MonoBehaviour:
       x: 1
       y: 2
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 2
-        y: 1
-      partType: 2
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 8
     categoryName: 3
     typeName: Mount
@@ -16684,23 +16466,22 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 8
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 9
     categoryName: 3
     typeName: Pistol Grip
@@ -16708,23 +16489,22 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 2
-        y: 1
-      partType: 3
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 10
     categoryName: 3
     typeName: Stock
@@ -16732,23 +16512,22 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: 58d177db2b031924585e3b88b0119e23, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 1
-        y: 1
-      partType: 4
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 11
     categoryName: 4
     typeName: Hearing Protection
@@ -16756,23 +16535,22 @@ MonoBehaviour:
       x: 2
       y: 2
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 12
     categoryName: 5
     typeName: Balaclava
@@ -16780,23 +16558,22 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 13
     categoryName: 6
     typeName: Sunglasses
@@ -16804,23 +16581,22 @@ MonoBehaviour:
       x: 2
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 14
     categoryName: 7
     typeName: Backpack
@@ -16828,23 +16604,22 @@ MonoBehaviour:
       x: 3
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 15
     categoryName: 8
     typeName: Rig
@@ -16852,23 +16627,22 @@ MonoBehaviour:
       x: 3
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 16
     categoryName: 9
     typeName: Case
@@ -16876,23 +16650,22 @@ MonoBehaviour:
       x: 2
       y: 2
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 17
     categoryName: 10
     typeName: Sword
@@ -16900,23 +16673,22 @@ MonoBehaviour:
       x: 1
       y: 3
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 18
     categoryName: 11
     typeName: Crackers
@@ -16924,23 +16696,22 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 19
     categoryName: 11
     typeName: Water
@@ -16948,23 +16719,22 @@ MonoBehaviour:
       x: 1
       y: 2
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 20
     categoryName: 12
     typeName: Bronze Ingot
@@ -16972,23 +16742,22 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 21
     categoryName: 12
     typeName: Iron Ingot
@@ -16996,23 +16765,22 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 22
     categoryName: 12
     typeName: Steel Ingot
@@ -17020,23 +16788,22 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   - Slot: {fileID: 0}
+    PartSlot: {fileID: 0}
+    SizeModifiers:
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    - highestModifier: 0
+      list: 
+    PartSize:
+      x: 0
+      y: 0
+    partType: 0
     globalID: 22
     categoryName: 12
     typeName: Steel Ingot
@@ -17044,22 +16811,7 @@ MonoBehaviour:
       x: 1
       y: 1
     icon: {fileID: 21300000, guid: b3ec9890f8548104eb61f6be9f197e89, type: 3}
-    part:
-      PartSlot: {fileID: 0}
-      SizeModifiers:
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      - highestModifier: 0
-        list: 
-      Size:
-        x: 0
-        y: 0
-      partType: 0
-      partSlots: []
+    partSlots: []
   LootTextPrefab: {fileID: 3558581089250535135, guid: 2c8271d16e7171a4690216391742f8de,
     type: 3}
   LootBoxPrefab: {fileID: 0}

@@ -55,7 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Part.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\PartSlotInfo.cs" />
      <Compile Include="Assets\Scripts\CombatController.cs" />
@@ -96,6 +95,7 @@
      <Compile Include="Assets\Scripts\Stat.cs" />
      <Compile Include="Assets\Scripts\SlotGridList.cs" />
      <Compile Include="Assets\Scripts\Round.cs" />
+     <Compile Include="Assets\Scripts\InventoryEquipSlot.cs" />
      <Compile Include="Assets\Scripts\Misc\GroundLoot.cs" />
      <Compile Include="Assets\Close.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />

@@ -22,12 +22,13 @@ public class AdvancedCamRecoil : MonoBehaviour
     public Gun Gun;
     public GameObject MagazinePrefab;
 
-    public PlayerMovement PlayerMovement;
-    public GameObject InventoryCanvas;
-    public GameObject LootInventory;
-    public GameObject LootBoxInventory;
-    public RectTransform LootBoxRect;
-    public Inventory Inventory;
+    public PlayerMovement PlayerMovement { get { return playerMovement; } }
+    public GameObject InventoryCanvas { get { return inventoryCanvas; } }
+    public GameObject LootInventory { get { return lootInventory; } }
+    public GameObject LootBoxInventory { get { return lootBoxInventory; } }
+    public RectTransform LootBoxRect { get { return lootBoxRect; } }
+    public Inventory Inventory { get { return inventory; } }
+    public CombatController CombatController { get { return combatController; } }
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameObject inventoryCanvas;
@@ -36,7 +37,7 @@ public class AdvancedCamRecoil : MonoBehaviour
     [SerializeField] private GameObject SlotPrefab;
     [SerializeField] private RectTransform lootBoxRect;
     [SerializeField] private Inventory inventory;
-    [SerializeField] private CombatController CombatController;
+    [SerializeField] private CombatController combatController;
 
     private float spread = 20f;          //Adjust this for a bigger or smaller crosshair
     private float maxSpread = 60f;
@@ -85,7 +86,7 @@ public class AdvancedCamRecoil : MonoBehaviour
             Gun.AudioSource.PlayOneShot(AudioClip);
             consecutiveShots++;
             bullet = Instantiate(BulletPrefab, Gun.BulletSpawn.position, Gun.transform.rotation).GetComponent<Bullet>();
-            bullet.Shooter = CombatController;
+            bullet.Shooter = combatController;
             bullet.rb.velocity = (targetPoint - Gun.BulletSpawn.transform.position).normalized * 500;
             //Destroy(bullet, 2f);
             canShoot = false;

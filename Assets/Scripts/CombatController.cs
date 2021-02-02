@@ -11,7 +11,6 @@ public class CombatController : MonoBehaviour
     public Animator Animator { get { return animator; } }
 
     [SerializeField] protected List<EquipSlotInfo> EquipSlotInfo = new List<EquipSlotInfo>();
-
     [SerializeField] private Animator animator;
     [SerializeField] private List<Stat> Stats = new List<Stat>();
 
@@ -44,7 +43,12 @@ public class CombatController : MonoBehaviour
     //Equips item
     public void Equip(ItemScript itemScript)
     {
-        EquipInSlot(itemScript, EquipSlotInfo.Find(x => x.CategoryName == itemScript.Item.CategoryName));
+        EquipInSlot(itemScript, FindSlot(itemScript));
+    }
+
+    public EquipSlotInfo FindSlot(ItemScript itemScript)
+    {
+        return EquipSlotInfo.Find(x => x.CategoryName == itemScript.Item.CategoryName);
     }
 
     //Equips item in slot
