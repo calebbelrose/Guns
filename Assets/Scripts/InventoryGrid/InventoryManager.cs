@@ -8,39 +8,33 @@ public class InventoryManager : MonoBehaviour
 {
     public static Transform DragParent { get; private set; }
     public static Transform DropParent { get; private set; }
+    public static GameObject SlotPrefab { get; private set; }
+    public static Text LootText { get; private set; }
+    public static SlotScript HighlightedSlot;
 
     [SerializeField] private Transform dropParent;
     [SerializeField] private Transform dragParent;
     [SerializeField] private Transform InspectParent;
-    [SerializeField] private RectTransform PocketParent;
-    [SerializeField] private GameObject SlotPrefab;
-    [SerializeField] private Inventory Inventory;
+    [SerializeField] private CharacterInventory CharacterInventory;
+    [SerializeField] private GameObject slotPrefab;
+    [SerializeField] private Text lootText;
 
     private List<GameObject> InspectWindows = new List<GameObject>();
 
     //Loads inventory and hides the canvas
     private void Start()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            GameObject obj = Instantiate(SlotPrefab, PocketParent);
-            SlotScript slotScript = obj.GetComponent<SlotScript>();
-
-            obj.transform.name = "slot[0,0]";
-            slotScript.InventorySlotInfo = Inventory.SlotGridList[1].List[i].SlotInfo[0, 0];
-            slotScript.InventorySlotInfo.SlotScript = slotScript;
-        }
-
+        SlotPrefab = slotPrefab;
         DragParent = dragParent;
         DropParent = dropParent;
-
+        LootText = lootText;
     }
 
     private void Update()
     {
-        if (Inventory.HighlightedSlot != null)
+        if (HighlightedSlot != null)
         {
-            Inventory inventory = Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid.Inventory;
+            Inventory inventory = HighlightedSlot.InventorySlotInfo.SlotGrid.Inventory;
 
             if (Input.GetMouseButtonUp(0))
             {
@@ -48,14 +42,14 @@ public class InventoryManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.LeftAlt))
                 {
                     //Uses item in slot
-                    if (Inventory.HighlightedSlot.InventorySlotInfo.Item != null)
+                    if (HighlightedSlot.InventorySlotInfo.Item != null)
                     {
-                        ItemScript itemScript = inventory.GetItem(Inventory.HighlightedSlot.InventorySlotInfo);
+                        ItemScript itemScript = inventory.GetItem(HighlightedSlot.InventorySlotInfo);
 
-                        for (int y = 0; y < Inventory.HighlightedSlot.InventorySlotInfo.Item.Size.y; y++)
+                        for (int y = 0; y < HighlightedSlot.InventorySlotInfo.Item.Size.y; y++)
                         {
-                            for (int x = 0; x < Inventory.HighlightedSlot.InventorySlotInfo.Item.Size.x; x++)
-                                Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[Inventory.HighlightedSlot.InventorySlotInfo.ItemStartPos.x + x, Inventory.HighlightedSlot.InventorySlotInfo.ItemStartPos.y + y].SlotScript.Image.color = Color.white;
+                            for (int x = 0; x < HighlightedSlot.InventorySlotInfo.Item.Size.x; x++)
+                                HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[HighlightedSlot.InventorySlotInfo.ItemStartPos.x + x, HighlightedSlot.InventorySlotInfo.ItemStartPos.y + y].SlotScript.Image.color = Color.white;
                         }
                     }
                 }
@@ -67,14 +61,14 @@ public class InventoryManager : MonoBehaviour
                         switch (inventory.CheckState)
                         {
                             case 0: //Store on empty slots
-                                inventory.StoreItem(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, ItemScript.selectedItem.Item);
-                                inventory.PlaceItem(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[Inventory.HighlightedSlot.InventorySlotInfo.ItemStartPos.x, Inventory.HighlightedSlot.InventorySlotInfo.ItemStartPos.y], ItemScript.selectedItem);
-                                Inventory.ColorChangeLoop(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, ItemScript.selectedItemSize, inventory.totalOffset);
+                                inventory.StoreItem(HighlightedSlot.InventorySlotInfo.SlotGrid, ItemScript.selectedItem.Item);
+                                inventory.PlaceItem(HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[HighlightedSlot.InventorySlotInfo.ItemStartPos.x, HighlightedSlot.InventorySlotInfo.ItemStartPos.y], ItemScript.selectedItem);
+                                Inventory.ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, ItemScript.selectedItemSize, inventory.totalOffset);
                                 ItemScript.ResetSelectedItem();
                                 break;
                             case 1: //Swap items
                                 ItemScript.SwapSelectedItem(SwapItem(ItemScript.selectedItem.Item));
-                                Inventory.ColorChangeLoop(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, inventory.OtherItems(0).Item.Size, inventory.OtherItems(0).StartPosition); //*1
+                                Inventory.ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, inventory.OtherItems(0).Item.Size, inventory.OtherItems(0).StartPosition); //*1
                                 inventory.RefreshColor(true);
                                 break;
                         }
@@ -83,16 +77,16 @@ public class InventoryManager : MonoBehaviour
                 //If the slot has an item
                 else
                 {
-                    if (Inventory.HighlightedSlot.InventorySlotInfo.Item != null)
+                    if (HighlightedSlot.InventorySlotInfo.Item != null)
                     {
-                        Inventory.ColorChangeLoop(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, Inventory.HighlightedSlot.InventorySlotInfo.Item.Size, Inventory.HighlightedSlot.InventorySlotInfo.ItemStartPos);
-                        ItemScript.SetSelectedItem(inventory.GetItem(Inventory.HighlightedSlot.InventorySlotInfo));
+                        Inventory.ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, HighlightedSlot.InventorySlotInfo.Item.Size, HighlightedSlot.InventorySlotInfo.ItemStartPos);
+                        ItemScript.SetSelectedItem(inventory.GetItem(HighlightedSlot.InventorySlotInfo));
                         inventory.RefreshColor(true);
                     }
                 }
             }
-            else if (Input.GetMouseButtonUp(1) && Inventory.HighlightedSlot.InventorySlotInfo.Item != null)
-                Inventory.HighlightedSlot.ItemScript.Inspect(InspectParent);
+            else if (Input.GetMouseButtonUp(1) && HighlightedSlot.InventorySlotInfo.Item != null)
+                HighlightedSlot.ItemScript.Inspect(InspectParent);
         }
     }
 
@@ -101,8 +95,8 @@ public class InventoryManager : MonoBehaviour
     {
         ItemScript tempItem;
 
-        tempItem = Inventory.GetItem(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[Inventory.OtherItems(0).StartPosition.x, Inventory.OtherItems(0).StartPosition.y]);
-        Inventory.StoreItem(Inventory.HighlightedSlot.InventorySlotInfo.SlotGrid, item);
+        tempItem = CharacterInventory.GetItem(HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[CharacterInventory.OtherItems(0).StartPosition.x, CharacterInventory.OtherItems(0).StartPosition.y]);
+        CharacterInventory.StoreItem(HighlightedSlot.InventorySlotInfo.SlotGrid, item);
         return tempItem;
     }
 

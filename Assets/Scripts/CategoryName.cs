@@ -12,5 +12,7 @@
     Pouch,
     Melee,
     Consumable,
-    Material
+    Material,
+    PrimaryGun,
+    SecondaryGun
 }

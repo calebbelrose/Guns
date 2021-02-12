@@ -8,41 +8,87 @@ public class GroundLoot : Loot
     public int ItemID { get { return itemID; } }
 
     [SerializeField] private int itemID;
+    [SerializeField] private int InventoryIndex;
 
     //Sets up loot
     void Start()
     {
-        LootTextObject = ItemDatabase.Instance.CreateLootText();
-        LootTextObject.transform.GetChild(0).GetComponent<Text>().text = ItemDatabase.Instance.DBList(itemID).TypeName;
-        LootTextObject.SetActive(false);
+        Name = ItemDatabase.Instance.DBList(itemID).TypeName;
     }
 
     public override void Action(AdvancedCamRecoil playerCam)
     {
-        ItemScript newItem = GameObject.Instantiate(ItemDatabase.Instance.ItemPrefab).GetComponent<ItemScript>();
-        InventorySlotInfo slotInfo;
+        ItemClass itemClass = ItemDatabase.Instance.DBList(itemID);
         EquipSlotInfo equipSlotInfo;
 
-        newItem.SetItemObject(ItemDatabase.Instance.DBList(itemID));
-        equipSlotInfo = playerCam.CombatController.FindSlot(newItem);
+        equipSlotInfo = playerCam.Inventory.FindSlot(itemClass);
 
-        if (equipSlotInfo.ItemScript == null)
+        if (equipSlotInfo != null)
         {
-            ItemScript.SetSelectedItem(newItem);
-            playerCam.CombatController.EquipInSlot(newItem, equipSlotInfo);
-            GroundLoot.Destroy();
+            Inventory inventory = GetComponent<Inventory>();
+
+            if (inventory != null)
+            {
+                itemClass.SlotGridList = inventory.SlotGridList[0];
+                playerCam.Inventory.SlotGridList[InventoryIndex] = itemClass.SlotGridList;
+            }
+
+            playerCam.Inventory.EquipInSlot(itemClass, equipSlotInfo);
+            Destroy(gameObject);
         }
         else
         {
-            slotInfo = playerCam.Inventory.StoreLoot(newItem.Item);
+            InventorySlotInfo slotInfo = playerCam.Inventory.StoreLoot(itemClass);
 
             if (slotInfo != null)
             {
+                ItemScript newItem = ItemDatabase.CreateItemScript(itemClass, InventoryManager.DropParent);
+                Inventory inventory = GetComponent<Inventory>();
+
+                if (inventory != null)
+                    newItem.gameObject.AddComponent<Inventory>().SlotGridList = inventory.SlotGridList;
+
                 playerCam.Inventory.PlaceItem(slotInfo, newItem);
-                GroundLoot.Destroy();
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    public override bool Action(AIMovement aiMovement)
+    {
+        ItemClass itemClass = ItemDatabase.Instance.DBList(itemID);
+        EquipSlotInfo equipSlotInfo;
+
+        equipSlotInfo = aiMovement.Inventory.FindSlot(itemClass);
+
+        if (equipSlotInfo != null)
+        {
+            Debug.Log("Equip");
+            Inventory inventory = GetComponent<Inventory>();
+
+            if (inventory != null)
+            {
+                itemClass.SlotGridList = inventory.SlotGridList[0];
+                aiMovement.Inventory.SlotGridList[InventoryIndex] = itemClass.SlotGridList;
+            }
+
+            aiMovement.Inventory.EquipInSlot(itemClass, equipSlotInfo);
+            Destroy(gameObject);
+        }
+        {
+            Debug.Log("Loot");
+            InventorySlotInfo slotInfo = aiMovement.Inventory.StoreLoot(itemClass);
+
+            if (slotInfo != null)
+            {
+                Destroy(gameObject);
+                return true;
             }
             else
-                Destroy(newItem.gameObject);
+            {
+                aiMovement.IgnoredObjects.Add(transform);
+                return false;
+            }
         }
     }
 }

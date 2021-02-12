@@ -3,41 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AdvancedCamRecoil : MonoBehaviour
+public class AdvancedCamRecoil : Movement
 {
     public float rotationSpeed = 6;
     public float returnSpeed = 2;
-    public Vector3 recoilrotation = new Vector3(2f, 2f, 2f);
-    public Vector3 recoilrotationaiming = new Vector3(0.5f, 0.5f, 1.5f);
-    public bool aiming;
-    public Transform PlayerBody;
-    public GameObject BulletPrefab;
     public Camera mainCamera;
     public Image CrossHair;
     public CharacterController characterController;
     public float mouseSensitivity = 100f;
-    public AudioClip AudioClip;
     public Text PickupableName;
     public Text PickupableAmount;
-    public Gun Gun;
     public GameObject MagazinePrefab;
 
     public PlayerMovement PlayerMovement { get { return playerMovement; } }
     public GameObject InventoryCanvas { get { return inventoryCanvas; } }
-    public GameObject LootInventory { get { return lootInventory; } }
+    public EquipmentDisplay LootEquipment { get { return lootEquipment; } }
     public GameObject LootBoxInventory { get { return lootBoxInventory; } }
     public RectTransform LootBoxRect { get { return lootBoxRect; } }
-    public Inventory Inventory { get { return inventory; } }
-    public CombatController CombatController { get { return combatController; } }
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameObject inventoryCanvas;
-    [SerializeField] private GameObject lootInventory;
+    [SerializeField] private EquipmentDisplay playerEquipment;
+    [SerializeField] private EquipmentDisplay lootEquipment;
     [SerializeField] private GameObject lootBoxInventory;
     [SerializeField] private GameObject SlotPrefab;
     [SerializeField] private RectTransform lootBoxRect;
-    [SerializeField] private Inventory inventory;
-    [SerializeField] private CombatController combatController;
+    [SerializeField] private LayerMask LayerMask;
 
     private float spread = 20f;          //Adjust this for a bigger or smaller crosshair
     private float maxSpread = 60f;
@@ -50,20 +41,27 @@ public class AdvancedCamRecoil : MonoBehaviour
     private Color crosshairColor = Color.white;
     private Texture2D tex;
     private GUIStyle lineStyle;
-    private bool canShoot = true;
-    private int consecutiveShots = 0;
-    private Vector2 totalRotation = Vector2.zero;
-    private Vector3 targetGunLocation;
 
     void Awake()
     {
         Cursor.visible = false;
-        //FixCursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         tex = new Texture2D(1, 1);
         SetColor(tex, crosshairColor); //Set color
         lineStyle = new GUIStyle();
         lineStyle.normal.background = tex;
         targetGunLocation = Gun.idleLocation;
+    }
+
+    void Start()
+    {
+        for(int i = 0; i < Inventory.EquipSlotInfo.Count; i++)
+            playerEquipment.EquipSlots[i].SetInfo(Inventory.EquipSlotInfo[i]);
+
+        for (int i = 0; i < Inventory.GunSlotInfo.Count; i++)
+            playerEquipment.GunSlots[i].SetInfo(Inventory.GunSlotInfo[i]);
+
+        playerEquipment.DisplayPockets(Inventory.SlotGridList[1]);
     }
 
     Vector2 Fire()
@@ -86,7 +84,7 @@ public class AdvancedCamRecoil : MonoBehaviour
             Gun.AudioSource.PlayOneShot(AudioClip);
             consecutiveShots++;
             bullet = Instantiate(BulletPrefab, Gun.BulletSpawn.position, Gun.transform.rotation).GetComponent<Bullet>();
-            bullet.Shooter = combatController;
+            bullet.Shooter = CombatController;
             bullet.rb.velocity = (targetPoint - Gun.BulletSpawn.transform.position).normalized * 500;
             //Destroy(bullet, 2f);
             canShoot = false;
@@ -112,13 +110,14 @@ public class AdvancedCamRecoil : MonoBehaviour
             if (Cursor.visible)
             {
                 //FixCursor.lockState = CursorLockMode.Confined;
+                Cursor.lockState = CursorLockMode.None;
                 PlayerMovement.enabled = false;
             }
             else
             {
-                //FixCursor.lockState = CursorLockMode.Locked;
+                Cursor.lockState = CursorLockMode.Locked;
                 LootBoxInventory.SetActive(false);
-                LootInventory.SetActive(false);
+                LootEquipment.gameObject.SetActive(false);
                 PlayerMovement.enabled = true;
             }
         }
@@ -130,8 +129,15 @@ public class AdvancedCamRecoil : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
-                if (Loot.CurrentLoot != null)
-                    Loot.CurrentLoot.Action(this);
+                RaycastHit hit;
+
+                if (Physics.Raycast(new Ray(transform.position, transform.forward), out hit, 10.0f, LayerMask))
+                {
+                    Loot loot = hit.collider.GetComponent<Loot>();
+
+                    if (loot != null)
+                        loot.Action(this);
+                }
             }
 
             if (Input.GetButtonDown("Reload"))
@@ -180,7 +186,7 @@ public class AdvancedCamRecoil : MonoBehaviour
                 xRotation = Mathf.Clamp(xRotation - mouseY, -90f, 90f);
 
                 transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                PlayerBody.Rotate(Vector3.up * mouseX);
+                Body.Rotate(Vector3.up * mouseX);
             }
         }
     }

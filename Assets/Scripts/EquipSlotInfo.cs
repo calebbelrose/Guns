@@ -4,10 +4,14 @@ using UnityEngine;
 [Serializable]
 public class EquipSlotInfo
 {
-    public ItemScript ItemScript;
+    public ItemClass ItemClass;
     public EquipSlot EquipSlot;
+    public bool Empty = true;
 
-    public CategoryName CategoryName { get { return categoryName; } }
+    [SerializeField] protected CategoryName categoryName;
 
-    [SerializeField] private CategoryName categoryName;
+    public virtual bool CanEquip(ItemClass item)
+    {
+        return item.CategoryName == categoryName;
+    }
 }

@@ -7,33 +7,22 @@ public class LootBox : Loot
 {
     public Inventory Inventory { get { return inventory; } }
 
-    [SerializeField] private string Name;
     [SerializeField] private Inventory inventory;
-    [SerializeField] private IntVector2 GridSize;
-    [SerializeField] GameObject SlotPrefab;
+    [SerializeField] private List<IntVector2> GridSizes = new List<IntVector2>();
 
     //Sets up loot
     void Start()
     {
-        Inventory.SlotGridList[0].List.Add(new SlotGrid(GridSize.x, GridSize.y, Inventory));
+        foreach (IntVector2 GridSize in GridSizes)
+            Inventory.SlotGridList[0].List.Add(new SlotGrid(GridSize.x, GridSize.y, Inventory));
 
         for (int i = 0; i < Random.Range(1, 5); i++)
         {
-            ItemClass newItem = ItemDatabase.Instance.DBList(1/*Random.Range(0, ItemDatabase.Instance.DBCount())*/);
+            ItemClass newItem = ItemDatabase.Instance.DBList(Random.Range(0, ItemDatabase.Instance.DBCount()));
             InventorySlotInfo slotInfo;
 
             slotInfo = Inventory.StoreLoot(newItem);
-
-            if (slotInfo != null)
-            {
-                ItemScript itemScript = GameObject.Instantiate(ItemDatabase.Instance.ItemPrefab).GetComponent<ItemScript>();
-                itemScript.SetItemObject(newItem);
-            }
         }
-
-        LootTextObject = ItemDatabase.Instance.CreateLootText();
-        LootTextObject.transform.GetChild(0).GetComponent<Text>().text = Name;
-        LootTextObject.SetActive(false);
     }
 
     public override void Action(AdvancedCamRecoil playerCam)
@@ -45,6 +34,22 @@ public class LootBox : Loot
         playerCam.LootBoxInventory.SetActive(true);
         Cursor.visible = playerCam.InventoryCanvas.activeSelf;
         playerCam.PlayerMovement.enabled = false;
-        Inventory.SlotGridList[0].List[0].Display(SlotPrefab, playerCam.LootBoxRect);
+        Inventory.SlotGridList[0].List[0].Display(InventoryManager.SlotPrefab, playerCam.LootBoxRect);
+    }
+
+    public override bool Action(AIMovement aiMovement)
+    {
+        foreach (SlotGrid slotGrid in inventory.SlotGridList[0].List)
+            for(int x = 0; x < slotGrid.GridSize.x; x++)
+            {
+                for (int y = 0; y < slotGrid.GridSize.y; y++)
+                {
+                    if(!slotGrid.SlotInfo[x, y].Empty)
+                        aiMovement.Inventory.StoreLoot(slotGrid.SlotInfo[x, y].Item);
+                }
+            }
+
+        aiMovement.IgnoredObjects.Add(transform);
+        return true;
     }
 }

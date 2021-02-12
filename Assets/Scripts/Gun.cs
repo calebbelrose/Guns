@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
     public float ShotDelay = 5f;
     public float GunLength;
     public Magazine Magazine;
-
+    public CharacterInventory Inventory;
 
     private void Update()
     {
@@ -42,6 +42,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(OldMagazine.UnloadTime);
         Destroy(OldMagazine.gameObject);
         NewMagazine = Instantiate(MagazinePrefab, parent).GetComponent<Magazine>();
+        NewMagazine.MagazineReload.enabled = true;
         NewMagazine.MagazineReload.Setup(NewMagazine.ReloadTime);
         yield return new WaitForSeconds(NewMagazine.ReloadTime);
         Magazine = NewMagazine;

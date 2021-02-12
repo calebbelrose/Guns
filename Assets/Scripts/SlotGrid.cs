@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,46 +25,42 @@ public class SlotGrid
         for (int i = 0; i < gridSize.y; i++)
         {
             for (int j = 0; j < gridSize.x; j++)
-                SlotInfo[j,i] = new InventorySlotInfo(new IntVector2(j, i), null, IntVector2.Zero, this);
+                SlotInfo[j, i] = new InventorySlotInfo(new IntVector2(j, i), this);
         }
     }
 
     public void Display(GameObject slotPrefab, Transform parent)
     {
-        for (int y = 0; y < GridSize.y; y++)
+        List<IntVector2> slots = new List<IntVector2>();
+        for (int x = 0; x < GridSize.x; x++)
         {
-            for (int x = 0; x < GridSize.x; x++)
+            for (int y = 0; y < GridSize.y; y++)
+                slots.Add(new IntVector2(x, y));
+        }
+
+        while (slots.Count > 0)
+        {
+            GameObject obj = UnityEngine.Object.Instantiate(slotPrefab, parent);
+            SlotScript slotScript = obj.GetComponent<SlotScript>();
+
+            obj.transform.name = "slot[" + slots[0].x + "," + slots[9].y + "]";
+            slotScript.InventorySlotInfo = SlotInfo[slots[0].x, slots[0].y];
+            slotScript.InventorySlotInfo.SlotScript = slotScript;
+            slotScript.Rect.localPosition = new Vector3(slots[0].x * SlotSize, -(slots[0].y * SlotSize), 0);
+            slotScript.Rect.sizeDelta = new Vector2(SlotSize, SlotSize);
+            slotScript.Rect.localScale = Vector3.one;
+
+            if (slotScript.InventorySlotInfo.Item != null)
             {
-                GameObject obj = UnityEngine.Object.Instantiate(slotPrefab, parent);
-                SlotScript slotScript = obj.GetComponent<SlotScript>();
-
-                obj.transform.name = "slot[" + x + "," + y + "]";
-                slotScript.InventorySlotInfo = SlotInfo[x, y];
-                slotScript.InventorySlotInfo.SlotScript = slotScript;
-                slotScript.Rect.localPosition = new Vector3(x * SlotSize, -(y * SlotSize), 0);
-                slotScript.Rect.sizeDelta = new Vector2(SlotSize, SlotSize);
-                slotScript.Rect.localScale = Vector3.one;
-
-                if (slotScript.InventorySlotInfo.Item != null)
+                if (slotScript.InventorySlotInfo.ItemStartPos == slotScript.InventorySlotInfo.GridPos)
                 {
-                    //LayoutRebuilder.ForceRebuildLayoutImmediate(parent.GetComponent<RectTransform>());
-                    if (slotScript.InventorySlotInfo.ItemStartPos == slotScript.InventorySlotInfo.GridPos)
-                    {
-                        ItemScript itemScript = GameObject.Instantiate(ItemDatabase.Instance.ItemPrefab).GetComponent<ItemScript>();
-
-                        slotScript.ItemScript = itemScript;
-                        itemScript.SetItemObject(slotScript.InventorySlotInfo.Item);
-                        itemScript.transform.SetParent(InventoryManager.DropParent);
-                        itemScript.Rect.localScale = Vector3.one;
-                        itemScript.Image.color = Color.red;
-                        itemScript.transform.position = slotScript.transform.position;
-                        itemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * slotScript.InventorySlotInfo.Item.Size.x, SlotGrid.SlotSize * slotScript.InventorySlotInfo.Item.Size.y);
-                    }
-                    else
-                        slotScript.ItemScript = SlotInfo[slotScript.InventorySlotInfo.ItemStartPos.x, slotScript.InventorySlotInfo.ItemStartPos.y].SlotScript.ItemScript;
-
-                    slotScript.InventorySlotInfo.SlotScript.Image.color = Color.white;
+                    slotScript.ItemScript = ItemDatabase.CreateItemScript(slotScript.InventorySlotInfo.Item, InventoryManager.DropParent);
+                    slotScript.ItemScript.transform.position = slotScript.transform.position;
                 }
+                else
+                    slotScript.ItemScript = SlotInfo[slotScript.InventorySlotInfo.ItemStartPos.x, slotScript.InventorySlotInfo.ItemStartPos.y].SlotScript.ItemScript;
+
+                slotScript.InventorySlotInfo.SlotScript.Image.color = Color.white;
             }
         }
     }

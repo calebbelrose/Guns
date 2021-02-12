@@ -10,9 +10,12 @@ public class CombatController : MonoBehaviour
     public int Level { get; private set; } = 1;
     public Animator Animator { get { return animator; } }
 
-    [SerializeField] protected List<EquipSlotInfo> EquipSlotInfo = new List<EquipSlotInfo>();
     [SerializeField] private Animator animator;
     [SerializeField] private List<Stat> Stats = new List<Stat>();
+    [SerializeField] private Movement Movement;
+    [SerializeField] private CharacterInventory Inventory;
+    [SerializeField] private string Name;
+    [SerializeField] private List<Hitbox> Hitboxes = new List<Hitbox>();
 
     protected float CurrentHealth = 100, MaxHealth = 100;
     protected float CurrentResource = 100, MaxResource = 100;
@@ -40,56 +43,24 @@ public class CombatController : MonoBehaviour
         Animator.SetTrigger("Attacking");
     }
 
-    //Equips item
-    public void Equip(ItemScript itemScript)
-    {
-        EquipInSlot(itemScript, FindSlot(itemScript));
-    }
-
-    public EquipSlotInfo FindSlot(ItemScript itemScript)
-    {
-        return EquipSlotInfo.Find(x => x.CategoryName == itemScript.Item.CategoryName);
-    }
-
-    //Equips item in slot
-    public void EquipInSlot(ItemScript itemScript, EquipSlotInfo equipSlotInfo)
-    {
-        if (itemScript.Item.CategoryName == equipSlotInfo.CategoryName)
-        {
-            itemScript.transform.SetParent(equipSlotInfo.EquipSlot.transform);
-            itemScript.transform.localPosition = Vector3.zero;
-            itemScript.CanvasGroup.alpha = 1f;
-
-            if (equipSlotInfo.ItemScript==null)
-                ItemScript.ResetSelectedItem();
-            else
-                ItemScript.SetSelectedItem(equipSlotInfo.ItemScript);
-
-            equipSlotInfo.ItemScript = itemScript;
-            equipSlotInfo.EquipSlot.Image.color = Color.white;
-            equipSlotInfo.EquipSlot.EquipObject.SetActive(true);
-        }
-    }
-
-    //Unequips item
-    public void Unequip(EquipSlot equipSlot)
-    {
-        ItemScript.SetSelectedItem(equipSlot.EquipSlotInfo.ItemScript);
-        equipSlot.Empty = true;
-        equipSlot.EquipObject.SetActive(false);
-    }
-
     //Takes damage
     public virtual void TakeDamage(float amount, float multiplier, CombatController attacker)
     {
-        if (amount > 0)
+        if (CurrentHealth > 0 && amount > 0)
         {
             CurrentHealth -= amount;
 
             if (CurrentHealth <= 0)
             {
+                foreach (Hitbox hitbox in Hitboxes)
+                {
+                    hitbox.gameObject.AddComponent<CharacterLoot>().Setup(Inventory, Name);
+                    Destroy(hitbox);
+                }
+
                 attacker.AwardExperience(Level * MaxHealth);
-                Destroy(gameObject);
+                Destroy(Movement);
+                Destroy(this);
             }
         }
     }
@@ -110,11 +81,6 @@ public class CombatController : MonoBehaviour
             experienceToNextLevel = (int)(experienceToNextLevel * 1.25);
             Level++;
         }
-    }
-
-    public EquipSlotInfo EquipSlot(int index)
-    {
-        return EquipSlotInfo[index];
     }
 
     //Returns ordered stats

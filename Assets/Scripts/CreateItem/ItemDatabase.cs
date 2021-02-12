@@ -7,14 +7,12 @@ using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour
 {
-    public GameObject ItemPrefab { get { return itemPrefab; } }
-
     [SerializeField] private List<LootDrop> RareLootDrops = new List<LootDrop>();
     [SerializeField] private Transform LootParent;
     [SerializeField] private List<ItemClass> dbList = new List<ItemClass>();
     [SerializeField] private GameObject LootTextPrefab;
     [SerializeField] private GameObject LootBoxPrefab;
-    [SerializeField] private GameObject itemPrefab; 
+    [SerializeField] private GameObject itemPrefab;
 
     private int totalLootDropWeights = 0;
 
@@ -63,6 +61,18 @@ public class ItemDatabase : MonoBehaviour
     public int DBCount()
     {
         return dbList.Count;
+    }
+
+    public static ItemScript CreateItemScript(ItemClass item, Transform parent)
+    {
+        ItemScript itemScript = GameObject.Instantiate(Instance.itemPrefab, parent).GetComponent<ItemScript>();
+
+        itemScript.SetItemObject(item);
+        itemScript.Rect.localScale = Vector3.one;
+        itemScript.Image.color = Color.red;
+        itemScript.CanvasGroup.alpha = 1f;
+        itemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * item.Size.x, SlotGrid.SlotSize * item.Size.y);
+        return itemScript;
     }
 
     /*public void SpawnLoot(Vector3 position, int itemID, int amount)

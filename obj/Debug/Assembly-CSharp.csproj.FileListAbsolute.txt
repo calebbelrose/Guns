@@ -276,3 +276,4 @@ D:\Documents\Projects\Guns\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.ca
 D:\Documents\Projects\Guns\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\Documents\Projects\Guns\obj\Debug\Assembly-CSharp.dll
 D:\Documents\Projects\Guns\obj\Debug\Assembly-CSharp.pdb
+D:\Documents\Projects\Guns\Temp\bin\Debug\nunit.framework.dll

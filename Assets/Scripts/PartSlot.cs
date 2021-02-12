@@ -140,7 +140,7 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
                         for (int y = item.Size.y; y < item.Size.y + changedModifiers[0] + changedModifiers[2]; y++)
                         {
                             item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.white;
-                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ChangeItem(null, IntVector2.Zero);
+                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].RemoveItem();
                             item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.ItemScript = null;
                         }
                     }
@@ -150,7 +150,7 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
                         for (int y = item.Slot.InventorySlotInfo.GridPos.y; y < item.Size.y + changedModifiers[0] + changedModifiers[2]; y++)
                         {
                             item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.Image.color = Color.white;
-                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].ChangeItem(null, IntVector2.Zero);
+                            item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].RemoveItem();
                             item.Slot.InventorySlotInfo.SlotGrid.SlotInfo[x, y].SlotScript.ItemScript = null;
                         }
                     }
@@ -179,7 +179,7 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
             IconRect.sizeDelta = new Vector2( ItemScript.selectedItem.Item.Size.x * SlotGrid.SlotSize / ItemScript.selectedItem.Item.Size.y, SlotGrid.SlotSize);
 
         item.PartSlot = this;
-        SlotInfo.Item = ItemScript.selectedItem.Item;
+        SlotInfo.FillSlot(ItemScript.selectedItem.Item);
         Inspect.Refresh();
         Empty = false;
         ItemScript.selectedItem.transform.SetParent(InventoryManager.DropParent);
