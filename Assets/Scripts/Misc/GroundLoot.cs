@@ -42,13 +42,13 @@ public class GroundLoot : Loot
 
             if (slotInfo != null)
             {
-                ItemScript newItem = ItemDatabase.CreateItemScript(itemClass, InventoryManager.DropParent);
+                ItemScript newItem = ItemDatabase.CreateItemScript(itemClass, slotInfo.SlotScript.transform);
                 Inventory inventory = GetComponent<Inventory>();
 
                 if (inventory != null)
                     newItem.gameObject.AddComponent<Inventory>().SlotGridList = inventory.SlotGridList;
 
-                playerCam.Inventory.PlaceItem(slotInfo, newItem);
+                playerCam.Inventory.PlaceItem(slotInfo, newItem, slotInfo.SlotScript.transform.parent);
                 Destroy(gameObject);
             }
         }
@@ -63,7 +63,6 @@ public class GroundLoot : Loot
 
         if (equipSlotInfo != null)
         {
-            Debug.Log("Equip");
             Inventory inventory = GetComponent<Inventory>();
 
             if (inventory != null)
@@ -74,9 +73,10 @@ public class GroundLoot : Loot
 
             aiMovement.Inventory.EquipInSlot(itemClass, equipSlotInfo);
             Destroy(gameObject);
+            return true;
         }
+        else
         {
-            Debug.Log("Loot");
             InventorySlotInfo slotInfo = aiMovement.Inventory.StoreLoot(itemClass);
 
             if (slotInfo != null)

@@ -6,5 +6,6 @@ using UnityEngine;
 public class SlotGridList
 {
     public List<SlotGrid> List = new List<SlotGrid>();
+    public IntVector2 GridSize;
     public Vector2 Size;
 }

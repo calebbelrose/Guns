@@ -182,7 +182,7 @@ public class PartSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
         SlotInfo.FillSlot(ItemScript.selectedItem.Item);
         Inspect.Refresh();
         Empty = false;
-        ItemScript.selectedItem.transform.SetParent(InventoryManager.DropParent);
+        ItemScript.selectedItem.transform.SetParent(transform);
         IconImage.enabled = true;
         IconImage.sprite = ItemScript.selectedItem.Image.sprite;
         ItemScript.selectedItem.Image.enabled = false;

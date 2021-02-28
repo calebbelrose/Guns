@@ -72,14 +72,14 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void PlaceItem(InventorySlotInfo slotInfo, ItemScript itemScript)
+    public void PlaceItem(InventorySlotInfo slotInfo, ItemScript itemScript, Transform parent)
     {
         /*itemScript.Rect.sizeDelta = new Vector2(SlotGrid.SlotSize * slotInfo.Item.Size.x, SlotGrid.SlotSize * slotInfo.Item.Size.y);
         itemScript.Rect.position = slotInfo.SlotScript.Rect.position;
         slotInfo.SlotScript.ItemScript = itemScript;
         itemScript.Image.color = Color.red;
-        itemScript.Rect.localScale = Vector3.one;
-        itemScript.transform.SetParent(InventoryManager.DropParent);*/
+        itemScript.Rect.localScale = Vector3.one;*/
+        itemScript.transform.SetParent(parent);
         itemScript.Rect.position = slotInfo.SlotScript.Rect.position;
 
         for (int x = 0; x < slotInfo.Item.Size.x; x++)
@@ -184,9 +184,9 @@ public class Inventory : MonoBehaviour
     //Changes slots in an area to specified colour
     public static void ColorChangeLoop(SlotGrid slotGrid, Color32 color, IntVector2 size, IntVector2 startPos)
     {
-        for (int y = 0; y < size.y && y < slotGrid.SlotInfo.Length; y++)
+        for (int y = 0; y < size.y && startPos.y + y < slotGrid.SlotInfo.GetLength(1); y++)
         {
-            for (int x = 0; x < size.x && x < slotGrid.SlotInfo.Length; x++)
+            for (int x = 0; x < size.x && startPos.x + x < slotGrid.SlotInfo.GetLength(0); x++)
                 slotGrid.SlotInfo[startPos.x + x, startPos.y + y].SlotScript.Image.color = color;
         }
     }
@@ -194,9 +194,9 @@ public class Inventory : MonoBehaviour
     //Changes slots in an area to a colour based on what item is in the slot
     public static void ColorChangeLoop2(SlotGrid slotGrid, IntVector2 size, IntVector2 startPos)
     {
-        for (int y = 0; y < size.y && y < slotGrid.SlotInfo.Length; y++)
+        for (int y = 0; y < size.y && startPos.y +y < slotGrid.SlotInfo.GetLength(1); y++)
         {
-            for (int x = 0; x < size.x && x < slotGrid.SlotInfo.Length; x++)
+            for (int x = 0; x < size.x && startPos.x + x < slotGrid.SlotInfo.GetLength(0); x++)
                 slotGrid.SlotInfo[startPos.x + x, startPos.y + y].SlotScript.Image.color = Color.white;
         }
     }
@@ -205,11 +205,7 @@ public class Inventory : MonoBehaviour
     public ItemScript GetItem(InventorySlotInfo slotInfo)
     {
         ItemScript retItem = slotInfo.SlotScript.ItemScript;
-        IntVector2 tempItemPos = slotInfo.ItemStartPos;
-        Debug.Log(retItem);
-        Debug.Log(retItem.Item);
-        Debug.Log(retItem.Item.Size);
-        IntVector2 itemSizeL = retItem.Item.Size;
+        IntVector2 tempItemPos = slotInfo.ItemStartPos, itemSizeL = retItem.Item.Size;
 
         for (int y = 0; y < itemSizeL.y; y++)
         {

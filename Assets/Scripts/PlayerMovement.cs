@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MLAPI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkedBehaviour
 {
-    public CharacterController controller;
+    [SerializeField] private Animator Animator;
+    [SerializeField] private CharacterController controller;
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
@@ -12,8 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    Vector3 velocity;
-    bool isGrounded;
+    private Vector3 velocity;
+    private bool isGrounded;
 
     // Update is called once per frame
     void Update()
@@ -32,6 +34,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+        if (Input.GetKey(KeyCode.E))
+            Animator.SetInteger("Lean", 1);
+        else if (Input.GetKey(KeyCode.Q))
+            Animator.SetInteger("Lean", -1);
+        else
+            Animator.SetInteger("Lean", 0);
 
         velocity.y += gravity * Time.deltaTime;
 

@@ -16,13 +16,13 @@ public class LootBox : Loot
         foreach (IntVector2 GridSize in GridSizes)
             Inventory.SlotGridList[0].List.Add(new SlotGrid(GridSize.x, GridSize.y, Inventory));
 
-        for (int i = 0; i < Random.Range(1, 5); i++)
+        /*for (int i = 0; i < Random.Range(1, 5); i++)
         {
             ItemClass newItem = ItemDatabase.Instance.DBList(Random.Range(0, ItemDatabase.Instance.DBCount()));
             InventorySlotInfo slotInfo;
 
             slotInfo = Inventory.StoreLoot(newItem);
-        }
+        }*/
     }
 
     public override void Action(AdvancedCamRecoil playerCam)
@@ -34,7 +34,12 @@ public class LootBox : Loot
         playerCam.LootBoxInventory.SetActive(true);
         Cursor.visible = playerCam.InventoryCanvas.activeSelf;
         playerCam.PlayerMovement.enabled = false;
-        Inventory.SlotGridList[0].List[0].Display(InventoryManager.SlotPrefab, playerCam.LootBoxRect);
+
+        foreach (SlotGrid slotGrid in Inventory.SlotGridList[0].List)
+        {
+            Transform slotParent = UnityEngine.Object.Instantiate(InventoryManager.GridPrefab, playerCam.LootBoxRect).transform;
+            slotGrid.Display(InventoryManager.SlotPrefab, slotParent, InventoryManager.LootBoxDrop);
+        }
     }
 
     public override bool Action(AIMovement aiMovement)

@@ -60,22 +60,22 @@ public class ItemScript : MonoBehaviour
     }
 
     //Sets picked up item
-    public static void SetSelectedItem(ItemScript obj)
+    public static void SetSelectedItem(ItemScript itemScript)
     {
-        selectedItem = obj;
-        selectedItemSize = obj.Item.Size;
+        selectedItem = itemScript;
+        selectedItemSize = itemScript.Item.Size;
         isDragging = true;
-        obj.transform.SetParent(InventoryManager.DragParent);
-        obj.rect.localScale = Vector3.one;
+        itemScript.transform.SetParent(InventoryManager.DragParent);
+        itemScript.rect.localScale = Vector3.one;
         selectedItem.CanvasGroup.alpha = 0.5f;
         selectedItem.Rect.pivot = DragPivot;
     }
 
-    public static void SwapSelectedItem(ItemScript obj)
+    public static void SwapSelectedItem(ItemScript itemScript)
     {
         selectedItem.CanvasGroup.alpha = 1.0f;
         selectedItem.Rect.pivot = DropPivot;
-        SetSelectedItem(obj);
+        SetSelectedItem(itemScript);
     }
 
     //Resets picked up item

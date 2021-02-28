@@ -30,7 +30,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (EquipSlotInfo.Empty && eventData.button == PointerEventData.InputButton.Left && ItemScript.selectedItem != null)
         {
             ItemScript.selectedItem.transform.position = EquipSlotInfo.EquipSlot.transform.position;
-            ItemScript.selectedItem.transform.SetParent(InventoryManager.DropParent);
+            ItemScript.selectedItem.transform.SetParent(transform);
             Inventory.EquipInSlot(ItemScript.selectedItem.Item, EquipSlotInfo);
             ItemScript.ResetSelectedItem();
         }

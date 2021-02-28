@@ -8,10 +8,9 @@ public class AIMovement : Movement
     public LayerMask ItemMask;
     public List<Vector3> targets = new List<Vector3>();
     public List<float> directions;
+    public List<Transform> IgnoredObjects = new List<Transform>();
 
     private int currentTarget = 0;
-    public List<Transform> IgnoredObjects = new List<Transform>();
-    [SerializeField] private Collider CurrentAI;
 
     void Update()
     {
@@ -21,10 +20,12 @@ public class AIMovement : Movement
         RaycastHit hit;
         Transform rotationTarget = null;
         Vector3 moveTarget = Vector3.zero;
+        Vector3 addedPosition;
+        float direction;
 
         foreach (Collider collider in enemyColliders)
         {
-            if (collider != CurrentAI)
+            if (CombatController.NotHitboxCollider(collider))
             {
                 float distance = Vector3.Distance(Body.position, collider.transform.position);
 
@@ -82,7 +83,9 @@ public class AIMovement : Movement
 
             Body.Rotate(0.0f, rotation.y, 0.0f);
             transform.Rotate(rotation.x, 0.0f, 0.0f);
-            Body.position += Vector3.ClampMagnitude(moveTarget - Body.position, Time.deltaTime * 10.0f);
+            addedPosition = Vector3.ClampMagnitude(moveTarget - Body.position, Time.deltaTime * 10.0f);
+            direction = Vector3.Dot(addedPosition, transform.forward);
+            Body.position += addedPosition;
             //transform.Rotate((Quaternion.LookRotation(new Vector3(0.0f, targetRotation.y, 0.0f)).eulerAngles - transform.eulerAngles).normalized);
             //transform.Rotate(new Vector3(Vector3.Angle((nearestTarget.position - transform.position).normalized, transform.forward), 0.0f, 0.0f));
         }
@@ -91,6 +94,7 @@ public class AIMovement : Movement
             float minDirection = Mathf.Repeat(Mathf.Round(Body.rotation.y - 22.5f), 360.0f), maxDirection = Mathf.Repeat(Mathf.Round(Body.rotation.y + 22.5f), 360.0f);
             int lowestIndex = -1;
             float lowestValue = float.MaxValue;
+
             if (Vector3.Distance(Body.position, targets[currentTarget]) <= 0.1f)
                 currentTarget = ++currentTarget % targets.Count;
 
@@ -110,11 +114,24 @@ public class AIMovement : Movement
                 }
             }
 
+            addedPosition = Vector3.ClampMagnitude(targets[currentTarget] - Body.position, Time.deltaTime * 10.0f);
+            direction = Vector3.SignedAngle(addedPosition, transform.forward, Vector3.up);
             Body.Rotate(0.0f, Mathf.Clamp((lowestIndex - Body.rotation.y) * Time.deltaTime, 0.0f, 0.1f), 0.0f);
-            Body.position += Vector3.ClampMagnitude(targets[currentTarget] - Body.position, Time.deltaTime * 10.0f);
+            Body.position += addedPosition;
             consecutiveShots = 0;
             //spread -= decreasePerSecond * Time.deltaTime;      //Decrement the spread        
         }
+
+        if (Mathf.Abs(direction) <= 45.0f)
+            Animator.SetInteger("Walk", 1);
+        else if (Mathf.Abs(direction) >= 135.0f)
+            Animator.SetInteger("Walk", -1);
+        else if(direction < 0.0f)
+            Animator.SetInteger("Walk", 2);
+        else if(direction > 0.0f)
+            Animator.SetInteger("Walk", -2);
+        else
+            Animator.SetInteger("Walk", 0);
 
         //spread = Mathf.Clamp(spread, minSpread, maxSpread);
 

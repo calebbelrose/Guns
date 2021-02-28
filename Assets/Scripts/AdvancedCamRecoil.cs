@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MLAPI;
 
 public class AdvancedCamRecoil : Movement
 {
@@ -29,6 +30,8 @@ public class AdvancedCamRecoil : Movement
     [SerializeField] private GameObject SlotPrefab;
     [SerializeField] private RectTransform lootBoxRect;
     [SerializeField] private LayerMask LayerMask;
+    [SerializeField] private GameObject Canvas;
+    [SerializeField] private AudioListener AudioListener;
 
     private float spread = 20f;          //Adjust this for a bigger or smaller crosshair
     private float maxSpread = 60f;
@@ -42,20 +45,25 @@ public class AdvancedCamRecoil : Movement
     private Texture2D tex;
     private GUIStyle lineStyle;
 
-    void Awake()
+    void Start()
     {
+        if (!IsLocalPlayer)
+        {
+            Destroy(Canvas);
+            Destroy(playerMovement);
+            Destroy(AudioListener);
+            Destroy(mainCamera);
+            Destroy(this);
+        }
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         tex = new Texture2D(1, 1);
         SetColor(tex, crosshairColor); //Set color
         lineStyle = new GUIStyle();
         lineStyle.normal.background = tex;
-        targetGunLocation = Gun.idleLocation;
-    }
 
-    void Start()
-    {
-        for(int i = 0; i < Inventory.EquipSlotInfo.Count; i++)
+        for (int i = 0; i < Inventory.EquipSlotInfo.Count; i++)
             playerEquipment.EquipSlots[i].SetInfo(Inventory.EquipSlotInfo[i]);
 
         for (int i = 0; i < Inventory.GunSlotInfo.Count; i++)
@@ -122,9 +130,6 @@ public class AdvancedCamRecoil : Movement
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
-            Debug.Log(Inventory.SlotGridList[1].List[0].SlotInfo[0, 0].SlotScript.transform.position + " " + Inventory.SlotGridList[1].List[0].SlotInfo[0, 0].SlotScript.ItemScript.transform.position);
-
         if (PlayerMovement.enabled)
         {
             if (Input.GetButtonDown("Interact"))
@@ -167,18 +172,16 @@ public class AdvancedCamRecoil : Movement
 
                 //spread = Mathf.Clamp(spread, minSpread, maxSpread);
 
-                if (Input.GetButtonDown("Fire2"))
+                if (Input.GetButtonDown("Aiming"))
                 {
                     aiming = true;
-                    targetGunLocation = Gun.aimingLocation;
+                    Animator.SetBool("Aiming", true);
                 }
-                else if (Input.GetButtonUp("Fire2"))
+                else if (Input.GetButtonUp("Aiming"))
                 {
                     aiming = false;
-                    targetGunLocation = Gun.idleLocation;
+                    Animator.SetBool("Aiming", false);
                 }
-
-                Gun.transform.localPosition = Vector3.Lerp(Gun.transform.localPosition, targetGunLocation, Time.deltaTime * Gun.Maneuverability);
 
                 float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime + newRotation.x - removedRotation.x;
                 float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime + newRotation.y - removedRotation.y;

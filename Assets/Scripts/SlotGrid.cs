@@ -13,7 +13,8 @@ public class SlotGrid
     [SerializeField] private Inventory inventory;
     [SerializeField] private IntVector2 gridSize;
 
-    public static float SlotSize { get; private set; } = 50f;
+    public static float SlotSize { get; } = 50f;
+    public static float SlotSpacing { get; } = 5f;
 
     //Creates inventory slots
     public SlotGrid(int x, int y, Inventory _inventory)
@@ -29,38 +30,33 @@ public class SlotGrid
         }
     }
 
-    public void Display(GameObject slotPrefab, Transform parent)
+    public void Display(GameObject slotPrefab, Transform parent, Transform dropParent)
     {
-        List<IntVector2> slots = new List<IntVector2>();
         for (int x = 0; x < GridSize.x; x++)
         {
             for (int y = 0; y < GridSize.y; y++)
-                slots.Add(new IntVector2(x, y));
-        }
-
-        while (slots.Count > 0)
-        {
-            GameObject obj = UnityEngine.Object.Instantiate(slotPrefab, parent);
-            SlotScript slotScript = obj.GetComponent<SlotScript>();
-
-            obj.transform.name = "slot[" + slots[0].x + "," + slots[9].y + "]";
-            slotScript.InventorySlotInfo = SlotInfo[slots[0].x, slots[0].y];
-            slotScript.InventorySlotInfo.SlotScript = slotScript;
-            slotScript.Rect.localPosition = new Vector3(slots[0].x * SlotSize, -(slots[0].y * SlotSize), 0);
-            slotScript.Rect.sizeDelta = new Vector2(SlotSize, SlotSize);
-            slotScript.Rect.localScale = Vector3.one;
-
-            if (slotScript.InventorySlotInfo.Item != null)
             {
-                if (slotScript.InventorySlotInfo.ItemStartPos == slotScript.InventorySlotInfo.GridPos)
-                {
-                    slotScript.ItemScript = ItemDatabase.CreateItemScript(slotScript.InventorySlotInfo.Item, InventoryManager.DropParent);
-                    slotScript.ItemScript.transform.position = slotScript.transform.position;
-                }
-                else
-                    slotScript.ItemScript = SlotInfo[slotScript.InventorySlotInfo.ItemStartPos.x, slotScript.InventorySlotInfo.ItemStartPos.y].SlotScript.ItemScript;
+                SlotScript slotScript = UnityEngine.Object.Instantiate(slotPrefab, parent).GetComponent<SlotScript>();
 
-                slotScript.InventorySlotInfo.SlotScript.Image.color = Color.white;
+                slotScript.gameObject.name = "slot[" + x + "," + y + "]";
+                slotScript.InventorySlotInfo = SlotInfo[x,y];
+                slotScript.InventorySlotInfo.SlotScript = slotScript;
+                slotScript.Rect.localPosition = new Vector3(x * SlotSize, -(y * SlotSize), 0);
+                slotScript.Rect.sizeDelta = new Vector2(SlotSize, SlotSize);
+                slotScript.Rect.localScale = Vector3.one;
+
+                if (slotScript.InventorySlotInfo.Item != null)
+                {
+                    if (slotScript.InventorySlotInfo.ItemStartPos == slotScript.InventorySlotInfo.GridPos)
+                    {
+                        slotScript.ItemScript = ItemDatabase.CreateItemScript(slotScript.InventorySlotInfo.Item, dropParent);
+                        slotScript.ItemScript.transform.position = slotScript.transform.position;
+                    }
+                    else
+                        slotScript.ItemScript = SlotInfo[slotScript.InventorySlotInfo.ItemStartPos.x, slotScript.InventorySlotInfo.ItemStartPos.y].SlotScript.ItemScript;
+
+                    slotScript.InventorySlotInfo.SlotScript.Image.color = Color.white;
+                }
             }
         }
     }

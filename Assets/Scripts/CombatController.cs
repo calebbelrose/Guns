@@ -15,7 +15,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] private Movement Movement;
     [SerializeField] private CharacterInventory Inventory;
     [SerializeField] private string Name;
-    [SerializeField] private List<Hitbox> Hitboxes = new List<Hitbox>();
+    public List<Hitbox> Hitboxes = new List<Hitbox>();
 
     protected float CurrentHealth = 100, MaxHealth = 100;
     protected float CurrentResource = 100, MaxResource = 100;
@@ -63,6 +63,15 @@ public class CombatController : MonoBehaviour
                 Destroy(this);
             }
         }
+    }
+
+    public bool NotHitboxCollider(Collider collider)
+    {
+        foreach (Hitbox hitbox in Hitboxes)
+            if (collider == hitbox.Collider)
+                return false;
+
+        return true;
     }
 
     //Uses resource

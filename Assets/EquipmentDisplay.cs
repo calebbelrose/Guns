@@ -41,10 +41,9 @@ public class EquipmentDisplay : MonoBehaviour
             {
                 for (int x = 0; x < slotGridList.List[i].GridSize.x; x++)
                 {
-                    GameObject obj = UnityEngine.Object.Instantiate(InventoryManager.SlotPrefab, PocketParent);
-                    SlotScript slotScript = obj.GetComponent<SlotScript>();
+                    SlotScript slotScript = UnityEngine.Object.Instantiate(InventoryManager.SlotPrefab, PocketParent).GetComponent<SlotScript>();
 
-                    obj.transform.name = "slot[" + x + "," + y + "]";
+                    slotScript.gameObject.name = "slot[" + x + "," + y + "]";
                     slotScript.InventorySlotInfo = slotGridList.List[i].SlotInfo[x, y];
                     slotScript.InventorySlotInfo.SlotScript = slotScript;
                     slotScript.Rect.localPosition = new Vector3(x * SlotGrid.SlotSize, -(y * SlotGrid.SlotSize), 0);

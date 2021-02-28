@@ -33,19 +33,12 @@ public class CharacterInventory : Inventory
 
             equipSlotInfo.ItemClass = itemClass;
             equipSlotInfo.Empty = false;
-
-            if (equipSlotInfo.EquipSlot != null)
-                equipSlotInfo.EquipSlot.Display();
         }
     }
 
     //Unequips item
     public void Unequip(EquipSlot equipSlot)
     {
-        Debug.Log(equipSlot);
-        Debug.Log(equipSlot.EquipSlotInfo);
-        Debug.Log(equipSlot.EquipSlotInfo.EquipSlot);
-        Debug.Log(equipSlot.EquipSlotInfo.EquipSlot.ItemScript);
         ItemScript.SetSelectedItem(equipSlot.EquipSlotInfo.EquipSlot.ItemScript);
         equipSlot.EquipSlotInfo.Empty = true;
     }

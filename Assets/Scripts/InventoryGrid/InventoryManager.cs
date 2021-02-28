@@ -7,16 +7,18 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static Transform DragParent { get; private set; }
-    public static Transform DropParent { get; private set; }
+    public static Transform LootBoxDrop { get; private set; }
     public static GameObject SlotPrefab { get; private set; }
+    public static GameObject GridPrefab { get; private set; }
     public static Text LootText { get; private set; }
     public static SlotScript HighlightedSlot;
 
-    [SerializeField] private Transform dropParent;
     [SerializeField] private Transform dragParent;
+    [SerializeField] private Transform lootBoxDrop;
     [SerializeField] private Transform InspectParent;
     [SerializeField] private CharacterInventory CharacterInventory;
     [SerializeField] private GameObject slotPrefab;
+    [SerializeField] private GameObject gridPrefab;
     [SerializeField] private Text lootText;
 
     private List<GameObject> InspectWindows = new List<GameObject>();
@@ -25,8 +27,9 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         SlotPrefab = slotPrefab;
+        GridPrefab = gridPrefab;
         DragParent = dragParent;
-        DropParent = dropParent;
+        LootBoxDrop = lootBoxDrop;
         LootText = lootText;
     }
 
@@ -62,7 +65,7 @@ public class InventoryManager : MonoBehaviour
                         {
                             case 0: //Store on empty slots
                                 inventory.StoreItem(HighlightedSlot.InventorySlotInfo.SlotGrid, ItemScript.selectedItem.Item);
-                                inventory.PlaceItem(HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[HighlightedSlot.InventorySlotInfo.ItemStartPos.x, HighlightedSlot.InventorySlotInfo.ItemStartPos.y], ItemScript.selectedItem);
+                                inventory.PlaceItem(HighlightedSlot.InventorySlotInfo.SlotGrid.SlotInfo[HighlightedSlot.InventorySlotInfo.ItemStartPos.x, HighlightedSlot.InventorySlotInfo.ItemStartPos.y], ItemScript.selectedItem, HighlightedSlot.transform.parent);
                                 Inventory.ColorChangeLoop(HighlightedSlot.InventorySlotInfo.SlotGrid, Color.white, ItemScript.selectedItemSize, inventory.totalOffset);
                                 ItemScript.ResetSelectedItem();
                                 break;

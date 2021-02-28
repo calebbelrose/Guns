@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public Vector3 idleLocation, aimingLocation;
     public Transform BulletSpawn;
     public AudioSource AudioSource;
     public float Maneuverability = 5f;
